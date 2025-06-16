@@ -51,6 +51,31 @@ export default function Hileyformula() {
             setpilebasearea(null); // reset if input is invalid
         }
     };
+    const handleEfficiency   = (e) => {
+        const value = parseFloat( e.target.value );
+        setcoefficientrestitution(value);
+        const tmpcoefficientrestitution = Math.pow(value, 2);
+        const tmpweighthammer = parseFloat(weighthammer);
+        const tmpweightpileanvilhelmet = parseFloat(weightpileanvilhelmet);
+        const tmpeffectiveheightfall =  parseFloat(effectiveheight) ;
+        const tmpfinalpenetration = parseFloat(finalpenetration) ;
+        const tmppilebasearea = parseFloat(pilebasearea) ;
+
+        const EfficiencyofBlow =
+            (tmpweighthammer + (weightpileanvilhelmet * tmpcoefficientrestitution))
+            /(tmpweighthammer + tmpweightpileanvilhelmet) ;
+
+        const Potentialenergyhammer = (tmpweighthammer  * tmpeffectiveheightfall) * 1000;
+
+        const Drivingforce = ( tmpweighthammer *(tmpeffectiveheightfall/tmpfinalpenetration )) * 1000  ;
+
+        const Stresspilesdrivingforce = (Potentialenergyhammer)/(tmpfinalpenetration*tmppilebasearea) ;
+
+        setefficiencyblow(EfficiencyofBlow);
+        setpotentialenergyhammer(Potentialenergyhammer) ;
+        setdrivingforce(Drivingforce) ;
+        setstresspilesdrivingforce(Stresspilesdrivingforce);
+    };
 
     const  handlePileTotalWeight  = (e) => {
 
@@ -83,12 +108,7 @@ export default function Hileyformula() {
         seteffectiveheight(effectiveheightFall) ;
     };
 
-    const handleEfficiency   = (e) => {
 
-        const value = e.target.value;
-        setcoefficientrestitution(value);
-
-    };
 
     return (
         <AuthenticatedLayout
@@ -239,10 +259,12 @@ export default function Hileyformula() {
                                 </div>
 
                                 <div className="md:col-span-3 flex items-center">
-                                    <label htmlFor="weightpileanvilhelmet">Weight of pile, anvil, & helmet: P := W<sub>T</sub> + W<sub>A</sub> + W<sub>H</sub>   </label>
+                                    <label htmlFor="weightpileanvilhelmet">Weight of pile, anvil, & helmet: P :=
+                                        W<sub>T</sub> + W<sub>A</sub> + W<sub>H</sub> </label>
                                 </div>
                                 <div className="md:col-span-8">
-                                    <input type="number" name="weightpileanvilhelmet" id="weightpileanvilhelmet" required
+                                    <input type="number" name="weightpileanvilhelmet" id="weightpileanvilhelmet"
+                                           required
                                            step="any" disabled
                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
                                            placeholder="0"
@@ -255,7 +277,7 @@ export default function Hileyformula() {
 
                                 <button
                                     onClick={() => {
-                                        setIsVisible2(!isVisible2) ;
+                                        setIsVisible2(!isVisible2);
                                         setIsVisibleBT2(!isVisibleBT2);
                                         setIsVisibleBT1(!isVisibleBT1);
                                     }}
@@ -267,7 +289,7 @@ export default function Hileyformula() {
                                     &nbsp;
                                     {/*Block1 End*/}
                                 </div>
-                        </div>
+                            </div>
 
                             <div className={`grid grid-cols-1 md:grid-cols-12 gap-4 ${isVisible2 ? '' : 'hidden'}`}>
                                 <div className="md:col-span-12">
@@ -276,7 +298,7 @@ export default function Hileyformula() {
                                 </div>
 
                                 <div className="md:col-span-3 flex items-center">
-                                    <label htmlFor="freefallheight">Free fall height of hammer  ff ≔</label>
+                                    <label htmlFor="freefallheight">Free fall height of hammer ff ≔</label>
                                 </div>
                                 <div className="md:col-span-8">
                                     <input type="number" name="freefallheight" id="freefallheight" required
@@ -306,7 +328,7 @@ export default function Hileyformula() {
                                 </div>
 
                                 <div className="md:col-span-3 flex items-center">
-                                    <label htmlFor="effectiveheight">Effective height of fall  h ≔ ff ⋅ Eff =</label>
+                                    <label htmlFor="effectiveheight">Effective height of fall h ≔ ff ⋅ Eff =</label>
                                 </div>
                                 <div className="md:col-span-8">
                                     <input type="number" name="effectiveheight" id="effectiveheight" required
@@ -324,7 +346,7 @@ export default function Hileyformula() {
                                         setIsVisible3(!isVisible3)
                                         setIsVisibleBT3(!isVisibleBT3);
                                         setIsVisibleBT2(!isVisibleBT2);
-                                }}
+                                    }}
                                     className={`w-64 bg-blue-500 text-white py-2 px-4 rounded ${isVisibleBT2 ? '' : 'hidden'}`}
                                 >
                                     Continue
@@ -332,81 +354,176 @@ export default function Hileyformula() {
                                 <div className="md:col-span-12">
                                     &nbsp;
                                     {/*Block2  eD*/}
-                                    &nbsp;
                                 </div>
                             </div>
 
-                            <div className={`grid grid-cols-1 md:grid-cols-12 gap-4 ${isVisible3 ? '' : 'hidden'}`}>
-                                <div className="md:col-span-12">
-                                    &nbsp;
-                                    Block 3
-                                    &nbsp;
-                                </div>
-
-                                <button
-                                    onClick={() => {
-                                        setIsVisible4(!isVisible4)
-                                        setIsVisibleBT4(!isVisibleBT4);
-                                        setIsVisibleBT3(!isVisibleBT3);
-                                    }}
-
-                                    className={`w-64 bg-blue-500 text-white py-2 px-4 rounded ${isVisibleBT3 ? '' : 'hidden'}`}
-                                >
-                                    Continue
-                                </button>
+                        <div className={`grid grid-cols-1 md:grid-cols-12 gap-4 ${isVisible3 ? '' : 'hidden'}`}>
+                            <div className="md:col-span-12">
+                                &nbsp;
+                                <br/>Block 3
                             </div>
 
-                            <div className={`grid grid-cols-1 md:grid-cols-12 gap-4 ${isVisible4 ? '' : 'hidden'}`}>
-                                <div className="md:col-span-12">
-                                    &nbsp;
-                                    Block 4
-                                    &nbsp;
-                                </div>
-
-                                <button
-                                    onClick={() => {
-                                        setIsVisible5(!isVisible5)
-                                        setIsVisibleBT5(!isVisibleBT5);
-                                        setIsVisibleBT4(!isVisibleBT4);
-                                    }}
-                                    className={`w-64 bg-blue-500 text-white py-2 px-4 rounded ${isVisibleBT4 ? '' : 'hidden'}`}
-                                >
-                                    Continue
-                                </button>
+                            <div className="md:col-span-3 flex items-center">
+                                <label htmlFor="effectiveheight">Final set or penetration per blow
+                                    (mean of final 10 blows) S ≔</label>
+                            </div>
+                            <div className="md:col-span-8">
+                                <input type="number" name="finalpenetration" id="finalpenetration" required
+                                       step="any"
+                                       className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+                                       value={finalpenetration}
+                                       onChange={(e) => setfinalpenetration(e.target.value)}
+                                />
+                            </div>
+                            <div className="md:col-span-1">
+                                mm Vary set to achieve design load
                             </div>
 
-                            <div className={`grid grid-cols-1 md:grid-cols-12 gap-4 ${isVisible5 ? '' : 'hidden'}`}>
-                                <div className="md:col-span-12">
-                                    &nbsp;
-                                    Block 5
-                                    &nbsp;
-                                </div>
-
-                                <button
-                                    className={`w-64 bg-blue-500 text-white py-2 px-4 rounded ${isVisibleBT5 ? '' : 'hidden'}`}
-                                >
-                                    Continue
-                                </button>
+                            <div className="md:col-span-3 flex items-center">
+                                <label htmlFor="effectiveheight">Coefficient of restitution e ≔</label>
+                            </div>
+                            <div className="md:col-span-8">
+                                <input type="number" name="coefficientrestitution" id="coefficientrestitution"
+                                       required
+                                       step="any"
+                                       className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+                                       value={coefficientrestitution}
+                                       onChange={handleEfficiency}
+                                />
+                            </div>
+                            <div className="md:col-span-1">
+                                Single Acting Hammer Timber piles
                             </div>
 
+                            <div className="md:col-span-3 flex items-center">
+                                <label htmlFor="efficiencyblow">Efficiency of blow</label>
+                            </div>
+                            <div className="md:col-span-8">
+                                <input type="number" name="efficiencyblow" id="efficiencyblow" required
+                                       step="any" disabled
+                                       className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+                                       placeholder="0"
+                                       value={parseFloat(efficiencyblow).toFixed(3)}
+                                />
+                            </div>
+                            <div className="md:col-span-1">
+                                &nbsp;
+                            </div>
+
+                            <div className="md:col-span-3 flex items-center">
+                                <label htmlFor="potentialenergyhammer">Potential Energy of hammer in free falL</label>
+                            </div>
+                            <div className="md:col-span-8">
+                                <input type="number" name="potentialenergyhammer" id="potentialenergyhammer"
+                                       required
+                                       step="any" disabled
+                                       className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+                                       placeholder="0"
+                                       value={parseFloat(potentialenergyhammer).toFixed(3)}
+                                />
+                            </div>
+                            <div className="md:col-span-1">
+                                J
+                            </div>
+
+                            <div className="md:col-span-3 flex items-center">
+                                <label htmlFor="drivingforce">Driving Force</label>
+                            </div>
+                            <div className="md:col-span-8">
+                                <input type="number" name="drivingforce" id="drivingforce" required
+                                       step="any" disabled
+                                       className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+                                       placeholder="0"
+                                       value={parseFloat(drivingforce).toFixed(3)}
+                                />
+                            </div>
+                            <div className="md:col-span-1">
+                                kN
+                            </div>
+
+                            <div className="md:col-span-3 flex items-center">
+                                <label htmlFor="stresspilesdrivingforce">Stress in Piles due to Driving Force  &sigma;
+                                    <sub>D</sub></label>
+                            </div>
+                            <div className="md:col-span-8">
+                                <input type="number" name="stresspilesdrivingforce" id="stresspilesdrivingforce"
+                                       required
+                                       step="any" disabled
+                                       className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+                                       placeholder="0"
+                                       value={parseFloat(stresspilesdrivingforce).toFixed(3)}
+                                />
+                            </div>
+                            <div className="md:col-span-1">
+                                MPa
+                            </div>
+
+                            <div className="md:col-span-12">
+                                if &sigma;<sub>D</sub> {'>'} 9.9 MPa , "Check Driving Type" , "Medium" = "Medium"
+                            </div>
+
+                            <button
+                                onClick={() => {
+                                    setIsVisible4(!isVisible4)
+                                    setIsVisibleBT4(!isVisibleBT4);
+                                    setIsVisibleBT3(!isVisibleBT3);
+                                }}
+
+                                className={`w-64 bg-blue-500 text-white py-2 px-4 rounded ${isVisibleBT3 ? '' : 'hidden'}`}
+                            >
+                                Continue
+                            </button>
                         </div>
 
-                        {/*END  BOX1 */}
-                    </div>
+                        <div className={`grid grid-cols-1 md:grid-cols-12 gap-4 ${isVisible4 ? '' : 'hidden'}`}>
+                            <div className="md:col-span-12">
+                                &nbsp;
+                                Block 4
+                                &nbsp;
+                            </div>
 
-                    {/* Box 2: Can be results or other content */}
-                    <div className="flex-[1]">
-                        <div className="overflow-hidden bg-white shadow-md rounded-lg p-6">
-                            <h2 className="text-xl font-semibold mb-4">Hiley Formula Output</h2>
-                            <p>Image will show here...</p>
+                            <button
+                                onClick={() => {
+                                    setIsVisible5(!isVisible5)
+                                    setIsVisibleBT5(!isVisibleBT5);
+                                    setIsVisibleBT4(!isVisibleBT4);
+                                }}
+                                className={`w-64 bg-blue-500 text-white py-2 px-4 rounded ${isVisibleBT4 ? '' : 'hidden'}`}
+                            >
+                                Continue
+                            </button>
                         </div>
-                    </div>
 
+                        <div className={`grid grid-cols-1 md:grid-cols-12 gap-4 ${isVisible5 ? '' : 'hidden'}`}>
+                            <div className="md:col-span-12">
+                                &nbsp;
+                                Block 5
+                                &nbsp;
+                            </div>
+
+                            <button
+                                className={`w-64 bg-blue-500 text-white py-2 px-4 rounded ${isVisibleBT5 ? '' : 'hidden'}`}
+                            >
+                                Continue
+                            </button>
+                        </div>
+                        </div>
+                    {/*END  BOX1 */}
                 </div>
+
+                {/* Box 2: Can be results or other content */}
+                <div className="flex-[1]">
+                    <div className="overflow-hidden bg-white shadow-md rounded-lg p-6">
+                        <h2 className="text-xl font-semibold mb-4">Hiley Formula Output</h2>
+                        <p>Image will show here...</p>
+                    </div>
+                </div>
+
             </div>
+        </div>
 
 
-
-        </AuthenticatedLayout>
-    );
+</AuthenticatedLayout>
+)
+    ;
 }
