@@ -107,7 +107,7 @@ export default function Hileyformula() {
                             <h2 className="text-xl font-semibold mb-4">Hiley Formula Input</h2>
                             <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
                                 <div className="md:col-span-12">
-                                    Block 1
+                                    <br/> Block 1
                                     &nbsp;
                                 </div>
                                 <button
@@ -120,11 +120,15 @@ export default function Hileyformula() {
                                 >
                                     Continue
                                 </button>
+                                <div className="md:col-span-12">
+                                    &nbsp;
+                                    <br/>Block1 End
+                                </div>
                             </div>
 
                             <div className={`grid grid-cols-1 md:grid-cols-12 gap-4 ${isVisible2 ? '' : 'hidden'}`}>
                                 <div className="md:col-span-12">
-                                    Block2
+                                    <br/> Block2
                                     &nbsp;
                                 </div>
 
@@ -138,11 +142,15 @@ export default function Hileyformula() {
                                 >
                                     Continue
                                 </button>
+                                <div className="md:col-span-12">
+                                    &nbsp;
+                                    <br/>Block2 End
+                                </div>
                             </div>
 
                             <div className={`grid grid-cols-1 md:grid-cols-12 gap-4 ${isVisible3 ? '' : 'hidden'}`}>
                                 <div className="md:col-span-12">
-                                    Block 3
+                                    <br/> Block 3
                                     &nbsp;
                                 </div>
 
@@ -157,11 +165,15 @@ export default function Hileyformula() {
                                 >
                                     Continue
                                 </button>
+                                <div className="md:col-span-12">
+                                    &nbsp;
+                                    <br/>Block3 End
+                                </div>
                             </div>
 
                             <div className={`grid grid-cols-1 md:grid-cols-12 gap-4 ${isVisible4 ? '' : 'hidden'}`}>
                                 <div className="md:col-span-12">
-                                    Block 4
+                                    <br/>Block 4
                                     &nbsp;
                                 </div>
 
@@ -175,11 +187,15 @@ export default function Hileyformula() {
                                 >
                                     Continue
                                 </button>
+                                <div className="md:col-span-12">
+                                    &nbsp;
+                                    <br/>Block4 End
+                                </div>
                             </div>
 
                             <div className={`grid grid-cols-1 md:grid-cols-12 gap-4 ${isVisible5 ? '' : 'hidden'}`}>
                                 <div className="md:col-span-12">
-                                    Block 5
+                                    <br/>Block 5
                                     &nbsp;
                                 </div>
 
@@ -188,11 +204,12 @@ export default function Hileyformula() {
                                 >
                                     Continue
                                 </button>
+
+                                <div className="md:col-span-12">
+                                    &nbsp;
+                                    <br/>Block5 End
+                                </div>
                             </div>
-
-
-
-
                         </div>
 
                         {/*END  BOX1 */}

@@ -125,6 +125,134 @@ export default function Hileyformula() {
                                 <div className="md:col-span-1">
                                     mm
                                 </div>
+
+                                <div className="md:col-span-3 flex items-center">
+                                    <label htmlFor="pilelength">Pile Length: L :=</label>
+                                </div>
+                                <div className="md:col-span-8">
+                                    <input type="number" name="pilelength" id="pilelength"
+                                           required
+                                           placeholder="0"
+                                           step="any"
+                                           className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+                                           value={pilelength}
+                                           onChange={(e) => setpilelength(e.target.value)}
+                                    />
+                                </div>
+                                <div className="md:col-span-1">
+                                    m
+                                </div>
+
+                                <div className="md:col-span-3 flex items-center">
+                                    <label htmlFor="weighthammer">Weight of hammer: W :=</label>
+                                </div>
+                                <div className="md:col-span-8">
+                                    <input type="number" name="weighthammer" id="weighthammer" required
+                                           step="any"
+                                           className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+                                           placeholder="0"
+                                           value={weighthammer}
+                                           onChange={(e) => setweighthammer(e.target.value)}
+                                    />
+                                </div>
+                                <div className="md:col-span-1">
+                                    kN
+                                </div>
+
+                                <div className="md:col-span-3 flex items-center">
+                                    <label htmlFor="weightanvil">Weight of Anvil: W<sub>a</sub> :=</label>
+                                </div>
+                                <div className="md:col-span-8">
+                                    <input type="number" name="weightanvil" id="weightanvil" required
+                                           step="any"
+                                           className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+                                           placeholder="0"
+                                           value={weightanvil}
+                                           onChange={(e) => setweightanvil(e.target.value)}
+                                    />
+                                </div>
+                                <div className="md:col-span-1">
+                                    kN
+                                </div>
+
+                                <div className="md:col-span-3 flex items-center">
+                                    <label htmlFor="weighthelmet">Weight of Helmet: W<sub>H</sub> :=</label>
+                                </div>
+                                <div className="md:col-span-8">
+                                    <input type="number" name="weighthelmet" id="weighthelmet" required
+                                           step="any"
+                                           className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+                                           placeholder="0"
+                                           value={weighthelmet}
+                                           onChange={(e) => setweighthelmet(e.target.value)}
+                                    />
+                                </div>
+                                <div className="md:col-span-1">
+                                    kN
+                                </div>
+
+                                <div className="md:col-span-3 flex items-center">
+                                    <label htmlFor="pileunitweight">Pile Unit Weight: W<sub>p</sub> :=</label>
+                                </div>
+                                <div className="md:col-span-8">
+                                    <input type="number" name="pileunitweight" id="pileunitweight" required
+                                           step="any"
+                                           className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+                                           placeholder="0"
+                                           value={pileunitweight}
+                                           onChange={handlePileTotalWeight}
+                                    />
+                                </div>
+                                <div className="md:col-span-1">
+                                    kN.m<sup>-3</sup>
+                                </div>
+
+                                <div className="md:col-span-3 flex items-center">
+                                    <label htmlFor="pilebasearea">Pile Base Area: A:= &pi; . D<sup>2</sup>/4</label>
+                                </div>
+                                <div className="md:col-span-8">
+                                    <input type="number" name="pilebasearea" id="pilebasearea" required
+                                           step="any" disabled
+                                           className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+                                           placeholder="0"
+                                           value={parseFloat(pilebasearea).toFixed(3)}
+                                    />
+                                </div>
+                                <div className="md:col-span-1">
+                                    m<sup>2</sup>
+                                </div>
+
+                                <div className="md:col-span-3 flex items-center">
+                                    <label htmlFor="piletotalweight">Pile Total weight: W<sub>T</sub>:= W<sub>P</sub>
+                                        . L . A </label>
+                                </div>
+                                <div className="md:col-span-8">
+                                    <input type="number" name="piletotalweight" id="piletotalweight" required
+                                           step="any" disabled
+                                           className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+                                           placeholder="0"
+                                           value={parseFloat(piletotalweight).toFixed(3)}
+                                    />
+                                </div>
+                                <div className="md:col-span-1">
+                                    kN
+                                </div>
+
+                                <div className="md:col-span-3 flex items-center">
+                                    <label htmlFor="weightpileanvilhelmet">Weight of pile, anvil, & helmet: P := W<sub>T</sub> + W<sub>A</sub> + W<sub>H</sub>   </label>
+                                </div>
+                                <div className="md:col-span-8">
+                                    <input type="number" name="weightpileanvilhelmet" id="weightpileanvilhelmet" required
+                                           step="any" disabled
+                                           className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+                                           placeholder="0"
+                                           value={parseFloat(weightpileanvilhelmet).toFixed(3)}
+                                    />
+                                </div>
+                                <div className="md:col-span-1">
+                                    kN
+                                </div>
+
                                 <button
                                     onClick={() => {
                                         setIsVisible2(!isVisible2) ;
@@ -135,14 +263,62 @@ export default function Hileyformula() {
                                 >
                                     Continue
                                 </button>
-                            </div>
+                                <div className="md:col-span-12">
+                                    &nbsp;
+                                    {/*Block1 End*/}
+                                </div>
+                        </div>
 
                             <div className={`grid grid-cols-1 md:grid-cols-12 gap-4 ${isVisible2 ? '' : 'hidden'}`}>
                                 <div className="md:col-span-12">
-                                    Block2
-                                    &nbsp;
+                                    <br/> &nbsp;
+                                    {/*Block2*/}
                                 </div>
 
+                                <div className="md:col-span-3 flex items-center">
+                                    <label htmlFor="freefallheight">Free fall height of hammer  ff ≔</label>
+                                </div>
+                                <div className="md:col-span-8">
+                                    <input type="number" name="freefallheight" id="freefallheight" required
+                                           step="any"
+                                           className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+                                           value={freefallheight}
+                                           onChange={(e) => setfreefallheight(e.target.value)}
+                                    />
+                                </div>
+                                <div className="md:col-span-1">
+                                    mm
+                                </div>
+
+                                <div className="md:col-span-3 flex items-center">
+                                    <label htmlFor="efficiencyfall">Efficiency of fall Eff ≔</label>
+                                </div>
+                                <div className="md:col-span-8">
+                                    <input type="number" name="efficiencyfall" id="efficiencyfall" required
+                                           step="any"
+                                           className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+                                           value={efficiencyfall}
+                                           onChange={handleEffectiveHeightFall}
+                                    />
+                                </div>
+                                <div className="md:col-span-1">
+                                    %
+                                </div>
+
+                                <div className="md:col-span-3 flex items-center">
+                                    <label htmlFor="effectiveheight">Effective height of fall  h ≔ ff ⋅ Eff =</label>
+                                </div>
+                                <div className="md:col-span-8">
+                                    <input type="number" name="effectiveheight" id="effectiveheight" required
+                                           step="any" disabled
+                                           className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+                                           placeholder="0"
+                                           value={parseFloat(effectiveheight).toFixed(2)}
+                                    />
+                                </div>
+                                <div className="md:col-span-1">
+                                    m
+                                </div>
                                 <button
                                     onClick={() => {
                                         setIsVisible3(!isVisible3)
@@ -153,10 +329,16 @@ export default function Hileyformula() {
                                 >
                                     Continue
                                 </button>
+                                <div className="md:col-span-12">
+                                    &nbsp;
+                                    {/*Block2  eD*/}
+                                    &nbsp;
+                                </div>
                             </div>
 
                             <div className={`grid grid-cols-1 md:grid-cols-12 gap-4 ${isVisible3 ? '' : 'hidden'}`}>
                                 <div className="md:col-span-12">
+                                    &nbsp;
                                     Block 3
                                     &nbsp;
                                 </div>
@@ -176,6 +358,7 @@ export default function Hileyformula() {
 
                             <div className={`grid grid-cols-1 md:grid-cols-12 gap-4 ${isVisible4 ? '' : 'hidden'}`}>
                                 <div className="md:col-span-12">
+                                    &nbsp;
                                     Block 4
                                     &nbsp;
                                 </div>
@@ -194,6 +377,7 @@ export default function Hileyformula() {
 
                             <div className={`grid grid-cols-1 md:grid-cols-12 gap-4 ${isVisible5 ? '' : 'hidden'}`}>
                                 <div className="md:col-span-12">
+                                    &nbsp;
                                     Block 5
                                     &nbsp;
                                 </div>
@@ -204,9 +388,6 @@ export default function Hileyformula() {
                                     Continue
                                 </button>
                             </div>
-
-
-
 
                         </div>
 
