@@ -29,6 +29,7 @@ export default function Hileyformula() {
     const [isVisible3, setIsVisible3] = useState(false);
     const [isVisible4, setIsVisible4] = useState(false);
     const [isVisible5, setIsVisible5] = useState(false);
+    const [isVisible6, setIsVisible6] = useState(false);
 
     const [isVisibleBT1, setIsVisibleBT1] = useState(true);
     const [isVisibleBT2, setIsVisibleBT2] = useState(false);
@@ -502,6 +503,10 @@ export default function Hileyformula() {
                             </div>
 
                             <button
+                                onClick={() => {
+                                    setIsVisible6(!isVisible6)
+                                }}
+
                                 className={`w-64 bg-blue-500 text-white py-2 px-4 rounded ${isVisibleBT5 ? '' : 'hidden'}`}
                             >
                                 Continue
@@ -509,21 +514,31 @@ export default function Hileyformula() {
                         </div>
                         </div>
                     {/*END  BOX1 */}
-                </div>
+                    </div>
 
-                {/* Box 2: Can be results or other content */}
-                <div className="flex-[1]">
-                    <div className="overflow-hidden bg-white shadow-md rounded-lg p-6">
-                        <h2 className="text-xl font-semibold mb-4">Hiley Formula Output</h2>
-                        <p>Image will show here...</p>
+                 { /* Box 2: Can be results or other content */}
+                    <div className="flex-[1]">
+                        <div className="overflow-hidden bg-white shadow-md rounded-lg p-6">
+                            <h2 className="text-xl font-semibold mb-4">Hiley Formula Output</h2>
+                            <p>Image will show here...</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div
+                 className={`container mx-auto py-8 ${isVisible6 ? '' : 'hidden'}`}
+                 name="pilevalues_2" id="pilevalues_2">
+                <div className="flex flex-wrap gap-2">
+                    {/* Box 1: Form */}
+                    <div className="flex-[2]">
+                        <div className="overflow-hidden bg-white shadow-md rounded-lg p-6">
+                            <p>Image will show here...</p>
+                        </div>
                     </div>
                 </div>
-
             </div>
-        </div>
-
-
-</AuthenticatedLayout>
+        </AuthenticatedLayout>
 )
     ;
 }
