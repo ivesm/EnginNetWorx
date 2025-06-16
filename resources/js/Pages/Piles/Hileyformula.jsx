@@ -30,12 +30,14 @@ export default function Hileyformula() {
     const [isVisible4, setIsVisible4] = useState(false);
     const [isVisible5, setIsVisible5] = useState(false);
     const [isVisible6, setIsVisible6] = useState(false);
+    const [isVisible7, setIsVisible7] = useState(false);
 
     const [isVisibleBT1, setIsVisibleBT1] = useState(true);
     const [isVisibleBT2, setIsVisibleBT2] = useState(false);
     const [isVisibleBT3, setIsVisibleBT3] = useState(false);
     const [isVisibleBT4, setIsVisibleBT4] = useState(false);
     const [isVisibleBT5, setIsVisibleBT5] = useState(false);
+    const [isVisibleBT6, setIsVisibleBT6] = useState(false);
 
 
     const handlePileDiameter = (e) => {
@@ -109,6 +111,10 @@ export default function Hileyformula() {
         seteffectiveheight(effectiveheightFall) ;
     };
 
+    const handleDownLoad = (e) => {
+
+        alert(" THIS  WILL  DOWN LOAD THE  VALUES  AS A PDF ");
+    };
 
 
     return (
@@ -504,12 +510,20 @@ export default function Hileyformula() {
 
                             <button
                                 onClick={() => {
-                                    setIsVisible6(!isVisible6)
+                                    setIsVisible6(!isVisible6);
+                                    setIsVisible7(!isVisible7);
+                                    setIsVisibleBT6(!isVisibleBT6);
                                 }}
 
                                 className={`w-64 bg-blue-500 text-white py-2 px-4 rounded ${isVisibleBT5 ? '' : 'hidden'}`}
                             >
                                 Continue
+                            </button>
+                            <button
+                                onClick={handleDownLoad}
+                                className={`w-64 bg-blue-500 text-white py-2 px-4 rounded ${isVisibleBT6 ? '' : 'hidden'}`}
+                            >
+                                DownLoad PDF
                             </button>
                         </div>
                         </div>
@@ -519,7 +533,7 @@ export default function Hileyformula() {
                  { /* Box 2: Can be results or other content */}
                     <div className="flex-[1]">
                         <div className="overflow-hidden bg-white shadow-md rounded-lg p-6">
-                            <h2 className="text-xl font-semibold mb-4">Hiley Formula Output</h2>
+                            <h2 className="text-xl font-semibold mb-4">Hiley Formula Image</h2>
                             <p>Image will show here...</p>
                         </div>
                     </div>
@@ -527,13 +541,23 @@ export default function Hileyformula() {
                 </div>
             </div>
             <div
-                 className={`container mx-auto py-8 ${isVisible6 ? '' : 'hidden'}`}
-                 name="pilevalues_2" id="pilevalues_2">
+                 className={`container mx-auto py-8 ${isVisible6 ? '' : 'hidden'}`} name="pilevalues_2" id="pilevalues_2">
                 <div className="flex flex-wrap gap-2">
                     {/* Box 1: Form */}
                     <div className="flex-[2]">
                         <div className="overflow-hidden bg-white shadow-md rounded-lg p-6">
-                            <p>Image will show here...</p>
+                            <p>Pile Capacity Table</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div
+                className={`container mx-auto py-8 ${isVisible7 ? '' : 'hidden'}`} name="pilevalues_3" id="pilevalues_3">
+                <div className="flex flex-wrap gap-2">
+                    {/* Box 1: Form */}
+                    <div className="flex-[2]">
+                        <div className="overflow-hidden bg-white shadow-md rounded-lg p-6">
+                            <p>Table8. Temporary Compresions (mm)</p>
                         </div>
                     </div>
                 </div>
