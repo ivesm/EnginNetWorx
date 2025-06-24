@@ -29,6 +29,14 @@ Route::get('/hileyformula', function () {
 })->middleware(['auth', 'verified'])->name('hileyformula');
 
 
+Route::get('/testing', function () {
+    return Inertia::render('Test/Test');
+})->middleware(['auth', 'verified'])->name('test');
+
+Route::get('/testing_tab', function () {
+    return Inertia::render('Test/Test_tabs');
+})->middleware(['auth', 'verified'])->name('test_tabs');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
