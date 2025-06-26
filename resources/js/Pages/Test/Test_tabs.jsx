@@ -10,11 +10,11 @@ export default function Test_tabs() {
         <AuthenticatedLayout
             header={
                 <h2 className="text-xl font-semibold leading-tight text-gray-800">
-                    TEST PAGE
+                    TEST TABS
                 </h2>
             }
         >
-            <Head title="TEST"/>
+            <Head title="TEST TABS"/>
                 <div className="w-full max-w-4xl mx-auto mt-10">
                     {/* Tab Headers */}
                     <div className="flex border-b border-gray-300">

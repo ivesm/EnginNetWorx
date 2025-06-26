@@ -31,11 +31,11 @@ Route::get('/hileyformula', function () {
 
 Route::get('/testing', function () {
     return Inertia::render('Test/Test');
-})->middleware(['auth', 'verified'])->name('test');
+})->middleware(['auth', 'verified'])->name('testing');
 
 Route::get('/testing_tab', function () {
     return Inertia::render('Test/Test_tabs');
-})->middleware(['auth', 'verified'])->name('test_tabs');
+})->middleware(['auth', 'verified'])->name('testing_tab');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

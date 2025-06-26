@@ -45,7 +45,7 @@ export default function Test() {
         <AuthenticatedLayout
             header={
                 <h2 className="text-xl font-semibold leading-tight text-gray-800">
-                    Piles
+                    TEST Page
                 </h2>
             }
         >
