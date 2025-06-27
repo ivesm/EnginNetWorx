@@ -288,7 +288,7 @@ export default function Hileyformula() {
                                         setIsVisibleBT2(!isVisibleBT2);
                                         setIsVisibleBT1(!isVisibleBT1);
                                     }}
-                                    className={`w-64 bg-blue-500 text-white py-2 px-4 rounded ${isVisibleBT1 ? '' : 'hidden'}`}
+                                    className={`w-64 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ${isVisibleBT1 ? '' : 'hidden'}`}
                                 >
                                     Continue
                                 </button>
@@ -354,7 +354,7 @@ export default function Hileyformula() {
                                         setIsVisibleBT3(!isVisibleBT3);
                                         setIsVisibleBT2(!isVisibleBT2);
                                     }}
-                                    className={`w-64 bg-blue-500 text-white py-2 px-4 rounded ${isVisibleBT2 ? '' : 'hidden'}`}
+                                    className={`w-64 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ${isVisibleBT2 ? '' : 'hidden'}`}
                                 >
                                     Continue
                                 </button>
@@ -476,7 +476,7 @@ export default function Hileyformula() {
                                     setIsVisibleBT3(!isVisibleBT3);
                                 }}
 
-                                className={`w-64 bg-blue-500 text-white py-2 px-4 rounded ${isVisibleBT3 ? '' : 'hidden'}`}
+                                className={`w-64 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ${isVisibleBT3 ? '' : 'hidden'}`}
                             >
                                 Continue
                             </button>
@@ -495,7 +495,7 @@ export default function Hileyformula() {
                                     setIsVisibleBT5(!isVisibleBT5);
                                     setIsVisibleBT4(!isVisibleBT4);
                                 }}
-                                className={`w-64 bg-blue-500 text-white py-2 px-4 rounded ${isVisibleBT4 ? '' : 'hidden'}`}
+                                className={`w-64 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ${isVisibleBT4 ? '' : 'hidden'}`}
                             >
                                 Continue
                             </button>
@@ -513,15 +513,16 @@ export default function Hileyformula() {
                                     setIsVisible6(!isVisible6);
                                     setIsVisible7(!isVisible7);
                                     setIsVisibleBT6(!isVisibleBT6);
+                                    setIsVisibleBT5(!isVisibleBT5);
                                 }}
 
-                                className={`w-64 bg-blue-500 text-white py-2 px-4 rounded ${isVisibleBT5 ? '' : 'hidden'}`}
+                                className={`w-64 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ${isVisibleBT5 ? '' : 'hidden'}`}
                             >
                                 Continue
                             </button>
                             <button
                                 onClick={handleDownLoad}
-                                className={`w-64 bg-blue-500 text-white py-2 px-4 rounded ${isVisibleBT6 ? '' : 'hidden'}`}
+                                className={`w-64 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ${isVisibleBT6 ? '' : 'hidden'}`}
                             >
                                 DownLoad PDF
                             </button>

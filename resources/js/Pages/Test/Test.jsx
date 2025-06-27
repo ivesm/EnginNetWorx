@@ -1,7 +1,6 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import {Head, Link} from '@inertiajs/react';
-import {useState} from "react";
-
+import { useEffect, useState } from 'react';
 export default function Test() {
     //
     const [isVisible2, setIsVisible2] = useState(false);
@@ -17,6 +16,13 @@ export default function Test() {
     const [isVisibleBT4, setIsVisibleBT4] = useState(false);
     const [isVisibleBT5, setIsVisibleBT5] = useState(false);
     const [isVisibleBT6, setIsVisibleBT6] = useState(false);
+
+    const [loaded, setLoaded] = useState(false);
+
+    useEffect(() => {
+        setLoaded(true);
+    }, []);
+
 
     //Example Function
     const handlePileDiameter = (e) => {
@@ -45,7 +51,13 @@ export default function Test() {
         <AuthenticatedLayout
             header={
                 <h2 className="text-xl font-semibold leading-tight text-gray-800">
-                    TEST Page
+                    <div
+                        className={`transition-all duration-700 transform ${
+                            loaded ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'
+                        }`}
+                    >
+                        <p className="text-gray-800">TEST PAGE</p>
+                    </div>
                 </h2>
             }
         >
@@ -55,7 +67,15 @@ export default function Test() {
                     {/* Box 1: Form */}
                     <div className="flex-[2]">
                         <div className="overflow-hidden bg-white shadow-md rounded-lg p-6">
-                            <h2 className="text-xl font-semibold mb-4">TESTING PAGE</h2>
+                            <h2 className="text-xl font-semibold mb-4">
+                                <div
+                                    className={`transition-all duration-700 transform ${
+                                        loaded ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'
+                                    }`}
+                                >
+                                    <p className="text-gray-800">TEST PAGE</p>
+                                </div>
+                            </h2>
                             <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
                                 <div className="md:col-span-12">
                                     Block 1
@@ -67,7 +87,7 @@ export default function Test() {
                                         setIsVisibleBT2(!isVisibleBT2);
                                         setIsVisibleBT1(!isVisibleBT1);
                                     }}
-                                    className={`w-64 bg-blue-500 text-white py-2 px-4 rounded ${isVisibleBT1 ? '' : 'hidden'}`}
+                                    className={`w-64 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ${isVisibleBT1 ? '' : 'hidden'}`}
                                 >
                                     Continue
                                 </button>
@@ -85,7 +105,7 @@ export default function Test() {
                                         setIsVisibleBT3(!isVisibleBT3);
                                         setIsVisibleBT2(!isVisibleBT2);
                                     }}
-                                    className={`w-64 bg-blue-500 text-white py-2 px-4 rounded ${isVisibleBT2 ? '' : 'hidden'}`}
+                                    className={`w-64 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ${isVisibleBT2 ? '' : 'hidden'}`}
                                 >
                                     Continue
                                 </button>
@@ -104,7 +124,7 @@ export default function Test() {
                                     setIsVisibleBT3(!isVisibleBT3);
                                 }}
 
-                                className={`w-64 bg-blue-500 text-white py-2 px-4 rounded ${isVisibleBT3 ? '' : 'hidden'}`}
+                                className={`w-64 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ${isVisibleBT3 ? '' : 'hidden'}`}
                             >
                                 Continue
                             </button>
@@ -122,7 +142,7 @@ export default function Test() {
                                     setIsVisibleBT5(!isVisibleBT5);
                                     setIsVisibleBT4(!isVisibleBT4);
                                 }}
-                                className={`w-64 bg-blue-500 text-white py-2 px-4 rounded ${isVisibleBT4 ? '' : 'hidden'}`}
+                                className={`w-64 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ${isVisibleBT4 ? '' : 'hidden'}`}
                             >
                                 Continue
                             </button>
@@ -139,15 +159,16 @@ export default function Test() {
                                     setIsVisible6(!isVisible6);
                                     setIsVisible7(!isVisible7);
                                     setIsVisibleBT6(!isVisibleBT6);
+                                    setIsVisibleBT5(!isVisibleBT5);
                                 }}
 
-                                className={`w-64 bg-blue-500 text-white py-2 px-4 rounded ${isVisibleBT5 ? '' : 'hidden'}`}
+                                className={`w-64 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ${isVisibleBT5 ? '' : 'hidden'}`}
                             >
                                 Continue
                             </button>
                             <button
                                 onClick={handleDownLoad}
-                                className={`w-64 bg-blue-500 text-white py-2 px-4 rounded ${isVisibleBT6 ? '' : 'hidden'}`}
+                                className={`w-64 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ${isVisibleBT6 ? '' : 'hidden'}`}
                             >
                                 DownLoad PDF
                             </button>
@@ -159,7 +180,15 @@ export default function Test() {
                  { /* Box 2: Can be results or other content */}
                     <div className="flex-[1]">
                         <div className="overflow-hidden bg-white shadow-md rounded-lg p-6">
-                            <h2 className="text-xl font-semibold mb-4">SOME Heading </h2>
+                            <h2 className="text-xl font-semibold mb-4">
+                                <div
+                                    className={`transition-all duration-700 transform ${
+                                        loaded ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'
+                                    }`}
+                                >
+                                    <p className="text-gray-800">SOME HEADING</p>
+                                </div>
+                            </h2>
                             <p>Lorem</p>
                         </div>
                     </div>

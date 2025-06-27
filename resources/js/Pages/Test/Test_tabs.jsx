@@ -35,8 +35,47 @@ export default function Test_tabs() {
 
                     {/* Tab Content */}
                     <div className="p-6 bg-white shadow-md rounded-b-md">
-                        {activeTab === 'home' && <div>🏠 Home Content</div>}
-                        {activeTab === 'profile' && <div>👤 Profile Content</div>}
+                        {activeTab === 'home' && <div>🏠 Home Content
+
+                            <div className="flex flex-wrap gap-2">
+                                {/* Box 1: Form */}
+                                <div className="flex-[2]">
+                                    <div className="overflow-hidden bg-white shadow-md rounded-lg p-6">
+                                        <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
+
+                                            <div className="md:col-span-3 flex items-center">
+                                                <label htmlFor="pilediameter">Pile Diameter: D :=</label>
+                                            </div>
+                                            <div className="md:col-span-8">
+                                                <input type="number" name="pilediameter" id="pilediameter" required
+                                                       placeholder="0"
+                                                       step="any"
+                                                       className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+                                                />
+                                            </div>
+                                            <div className="md:col-span-1">
+                                                mm
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                { /* Box 2: Can be results or other content */}
+                                <div className="flex-[1]">
+                                    <div className="overflow-hidden bg-white shadow-md rounded-lg p-6">
+                                        <h2 className="text-xl font-semibold mb-4">Hiley Formula Image</h2>
+                                        <p>Image will show here...</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>}
+                        {activeTab === 'profile' && <div>👤 Profile Content
+
+                            <button className="w-64 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300">
+                                Hover Me
+                            </button>
+                        </div>}
                         {activeTab === 'settings' && <div>⚙️ Settings Content</div>}
                     </div>
                 </div>
