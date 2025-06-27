@@ -166,8 +166,7 @@ export default function Test() {
 
                 </div>
             </div>
-            <div
-                 className={`container mx-auto py-8 ${isVisible6 ? '' : 'hidden'}`} name="pilevalues_2" id="pilevalues_2">
+            <div className={`container mx-auto py-8 ${isVisible6 ? '' : 'hidden'}`} name="pilevalues_2" id="pilevalues_2">
                 <div className="flex flex-wrap gap-2">
                     {/* Box 1: Form */}
                     <div className="flex-[2]">

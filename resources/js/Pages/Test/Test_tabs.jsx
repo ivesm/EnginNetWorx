@@ -15,7 +15,7 @@ export default function Test_tabs() {
             }
         >
             <Head title="TEST TABS"/>
-                <div className="w-full max-w-4xl mx-auto mt-10">
+                <div className="w-full max-w-6xl mx-auto mt-10">
                     {/* Tab Headers */}
                     <div className="flex border-b border-gray-300">
                         {['home', 'profile', 'settings'].map((tab) => (
