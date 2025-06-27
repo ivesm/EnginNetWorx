@@ -19,7 +19,7 @@ export default function AuthenticatedLayout({ header, children }) {
                         <div className="flex">
                             <div className="flex shrink-0 items-center">
                                 <Link href="/dashboard">
-                                    <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" />
+                                    <img className="w-16 h-16 object-cover border rounded" alt="Thumbnail" src="/images/EngeneerWorx_1.png"/>
                                 </Link>
                             </div>
 
