@@ -40,6 +40,7 @@ export default function Test_tabs() {
                             <div className="flex flex-wrap gap-2">
                                 {/* Box 1: Form */}
                                 <div className="flex-[2]">
+                                    <h2 className="text-xl font-semibold mb-4">BOX 1</h2>
                                     <div className="overflow-hidden bg-white shadow-md rounded-lg p-6">
                                         <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
 
@@ -63,8 +64,8 @@ export default function Test_tabs() {
                                 { /* Box 2: Can be results or other content */}
                                 <div className="flex-[1]">
                                     <div className="overflow-hidden bg-white shadow-md rounded-lg p-6">
-                                        <h2 className="text-xl font-semibold mb-4">Hiley Formula Image</h2>
-                                        <p>Image will show here...</p>
+                                        <h2 className="text-xl font-semibold mb-4">BOX 2</h2>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores blanditiis cum doloribus itaque laborum minus natus nisi non, pariatur porro praesentium quidem ratione, repellat repellendus similique suscipit ullam unde. Beatae?</p>
                                     </div>
                                 </div>
                             </div>

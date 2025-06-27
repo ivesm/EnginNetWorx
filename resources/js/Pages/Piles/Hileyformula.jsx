@@ -1,8 +1,13 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import {Head, Link} from '@inertiajs/react';
-import {useState} from "react";
-
+import { useEffect, useState } from 'react';
 export default function Hileyformula() {
+
+    const [loaded, setLoaded] = useState(false);
+    useEffect(() => {
+        setLoaded(true);
+    }, []);
+
 
     const [pilediameter, setpilediameter] = useState(0);
     const [pilebasearea, setpilebasearea] = useState(0);
@@ -121,7 +126,13 @@ export default function Hileyformula() {
         <AuthenticatedLayout
             header={
                 <h2 className="text-xl font-semibold leading-tight text-gray-800">
-                    Piles
+                    <div
+                        className={`transition-all duration-700 transform ${
+                            loaded ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'
+                        }`}
+                    >
+                        <p className="text-gray-800">TEST PAGE</p>
+                    </div>
                 </h2>
             }
         >
@@ -131,7 +142,15 @@ export default function Hileyformula() {
                     {/* Box 1: Form */}
                     <div className="flex-[2]">
                         <div className="overflow-hidden bg-white shadow-md rounded-lg p-6">
-                            <h2 className="text-xl font-semibold mb-4">Hiley Formula Input</h2>
+                            <h2 className="text-xl font-semibold mb-4">
+                                <div
+                                    className={`transition-all duration-700 transform ${
+                                        loaded ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'
+                                    }`}
+                                >
+                                Hiley Formula Input
+                                </div>
+                            </h2>
                             <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
                                 <div className="md:col-span-12">
                                     Block 1
@@ -513,7 +532,7 @@ export default function Hileyformula() {
                                     setIsVisible6(!isVisible6);
                                     setIsVisible7(!isVisible7);
                                     setIsVisibleBT6(!isVisibleBT6);
-                                    setIsVisibleBT5(!isVisibleBT5);
+                                    setisVisibleBT5(!isVisibleBT5) ;
                                 }}
 
                                 className={`w-64 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ${isVisibleBT5 ? '' : 'hidden'}`}
@@ -534,8 +553,15 @@ export default function Hileyformula() {
                  { /* Box 2: Can be results or other content */}
                     <div className="flex-[1]">
                         <div className="overflow-hidden bg-white shadow-md rounded-lg p-6">
-                            <h2 className="text-xl font-semibold mb-4">Hiley Formula Image</h2>
-                            <p>Image will show here...</p>
+                            <div
+                                className={`transition-all duration-2500 transform ${
+                                    loaded ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'
+                                }`}
+                            >
+                                <h2 className="text-xl font-semibold mb-4">Hiley Formula Image</h2>
+                                <p>Image will show here...</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium amet asperiores commodi consequuntur, cumque est exercitationem nemo nostrum nulla odio officia omnis perferendis placeat quis repellat sapiente sit vero voluptatem!</p>
+                            </div>
                         </div>
                     </div>
 

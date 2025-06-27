@@ -2,6 +2,12 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import {Head, Link} from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 export default function Test() {
+
+    const [loaded, setLoaded] = useState(false);
+    useEffect(() => {
+        setLoaded(true);
+    }, []);
+
     //
     const [isVisible2, setIsVisible2] = useState(false);
     const [isVisible3, setIsVisible3] = useState(false);
@@ -17,11 +23,6 @@ export default function Test() {
     const [isVisibleBT5, setIsVisibleBT5] = useState(false);
     const [isVisibleBT6, setIsVisibleBT6] = useState(false);
 
-    const [loaded, setLoaded] = useState(false);
-
-    useEffect(() => {
-        setLoaded(true);
-    }, []);
 
 
     //Example Function
@@ -52,7 +53,7 @@ export default function Test() {
             header={
                 <h2 className="text-xl font-semibold leading-tight text-gray-800">
                     <div
-                        className={`transition-all duration-700 transform ${
+                        className={`transition-all duration-1500 transform ${
                             loaded ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'
                         }`}
                     >
@@ -180,16 +181,18 @@ export default function Test() {
                  { /* Box 2: Can be results or other content */}
                     <div className="flex-[1]">
                         <div className="overflow-hidden bg-white shadow-md rounded-lg p-6">
-                            <h2 className="text-xl font-semibold mb-4">
-                                <div
-                                    className={`transition-all duration-700 transform ${
-                                        loaded ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'
-                                    }`}
-                                >
-                                    <p className="text-gray-800">SOME HEADING</p>
-                                </div>
-                            </h2>
-                            <p>Lorem</p>
+                            <div
+                                className={`transition-all duration-700 transform ${
+                                    loaded ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'
+                                }`}
+                            >
+                                <h2 className="text-xl font-semibold mb-4">
+
+                                        <p className="text-gray-800">SOME HEADING</p>
+
+                                </h2>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab ad adipisci aliquam animi beatae, consectetur dolore earum eveniet explicabo illo iure nihil, quia quibusdam quod sit tempore totam voluptates.</p>
+                        </div>
                         </div>
                     </div>
 
