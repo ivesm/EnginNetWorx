@@ -131,7 +131,7 @@ export default function Hileyformula() {
                             loaded ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'
                         }`}
                     >
-                        <p className="text-gray-800">TEST PAGE</p>
+                        <p className="text-gray-800">Hiley Formula</p>
                     </div>
                 </h2>
             }
@@ -164,7 +164,6 @@ export default function Hileyformula() {
                                            placeholder="0"
                                            step="any"
                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
-                                           value={pilediameter}
                                            onChange={handlePileDiameter}
                                     />
                                 </div>
@@ -181,7 +180,6 @@ export default function Hileyformula() {
                                            placeholder="0"
                                            step="any"
                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
-                                           value={pilelength}
                                            onChange={(e) => setpilelength(e.target.value)}
                                     />
                                 </div>
@@ -197,7 +195,6 @@ export default function Hileyformula() {
                                            step="any"
                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
                                            placeholder="0"
-                                           value={weighthammer}
                                            onChange={(e) => setweighthammer(e.target.value)}
                                     />
                                 </div>
@@ -213,7 +210,6 @@ export default function Hileyformula() {
                                            step="any"
                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
                                            placeholder="0"
-                                           value={weightanvil}
                                            onChange={(e) => setweightanvil(e.target.value)}
                                     />
                                 </div>
@@ -229,7 +225,6 @@ export default function Hileyformula() {
                                            step="any"
                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
                                            placeholder="0"
-                                           value={weighthelmet}
                                            onChange={(e) => setweighthelmet(e.target.value)}
                                     />
                                 </div>
@@ -245,7 +240,6 @@ export default function Hileyformula() {
                                            step="any"
                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
                                            placeholder="0"
-                                           value={pileunitweight}
                                            onChange={handlePileTotalWeight}
                                     />
                                 </div>
@@ -330,7 +324,7 @@ export default function Hileyformula() {
                                     <input type="number" name="freefallheight" id="freefallheight" required
                                            step="any"
                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
-                                           value={freefallheight}
+                                           placeholder="0"
                                            onChange={(e) => setfreefallheight(e.target.value)}
                                     />
                                 </div>
@@ -345,7 +339,7 @@ export default function Hileyformula() {
                                     <input type="number" name="efficiencyfall" id="efficiencyfall" required
                                            step="any"
                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
-                                           value={efficiencyfall}
+                                           placeholder="0"
                                            onChange={handleEffectiveHeightFall}
                                     />
                                 </div>
@@ -397,7 +391,7 @@ export default function Hileyformula() {
                                 <input type="number" name="finalpenetration" id="finalpenetration" required
                                        step="any"
                                        className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
-                                       value={finalpenetration}
+                                       placeholder="0"
                                        onChange={(e) => setfinalpenetration(e.target.value)}
                                 />
                             </div>
@@ -413,7 +407,7 @@ export default function Hileyformula() {
                                        required
                                        step="any"
                                        className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
-                                       value={coefficientrestitution}
+                                       placeholder="0"
                                        onChange={handleEfficiency}
                                 />
                             </div>
@@ -532,7 +526,7 @@ export default function Hileyformula() {
                                     setIsVisible6(!isVisible6);
                                     setIsVisible7(!isVisible7);
                                     setIsVisibleBT6(!isVisibleBT6);
-                                    setisVisibleBT5(!isVisibleBT5) ;
+                                    setIsVisibleBT5(!isVisibleBT5);
                                 }}
 
                                 className={`w-64 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ${isVisibleBT5 ? '' : 'hidden'}`}

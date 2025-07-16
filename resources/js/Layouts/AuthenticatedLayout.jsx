@@ -19,7 +19,7 @@ export default function AuthenticatedLayout({ header, children }) {
                         <div className="flex">
                             <div className="flex shrink-0 items-center">
                                 <Link href="/dashboard">
-                                    <img className="w-16 h-16 object-cover border rounded" alt="Thumbnail" src="/images/EngeneerWorx_1.png"/>
+                                    <img className="w-16 h-16 object-cover border rounded" alt="Thumbnail" src="/Images/EngeneerWorx_1.png"/>
                                 </Link>
                             </div>
 
