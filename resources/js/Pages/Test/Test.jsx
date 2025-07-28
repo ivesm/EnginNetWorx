@@ -79,7 +79,9 @@ export default function Test() {
                             </h2>
                             <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
                                 <div className="md:col-span-12">
-                                    Block 1
+
+                                    <label htmlFor="monthPicker"> Block 1 Select Month and Year:</label>
+                                    <input type="month" id="monthPicker" name="monthYear"/>
                                     &nbsp;
                                 </div>
                                 <button

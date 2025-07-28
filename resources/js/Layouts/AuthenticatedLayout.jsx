@@ -4,12 +4,31 @@ import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Link, usePage } from '@inertiajs/react';
 import { useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 export default function AuthenticatedLayout({ header, children }) {
     const user = usePage().props.auth.user;
 
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
+    const submenuRef = useRef(null);
+    const [submenuOpen, setSubmenuOpen] = useState(false);
+    const [submenuOpen1, setSubmenuOpen1] = useState(false);
+
+    const [openSubmenu, setOpenSubmenu] = useState(null);
+
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (submenuRef.current && !submenuRef.current.contains(event.target)) {
+                setOpenSubmenu(null);
+            }
+        }
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
 
     return (
         <div className="min-h-screen bg-gray-100">
@@ -19,7 +38,7 @@ export default function AuthenticatedLayout({ header, children }) {
                         <div className="flex">
                             <div className="flex shrink-0 items-center">
                                 <Link href="/dashboard">
-                                    <img className="w-16 h-16 object-cover border rounded" alt="Thumbnail" src="/Images/EngeneerWorx_1.png"/>
+                                    <img className="w-16 h-16 object-cover border rounded" alt="Thumbnail" src="images/EngeneerWorx_1.png"/>
                                 </Link>
                             </div>
 
@@ -32,7 +51,7 @@ export default function AuthenticatedLayout({ header, children }) {
                                             type="button"
                                             className="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none"
                                             >
-                                                Piles
+                                                Foundations
                                                 <svg
                                                 className="-me-0.5 ms-2 h-4 w-4"
                                                 xmlns="http://www.w3.org/2000/svg"
@@ -49,9 +68,67 @@ export default function AuthenticatedLayout({ header, children }) {
                                         </span>
                                     </Dropdown.Trigger>
                                     <Dropdown.Content className="z-50">
-                                        <Dropdown.Link href={route('hileyformula')}>
-                                            Hiley Formula
-                                        </Dropdown.Link>
+                                        <div ref={submenuRef} className="relative group">
+                                            <button
+                                                type="button"
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    setOpenSubmenu(openSubmenu === 'piles' ? null : 'piles');
+                                                }}
+                                                className="flex w-full items-center justify-between px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                            >
+                                                Piles
+                                                <svg
+                                                    className={`ml-2 h-4 w-4 transform transition-transform ${
+                                                        openSubmenu === 'piles' ? 'rotate-90' : ''
+                                                    }`}
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    fill="none"
+                                                    viewBox="0 0 24 24"
+                                                    stroke="currentColor"
+                                                >
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                                                </svg>
+                                            </button>
+
+                                            {openSubmenu === 'piles' && (
+                                                <div className="absolute left-full top-0 ml-1 w-48 rounded-md border bg-white shadow-lg z-50">
+                                                    <Dropdown.Link href={route('hileyformula')}>
+                                                        Hiley Formula
+                                                    </Dropdown.Link>
+                                                </div>
+                                            )}
+
+                                            <button
+                                                type="button"
+                                                onClick={(e) => {
+                                                    e.stopPropagation(); // 👈 prevents closing the whole dropdown
+                                                    setOpenSubmenu(openSubmenu === 'test' ? null : 'test');
+                                                }}
+                                                className="flex w-full items-center justify-between px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                            >
+                                                Example
+                                                <svg
+                                                    className={`ml-2 h-4 w-4 transform transition-transform ${
+                                                        openSubmenu === 'test' ? 'rotate-90' : ''
+                                                    }`}
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    fill="none"
+                                                    viewBox="0 0 24 24"
+                                                    stroke="currentColor"
+                                                >
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                                                </svg>
+                                            </button>
+
+                                            {openSubmenu === 'test' && (
+                                                <div className="absolute left-full top-0 ml-1 w-48 rounded-md border bg-white shadow-lg z-50">
+                                                    <Dropdown.Link href="#">
+                                                        Example Submenu 1
+                                                    </Dropdown.Link>
+                                                </div>
+                                            )}
+                                        </div>
                                     </Dropdown.Content>
                                 </Dropdown>
                             </div>
@@ -89,9 +166,9 @@ export default function AuthenticatedLayout({ header, children }) {
                                             Test
                                         </Dropdown.Link>
                                     </Dropdown.Content>
+
                                 </Dropdown>
                             </div>
-                            {/***************************************************/}
                         </div>
 
                         <div className="hidden sm:ms-6 sm:flex sm:items-center">
