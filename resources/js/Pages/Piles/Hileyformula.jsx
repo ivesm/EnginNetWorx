@@ -299,18 +299,9 @@ export default function Hileyformula() {
                                 >
                                     Continue
                                 </button>
-                                <div className="md:col-span-12">
-                                    &nbsp;
-                                    {/*Block1 End*/}
-                                </div>
                             </div>
 
                             <div className={`grid grid-cols-1 md:grid-cols-12 gap-4 ${isVisible2 ? '' : 'hidden'}`}>
-                                <div className="md:col-span-12">
-                                    <br/> &nbsp;
-                                    {/*Block2*/}
-                                </div>
-
                                 <div className="md:col-span-3 flex items-center">
                                     <label htmlFor="freefallheight">Free fall height of hammer ff ≔</label>
                                 </div>
@@ -349,7 +340,7 @@ export default function Hileyformula() {
                                            step="any" disabled
                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
                                            placeholder="0"
-                                           value={parseFloat(effectiveheight).toFixed(2)}
+                                           value={effectiveheight ? parseFloat(effectiveheight).toFixed(3) : ''}
                                     />
                                 </div>
                                 <div className="md:col-span-1">
@@ -365,18 +356,9 @@ export default function Hileyformula() {
                                 >
                                     Continue
                                 </button>
-                                <div className="md:col-span-12">
-                                    &nbsp;
-                                    {/*Block2  eD*/}
-                                </div>
                             </div>
 
                         <div className={`grid grid-cols-1 md:grid-cols-12 gap-4 ${isVisible3 ? '' : 'hidden'}`}>
-                            <div className="md:col-span-12">
-                                &nbsp;
-                                <br/>Block 3
-                            </div>
-
                             <div className="md:col-span-3 flex items-center">
                                 <label htmlFor="effectiveheight">Final set or penetration per blow
                                     (mean of final 10 blows) S ≔</label>
@@ -417,7 +399,8 @@ export default function Hileyformula() {
                                        step="any" disabled
                                        className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
                                        placeholder="0"
-                                       value={parseFloat(efficiencyblow).toFixed(3)}
+                                       value={efficiencyblow ? parseFloat(efficiencyblow).toFixed(3) : ''}
+
                                 />
                             </div>
                             <div className="md:col-span-1">
@@ -433,7 +416,7 @@ export default function Hileyformula() {
                                        step="any" disabled
                                        className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
                                        placeholder="0"
-                                       value={parseFloat(potentialenergyhammer).toFixed(3)}
+                                       value={potentialenergyhammer ? parseFloat(potentialenergyhammer).toFixed(3) : ''}
                                 />
                             </div>
                             <div className="md:col-span-1">
@@ -448,7 +431,7 @@ export default function Hileyformula() {
                                        step="any" disabled
                                        className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
                                        placeholder="0"
-                                       value={parseFloat(drivingforce).toFixed(3)}
+                                       value={drivingforce ? parseFloat(drivingforce).toFixed(3) : ''}
                                 />
                             </div>
                             <div className="md:col-span-1">
@@ -465,7 +448,7 @@ export default function Hileyformula() {
                                        step="any" disabled
                                        className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
                                        placeholder="0"
-                                       value={parseFloat(stresspilesdrivingforce).toFixed(3)}
+                                       value={stresspilesdrivingforce ? parseFloat(stresspilesdrivingforce).toFixed(3) : ''}
                                 />
                             </div>
                             <div className="md:col-span-1">
