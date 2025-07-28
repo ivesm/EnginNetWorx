@@ -120,8 +120,6 @@ export default function Hileyformula() {
 
         alert(" THIS  WILL  DOWN LOAD THE  VALUES  AS A PDF ");
     };
-
-
     return (
         <AuthenticatedLayout
             header={
@@ -152,16 +150,12 @@ export default function Hileyformula() {
                                 </div>
                             </h2>
                             <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
-                                <div className="md:col-span-12">
-                                    Block 1
-                                    &nbsp;
-                                </div>
                                 <div className="md:col-span-3 flex items-center">
-                                    <label htmlFor="pilediameter">Pile Diameter: D :=</label>
+                                    <label htmlFor="pilediameter">Pile Diameter: D =</label>
                                 </div>
                                 <div className="md:col-span-8">
                                     <input type="number" name="pilediameter" id="pilediameter" required
-                                           placeholder="0"
+                                           placeholder="Pile Diameter"
                                            step="any"
                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
                                            onChange={handlePileDiameter}
@@ -177,7 +171,7 @@ export default function Hileyformula() {
                                 <div className="md:col-span-8">
                                     <input type="number" name="pilelength" id="pilelength"
                                            required
-                                           placeholder="0"
+                                           placeholder="Pile Length"
                                            step="any"
                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
                                            onChange={(e) => setpilelength(e.target.value)}
@@ -194,7 +188,7 @@ export default function Hileyformula() {
                                     <input type="number" name="weighthammer" id="weighthammer" required
                                            step="any"
                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
-                                           placeholder="0"
+                                           placeholder="Weight of hammer"
                                            onChange={(e) => setweighthammer(e.target.value)}
                                     />
                                 </div>
@@ -209,7 +203,7 @@ export default function Hileyformula() {
                                     <input type="number" name="weightanvil" id="weightanvil" required
                                            step="any"
                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
-                                           placeholder="0"
+                                           placeholder="Weight of Anvil"
                                            onChange={(e) => setweightanvil(e.target.value)}
                                     />
                                 </div>
@@ -224,7 +218,7 @@ export default function Hileyformula() {
                                     <input type="number" name="weighthelmet" id="weighthelmet" required
                                            step="any"
                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
-                                           placeholder="0"
+                                           placeholder="Weight of Helmet"
                                            onChange={(e) => setweighthelmet(e.target.value)}
                                     />
                                 </div>
@@ -239,7 +233,7 @@ export default function Hileyformula() {
                                     <input type="number" name="pileunitweight" id="pileunitweight" required
                                            step="any"
                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
-                                           placeholder="0"
+                                           placeholder="Pile Unit Weight"
                                            onChange={handlePileTotalWeight}
                                     />
                                 </div>
@@ -254,8 +248,8 @@ export default function Hileyformula() {
                                     <input type="number" name="pilebasearea" id="pilebasearea" required
                                            step="any" disabled
                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
-                                           placeholder="0"
-                                           value={parseFloat(pilebasearea).toFixed(3)}
+                                           placeholder="Pile Base Area"
+                                           value={pilebasearea ? parseFloat(pilebasearea).toFixed(3) : ''}
                                     />
                                 </div>
                                 <div className="md:col-span-1">
@@ -270,8 +264,8 @@ export default function Hileyformula() {
                                     <input type="number" name="piletotalweight" id="piletotalweight" required
                                            step="any" disabled
                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
-                                           placeholder="0"
-                                           value={parseFloat(piletotalweight).toFixed(3)}
+                                           placeholder="Pile Total weight"
+                                           value={piletotalweight ? parseFloat(piletotalweight).toFixed(3) : ''}
                                     />
                                 </div>
                                 <div className="md:col-span-1">
@@ -287,8 +281,8 @@ export default function Hileyformula() {
                                            required
                                            step="any" disabled
                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
-                                           placeholder="0"
-                                           value={parseFloat(weightpileanvilhelmet).toFixed(3)}
+                                           placeholder="Weight of pile, anvil, & helmet"
+                                           value={weightpileanvilhelmet ? parseFloat(weightpileanvilhelmet).toFixed(3) : ''}
                                     />
                                 </div>
                                 <div className="md:col-span-1">
