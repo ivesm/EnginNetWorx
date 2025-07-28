@@ -1,6 +1,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import {Head, Link} from '@inertiajs/react';
 import { useEffect, useState } from 'react';
+import { QuestionMarkCircleIcon } from '@heroicons/react/24/outline';
 export default function Hileyformula() {
 
     const [loaded, setLoaded] = useState(false);
@@ -150,6 +151,36 @@ export default function Hileyformula() {
                                 </div>
                             </h2>
                             <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
+
+                                <div className="md:col-span-3 flex items-center">
+                                    <label htmlFor="pilediameter">test123: T =</label>
+                                </div>
+                                <div className="md:col-span-4">
+                                    <input type="number" name="test123" id="test123" required
+                                           placeholder="test123 "
+                                           step="any"
+                                           className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+                                    />
+                                </div>
+                                <div className="md:col-span-1">
+                                    <div className="relative group inline-block">
+                                        mm
+                                        <QuestionMarkCircleIcon className="w-5 h-5 text-gray-500" />
+
+                                        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1
+                      w-32 opacity-0 group-hover:opacity-100 transition-opacity duration-200
+                      text-xs bg-black text-white px-2 py-1 rounded shadow-lg z-10 text-center">
+                                            This is help text.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="md:col-span-4">
+                                    &nbsp;
+                                </div>
+
+
+
+
                                 <div className="md:col-span-3 flex items-center">
                                     <label htmlFor="pilediameter">Pile Diameter: D =</label>
                                 </div>
@@ -238,7 +269,14 @@ export default function Hileyformula() {
                                     />
                                 </div>
                                 <div className="md:col-span-1">
-                                    kN.m<sup>-3</sup>
+                                    <div className="relative group inline-block">
+                                        <span className="text-black-600"> kN.m<sup>-3</sup></span>
+                                        <QuestionMarkCircleIcon className="w-5 h-5 text-gray-500" />
+                                        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 w-32 opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-xs bg-black text-white px-2 py-1 rounded shadow-lg z-10 text-center">
+                                            Timber pile
+                                        </div>
+                                    </div>
+
                                 </div>
 
                                 <div className="md:col-span-3 flex items-center">
@@ -302,6 +340,9 @@ export default function Hileyformula() {
                             </div>
 
                             <div className={`grid grid-cols-1 md:grid-cols-12 gap-4 ${isVisible2 ? '' : 'hidden'}`}>
+                                <div className="md:col-span-12">
+                                    &nbsp;
+                                </div>
                                 <div className="md:col-span-3 flex items-center">
                                     <label htmlFor="freefallheight">Free fall height of hammer ff ≔</label>
                                 </div>
@@ -309,7 +350,7 @@ export default function Hileyformula() {
                                     <input type="number" name="freefallheight" id="freefallheight" required
                                            step="any"
                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
-                                           placeholder="0"
+                                           placeholder="Free fall height of hammer"
                                            onChange={(e) => setfreefallheight(e.target.value)}
                                     />
                                 </div>
@@ -324,7 +365,7 @@ export default function Hileyformula() {
                                     <input type="number" name="efficiencyfall" id="efficiencyfall" required
                                            step="any"
                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
-                                           placeholder="0"
+                                           placeholder="Efficiency of fall Eff"
                                            onChange={handleEffectiveHeightFall}
                                     />
                                 </div>
@@ -339,7 +380,7 @@ export default function Hileyformula() {
                                     <input type="number" name="effectiveheight" id="effectiveheight" required
                                            step="any" disabled
                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
-                                           placeholder="0"
+                                           placeholder="Effective height of fall"
                                            value={effectiveheight ? parseFloat(effectiveheight).toFixed(3) : ''}
                                     />
                                 </div>
@@ -359,20 +400,34 @@ export default function Hileyformula() {
                             </div>
 
                         <div className={`grid grid-cols-1 md:grid-cols-12 gap-4 ${isVisible3 ? '' : 'hidden'}`}>
+                            <div className="md:col-span-12">
+                                &nbsp;
+                            </div>
                             <div className="md:col-span-3 flex items-center">
                                 <label htmlFor="effectiveheight">Final set or penetration per blow
                                     (mean of final 10 blows) S ≔</label>
                             </div>
-                            <div className="md:col-span-8">
+                            <div className="md:col-span-4">
                                 <input type="number" name="finalpenetration" id="finalpenetration" required
                                        step="any"
                                        className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
-                                       placeholder="0"
+                                       placeholder="Final set or penetration per blow (mean of final 10 blows)"
                                        onChange={(e) => setfinalpenetration(e.target.value)}
                                 />
                             </div>
                             <div className="md:col-span-1">
-                                mm Vary set to achieve design load
+
+                                <div className="relative group inline-block">
+                                    <span className="text-black-600">mm</span>
+                                    <QuestionMarkCircleIcon className="w-5 h-5 text-gray-500" />
+                                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 w-32 opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-xs bg-black text-white px-2 py-1 rounded shadow-lg z-10 text-center">
+                                        Vary set to achieve design load
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="md:col-span-4">
+                                &nbsp;
                             </div>
 
                             <div className="md:col-span-3 flex items-center">
@@ -383,12 +438,17 @@ export default function Hileyformula() {
                                        required
                                        step="any"
                                        className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
-                                       placeholder="0"
+                                       placeholder="Coefficient of restitution"
                                        onChange={handleEfficiency}
                                 />
                             </div>
                             <div className="md:col-span-1">
-                                Single Acting Hammer Timber piles
+                                <div className="relative group inline-block">
+                                    <QuestionMarkCircleIcon className="w-5 h-5 text-gray-500" />
+                                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 w-32 opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-xs bg-black text-white px-2 py-1 rounded shadow-lg z-10 text-center">
+                                        Single Acting Hammer Timber piles
+                                    </div>
+                                </div>
                             </div>
 
                             <div className="md:col-span-3 flex items-center">
@@ -475,7 +535,31 @@ export default function Hileyformula() {
                         <div className={`grid grid-cols-1 md:grid-cols-12 gap-4 ${isVisible4 ? '' : 'hidden'}`}>
                             <div className="md:col-span-12">
                                 &nbsp;
-                                Block 4
+                            </div>
+                            <div className="md:col-span-3 flex items-center">
+                                <label htmlFor="pilediameter">Elastic compression of pile
+                                    head / dolly / packing: T =</label>
+                            </div>
+                            <div className="md:col-span-4">
+                                <input type="number" name="test123" id="test123" required
+                                       placeholder="Elastic compression of pile head / dolly / packing "
+                                       step="any"
+                                       className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+                                />
+                            </div>
+                            <div className="md:col-span-1">
+                                <div className="relative group inline-block">
+                                    mm
+                                    <QuestionMarkCircleIcon className="w-5 h-5 text-gray-500" />
+
+                                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1
+                      w-32 opacity-0 group-hover:opacity-100 transition-opacity duration-200
+                      text-xs bg-black text-white px-2 py-1 rounded shadow-lg z-10 text-center">
+                                        Medium driving
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="md:col-span-4">
                                 &nbsp;
                             </div>
 
@@ -492,11 +576,6 @@ export default function Hileyformula() {
                         </div>
 
                         <div className={`grid grid-cols-1 md:grid-cols-12 gap-4 ${isVisible5 ? '' : 'hidden'}`}>
-                            <div className="md:col-span-12">
-                                &nbsp;
-                                Block 5
-                                &nbsp;
-                            </div>
 
                             <button
                                 onClick={() => {
