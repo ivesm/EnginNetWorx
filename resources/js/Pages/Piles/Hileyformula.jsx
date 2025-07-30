@@ -45,7 +45,7 @@ export default function Hileyformula() {
     const [isVisibleBT5, setIsVisibleBT5] = useState(false);
     const [isVisibleBT6, setIsVisibleBT6] = useState(false);
 
-
+    const [tabIndex, setTabIndex] = useState("form");
     const handlePileDiameter = (e) => {
         const value = e.target.value;
         setpilediameter(value);
@@ -150,6 +150,27 @@ export default function Hileyformula() {
                                 Hiley Formula Input
                                 </div>
                             </h2>
+                            <div className="flex border-b border-gray-300 mb-6">
+                                {[
+                                    { key: 'form', label: 'Hiley Form' },
+                                    { key: 'info', label: 'Info' }
+                                ].map((tab) => (
+                                    <button
+                                        key={tab.key}
+                                        className={`px-4 py-2 -mb-px text-sm font-medium text-gray-600 border-b-2 transition-colors duration-300 ${
+                                            tabIndex === tab.key
+                                                ? 'border-blue-500 text-blue-600'
+                                                : 'border-transparent hover:text-blue-500'
+                                        }`}
+                                        onClick={() => setTabIndex(tab.key)}
+                                    >
+                                        {tab.label}
+                                    </button>
+                                ))}
+                            </div>
+                            {/****Tab 1****/}
+                            {tabIndex === 'form' && (
+                                <>
                             <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
 
                                 <div className="md:col-span-3 flex items-center">
@@ -177,9 +198,6 @@ export default function Hileyformula() {
                                 <div className="md:col-span-4">
                                     &nbsp;
                                 </div>
-
-
-
 
                                 <div className="md:col-span-3 flex items-center">
                                     <label htmlFor="pilediameter">Pile Diameter: D =</label>
@@ -578,24 +596,32 @@ export default function Hileyformula() {
                         <div className={`grid grid-cols-1 md:grid-cols-12 gap-4 ${isVisible5 ? '' : 'hidden'}`}>
 
                             <button
-                                onClick={() => {
-                                    setIsVisible6(!isVisible6);
-                                    setIsVisible7(!isVisible7);
-                                    setIsVisibleBT6(!isVisibleBT6);
-                                    setIsVisibleBT5(!isVisibleBT5);
-                                }}
-
-                                className={`w-64 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ${isVisibleBT5 ? '' : 'hidden'}`}
-                            >
-                                Continue
-                            </button>
-                            <button
                                 onClick={handleDownLoad}
-                                className={`w-64 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ${isVisibleBT6 ? '' : 'hidden'}`}
+                                className={`w-64 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ${isVisibleBT5 ? '' : 'hidden'}`}
                             >
                                 DownLoad PDF
                             </button>
                         </div>
+                            </>
+)}
+
+
+{/* TAB: Info Content */}
+                            {tabIndex === 'info' && (
+                                <>
+                                    <div className="text-gray-700">
+                                        <h3 className="text-lg font-semibold mb-4">Formula Info</h3>
+                                        <ul className="list-disc list-inside space-y-2">
+                                            <li><strong>e</strong> = coefficient of restitution</li>
+                                            <li><strong>Eff</strong> = hammer efficiency (%)</li>
+                                            <li><strong>S</strong> = set per blow (mm)</li>
+                                            <li><strong>Wp</strong> = pile weight</li>
+                                        </ul>
+                                    </div>
+                                </>
+                            )}
+
+                            {/* END TAB 1*/}
                         </div>
                     {/*END  BOX1 */}
                     </div>
