@@ -150,8 +150,8 @@ return (
                         </h2>
                         <div className="flex border-b border-gray-300 mb-6">
                             {[
-                            { key: 'form', label: 'Hiley Form' },
-                            { key: 'info', label: 'Info' }
+                            { key: '1', label: 'Hiley Form' },
+                            { key: '2', label: 'Info' }
                             ].map((tab) => (
                             <button
                                 key={tab.key}
@@ -168,152 +168,153 @@ return (
                         </div>
 
                         {/****Tab 1****/}
-    {tabIndex === '1' && (
-    <>
-    <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
-    <div className="md:col-span-3 flex items-center">
-    <label htmlFor="pilediameter">test123: T =</label>
-    </div>
-    <div className="md:col-span-4">
-    <input type="number" name="test123" id="test123" required
-    placeholder="test123 "
-    step="any"
-    className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
-    />
-    </div>
-    <div className="md:col-span-1">
-    <div className="relative group inline-block">
-    mm
-    <QuestionMarkCircleIcon className="w-5 h-5 text-gray-500" />
+                        {tabIndex === '1' && (
+                            <>
+                                <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
+                                    <div className="md:col-span-3 flex items-center">
+                                        <label htmlFor="pilediameter">test123: T =</label>
+                                    </div>
+                                    <div className="md:col-span-4">
+                                        <input type="number" name="test123" id="test123" required
+                                            placeholder="test123 "
+                                            step="any"
+                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+                                        />
+                                    </div>
+                                    <div className="md:col-span-1">
+                                        <div className="relative group inline-block">
+                                            mm
+                                            <QuestionMarkCircleIcon className="w-5 h-5 text-gray-500" />
 
-    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1
-    w-32 opacity-0 group-hover:opacity-100 transition-opacity duration-200
-    text-xs bg-black text-white px-2 py-1 rounded shadow-lg z-10 text-center">
-    This is help text.
-    </div>
-    </div>
-    </div>
-    <div className="md:col-span-4">
-    &nbsp;
-    </div>
+                                            <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1
+                                                w-32 opacity-0 group-hover:opacity-100 transition-opacity duration-200
+                                                text-xs bg-black text-white px-2 py-1 rounded shadow-lg z-10 text-center"
+                                            >
+                                                This is help text.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="md:col-span-4">
+                                        &nbsp;
+                                    </div>
 
-    <div className="md:col-span-3 flex items-center">
-    <label htmlFor="pilediameter">Pile Diameter: D =</label>
-    </div>
-    <div className="md:col-span-8">
-    <input type="number" name="pilediameter" id="pilediameter" required
-    placeholder="Pile Diameter"
-    step="any"
-    className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
-    onChange={handlePileDiameter}
-    />
-    </div>
-    <div className="md:col-span-1">
-    mm
-    </div>
+                                    <div className="md:col-span-3 flex items-center">
+                                        <label htmlFor="pilediameter">Pile Diameter: D =</label>
+                                    </div>
+                                    <div className="md:col-span-8">
+                                        <input type="number" name="pilediameter" id="pilediameter" required
+                                            placeholder="Pile Diameter"
+                                            step="any"
+                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+                                            onChange={handlePileDiameter}
+                                        />
+                                    </div>
+                                    <div className="md:col-span-1">
+                                        mm
+                                    </div>
 
-    <div className="md:col-span-3 flex items-center">
-    <label htmlFor="pilelength">Pile Length: L :=</label>
-    </div>
-    <div className="md:col-span-8">
-    <input type="number" name="pilelength" id="pilelength"
-    required
-    placeholder="Pile Length"
-    step="any"
-    className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
-    onChange={(e) => setpilelength(e.target.value)}
-    />
-    </div>
-    <div className="md:col-span-1">
-    m
-    </div>
+                                    <div className="md:col-span-3 flex items-center">
+                                        <label htmlFor="pilelength">Pile Length: L :=</label>
+                                    </div>
+                                    <div className="md:col-span-8">
+                                        <input type="number" name="pilelength" id="pilelength"
+                                            required
+                                            placeholder="Pile Length"
+                                            step="any"
+                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+                                            onChange={(e) => setpilelength(e.target.value)}
+                                        />
+                                    </div>
+                                    <div className="md:col-span-1">
+                                        m
+                                    </div>
 
-    <div className="md:col-span-3 flex items-center">
-    <label htmlFor="weighthammer">Weight of hammer: W :=</label>
-    </div>
-    <div className="md:col-span-8">
-    <input type="number" name="weighthammer" id="weighthammer" required
-    step="any"
-    className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
-    placeholder="Weight of hammer"
-    onChange={(e) => setweighthammer(e.target.value)}
-    />
-    </div>
-    <div className="md:col-span-1">
-    kN
-    </div>
+                                    <div className="md:col-span-3 flex items-center">
+                                        <label htmlFor="weighthammer">Weight of hammer: W :=</label>
+                                    </div>
+                                    <div className="md:col-span-8">
+                                        <input type="number" name="weighthammer" id="weighthammer" required
+                                            step="any"
+                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+                                            placeholder="Weight of hammer"
+                                            onChange={(e) => setweighthammer(e.target.value)}
+                                        />
+                                    </div>
+                                    <div className="md:col-span-1">
+                                        kN
+                                    </div>
 
-    <div className="md:col-span-3 flex items-center">
-    <label htmlFor="weightanvil">Weight of Anvil: W<sub>a</sub> :=</label>
-    </div>
-    <div className="md:col-span-8">
-    <input type="number" name="weightanvil" id="weightanvil" required
-    step="any"
-    className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
-    placeholder="Weight of Anvil"
-    onChange={(e) => setweightanvil(e.target.value)}
-    />
-    </div>
-    <div className="md:col-span-1">
-    kN
-    </div>
+                                    <div className="md:col-span-3 flex items-center">
+                                        <label htmlFor="weightanvil">Weight of Anvil: W<sub>a</sub> :=</label>
+                                    </div>
+                                    <div className="md:col-span-8">
+                                        <input type="number" name="weightanvil" id="weightanvil" required
+                                            step="any"
+                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+                                            placeholder="Weight of Anvil"
+                                            onChange={(e) => setweightanvil(e.target.value)}
+                                        />
+                                    </div>
+                                    <div className="md:col-span-1">
+                                        kN
+                                    </div>
 
-    <div className="md:col-span-3 flex items-center">
-    <label htmlFor="weighthelmet">Weight of Helmet: W<sub>H</sub> :=</label>
-    </div>
-    <div className="md:col-span-8">
-    <input type="number" name="weighthelmet" id="weighthelmet" required
-    step="any"
-    className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
-    placeholder="Weight of Helmet"
-    onChange={(e) => setweighthelmet(e.target.value)}
-    />
-    </div>
-    <div className="md:col-span-1">
-    kN
-    </div>
+                                    <div className="md:col-span-3 flex items-center">
+                                        <label htmlFor="weighthelmet">Weight of Helmet: W<sub>H</sub> :=</label>
+                                    </div>
+                                    <div className="md:col-span-8">
+                                        <input type="number" name="weighthelmet" id="weighthelmet" required
+                                            step="any"
+                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+                                            placeholder="Weight of Helmet"
+                                            onChange={(e) => setweighthelmet(e.target.value)}
+                                        />
+                                    </div>
+                                    <div className="md:col-span-1">
+                                    kN
+                                    </div>
 
-    <div className="md:col-span-3 flex items-center">
-    <label htmlFor="pileunitweight">Pile Unit Weight: W<sub>p</sub> :=</label>
-    </div>
-    <div className="md:col-span-8">
-    <input type="number" name="pileunitweight" id="pileunitweight" required
-    step="any"
-    className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
-    placeholder="Pile Unit Weight"
-    onChange={handlePileTotalWeight}
-    />
-    </div>
-    <div className="md:col-span-1">
-    <div className="relative group inline-block">
-    <span className="text-black-600"> kN.m<sup>-3</sup></span>
-    <QuestionMarkCircleIcon className="w-5 h-5 text-gray-500" />
-    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 w-32 opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-xs bg-black text-white px-2 py-1 rounded shadow-lg z-10 text-center">
-    Timber pile
-    </div>
-    </div>
+                                    <div className="md:col-span-3 flex items-center">
+                                        <label htmlFor="pileunitweight">Pile Unit Weight: W<sub>p</sub> :=</label>
+                                    </div>
+                                    <div className="md:col-span-8">
+                                        <input type="number" name="pileunitweight" id="pileunitweight" required
+                                            step="any"
+                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+                                            placeholder="Pile Unit Weight"
+                                            onChange={handlePileTotalWeight}
+                                        />
+                                    </div>
+                                    <div className="md:col-span-1">
+                                        <div className="relative group inline-block">
+                                            <span className="text-black-600"> kN.m<sup>-3</sup></span>
+                                            <QuestionMarkCircleIcon className="w-5 h-5 text-gray-500" />
+                                            <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 w-32 opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-xs bg-black text-white px-2 py-1 rounded shadow-lg z-10 text-center">
+                                                Timber pile
+                                            </div>
+                                        </div>
 
-    </div>
+                                    </div>
 
-    <div className="md:col-span-3 flex items-center">
-    <label htmlFor="pilebasearea">Pile Base Area: A:= &pi; . D<sup>2</sup>/4</label>
-    </div>
-    <div className="md:col-span-8">
-    <input type="number" name="pilebasearea" id="pilebasearea" required
-    step="any" disabled
-    className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
-    placeholder="Pile Base Area"
-    value={pilebasearea ? parseFloat(pilebasearea).toFixed(3) : ''}
-    />
-    </div>
-    <div className="md:col-span-1">
-    m<sup>2</sup>
-    </div>
+                                    <div className="md:col-span-3 flex items-center">
+                                        <label htmlFor="pilebasearea">Pile Base Area: A:= &pi; . D<sup>2</sup>/4</label>
+                                    </div>
+                                    <div className="md:col-span-8">
+                                        <input type="number" name="pilebasearea" id="pilebasearea" required
+                                            step="any" disabled
+                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+                                            placeholder="Pile Base Area"
+                                            value={pilebasearea ? parseFloat(pilebasearea).toFixed(3) : ''}
+                                        />
+                                    </div>
+                                    <div className="md:col-span-1">
+                                        m<sup>2</sup>
+                                    </div>
 
-    <div className="md:col-span-3 flex items-center">
-    <label htmlFor="piletotalweight">Pile Total weight: W<sub>T</sub>:= W<sub>P</sub>
-    . L . A </label>
-    </div>
+                                    <div className="md:col-span-3 flex items-center">
+                                        <label htmlFor="piletotalweight">Pile Total weight: W<sub>T</sub>:= W<sub>P</sub>
+                                            . L . A </label>
+                                    </div>
     <div className="md:col-span-8">
     <input type="number" name="piletotalweight" id="piletotalweight" required
     step="any" disabled
@@ -605,7 +606,7 @@ return (
 
 
     {/* TAB: Info Content */}
-    {tabIndex === 'info' && (
+    {tabIndex === '2' && (
     <>
     <div className="text-gray-700">
     <h3 className="text-lg font-semibold mb-4">Formula Info</h3>
