@@ -114,9 +114,23 @@ export default function Hileyformula() {
         seteffectiveheight(effectiveheightFall) ;
     };
 
-    const handleDownLoad = (e) => {
+    const handleDownLoad = async (e) => {
 
+        const html2canvas = (await import('html2canvas')).default;
+        const { jsPDF } = await import('jspdf');
+
+        const input = document.getElementById('pilevalues_1');
         alert(" THIS  WILL  DOWN LOAD THE  VALUES  AS A PDF ");
+
+
+        html2canvas(input)
+            .then((canvas) => {
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new jsPDF();
+                pdf.addImage(imgData, 'PNG', 0, 0); // Adjust position and size as needed
+                pdf.save('my-react-page.pdf');
+            });
+
     };
 
 return (
