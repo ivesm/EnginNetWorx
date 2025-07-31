@@ -2,6 +2,8 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import {Head, Link} from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 import { QuestionMarkCircleIcon } from '@heroicons/react/24/outline';
+
+
 export default function Hileyformula() {
 
     const [loaded, setLoaded] = useState(false);
@@ -114,9 +116,23 @@ export default function Hileyformula() {
         seteffectiveheight(effectiveheightFall) ;
     };
 
-    const handleDownLoad = (e) => {
+    const handleDownLoad = async (e) => {
 
+        const html2canvas = (await import('html2canvas')).default;
+        const { jsPDF } = await import('jspdf');
+
+        const input = document.getElementById('my-component-id');
         alert(" THIS  WILL  DOWN LOAD THE  VALUES  AS A PDF ");
+
+
+        html2canvas(input)
+            .then((canvas) => {
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new jsPDF();
+                pdf.addImage(imgData, 'PNG', 0, 0); // Adjust position and size as needed
+                pdf.save('my-react-page.pdf');
+            });
+
     };
 
 return (
@@ -135,6 +151,17 @@ return (
         }
     >
     <Head title="Hileyformula"/>
+
+
+        <div>
+            <div id="my-component-id">
+                {/* Your React component content here */}
+                <h1>This is a downloadable page</h1>
+                <p>Some content that will be in the PDF.</p>
+                <p>&nbsp;</p>
+            </div>
+        </div>
+
         <div className="container mx-auto py-8" name="pilevalues_1" id="pilevalues_1">
             <div className="flex flex-wrap gap-2">
             {/* Box 1: Form */}
