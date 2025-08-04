@@ -51,7 +51,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/hiley', [HileyController::class, 'destroy'])->name('hiley.destroy');
 });
 
-
+Route::post('/process-form', [HileyController::class, 'testpage']);
 
 
 require __DIR__.'/auth.php';

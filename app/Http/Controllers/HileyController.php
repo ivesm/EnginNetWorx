@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Hiley;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -63,5 +64,10 @@ class HileyController extends Controller
     public function destroy(Hiley $hiley)
     {
         //
+    }
+
+    public function testpage(Request $request){
+        Log::debug(print_r($request->all(),true));
+        dd($request->all());
     }
 }

@@ -2,12 +2,19 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import {Head, Link} from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 import { QuestionMarkCircleIcon } from '@heroicons/react/24/outline';
+import { useForm } from '@inertiajs/react';
+import {post} from "axios";
 export default function Hileyformula() {
 
     const [loaded, setLoaded] = useState(false);
     useEffect(() => {
     setLoaded(true);
     }, []);
+
+    const { data, setData, post, processing, errors } = useForm({
+        input1: '',
+        input2: ''
+    });
 
     const [pilediameter, setpilediameter] = useState(0);
     const [pilebasearea, setpilebasearea] = useState(0);
@@ -27,6 +34,7 @@ export default function Hileyformula() {
     const [potentialenergyhammer, setpotentialenergyhammer] =  useState(0);
     const [drivingforce, setdrivingforce] =  useState(0);
     const [stresspilesdrivingforce, setstresspilesdrivingforce] =  useState(0);
+    const [elasticcompresion, setelasticcompresion] =  useState(0);
 
     const [isVisible2, setIsVisible2] = useState(false);
     const [isVisible3, setIsVisible3] = useState(false);
@@ -113,34 +121,19 @@ export default function Hileyformula() {
 
         seteffectiveheight(effectiveheightFall) ;
     };
+    const handleSubmit  = (e) => {
+        e.preventDefault();
+        alert("TESTING  SUBMISSION ") ;
+        setData('pilediameter', setpilediameter);
+
+        post('/process-form');
+    };
 
     const handleDownLoad = async (e) => {
 
-        const html2canvas = (await import('html2canvas')).default;
-        const { jsPDF } = await import('jspdf');
 
-        const input = document.getElementById('hileyformula_pdf');
         alert(" THIS  WILL  DOWN LOAD THE  VALUES  AS A PDF ");
 
-        setIsVisible5(false);
-
-        html2canvas(input)
-            .then((canvas) => {
-                const imgData = canvas.toDataURL('image/png');
-                const pdf = new jsPDF('p', 'mm', 'a4');
-                const pageWidth = pdf.internal.pageSize.getWidth();
-                const pageHeight = pdf.internal.pageSize.getHeight();
-                const imgProps = pdf.getImageProperties(imgData);
-
-                const ratio = Math.min(pageWidth / imgProps.width, pageHeight / imgProps.height);
-                const imgWidth = imgProps.width * ratio;
-                const imgHeight = imgProps.height * ratio;
-
-                pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
-                pdf.save('hiley-formula.pdf');
-            });
-
-        setIsVisible5(true);
 
     };
 
@@ -160,6 +153,7 @@ return (
         }
     >
         <Head title="Hileyformula"/>
+        <form onSubmit={handleSubmit} className="space-y-4 p-4">
             <div className="container mx-auto py-8" name="pilevalues_1" id="pilevalues_1">
                 <div className="flex flex-wrap gap-2">
                 {/* Box 1: Form */}
@@ -568,10 +562,11 @@ return (
                                             </label>
                                         </div>
                                         <div className="md:col-span-4">
-                                            <input type="number" name="test123" id="test123" required
+                                            <input type="number" name="elasticcompresion" id="elasticcompresion" required
                                                 placeholder="Elastic compression of pile head / dolly / packing "
                                                 step="any"
                                                 className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+                                                   onChange={(e) => setelasticcompresion(e.target.value)}
                                             />
                                         </div>
 
@@ -593,7 +588,9 @@ return (
                                         <button
                                             onClick={() => {
                                             setIsVisible5(!isVisible5)
+                                            setIsVisible6(!isVisible6)
                                             setIsVisibleBT5(!isVisibleBT5);
+                                            setIsVisibleBT6(!isVisibleBT6);
                                             setIsVisibleBT4(!isVisibleBT4);
                                             }}
                                             className={`w-64 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ${isVisibleBT4 ? '' : 'hidden'}`}
@@ -609,6 +606,18 @@ return (
                                         >
                                             DownLoad PDF
                                         </button>
+                                    </div>
+                                    <div className="md:col-span-4">
+                                        &nbsp;
+                                    </div>
+                                    <div className={`grid grid-cols-1 md:grid-cols-12 gap-4 ${isVisible6 ? '' : 'hidden'}`}>
+                                        <button
+                                            type="submit"
+                                            className={`w-64 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ${isVisibleBT6 ? '' : 'hidden'}`}
+                                        >
+                                            Save
+                                        </button>
+
                                     </div>
                                 </>
                             )}
@@ -649,9 +658,10 @@ return (
                     </div>
                 </div>
             </div>
-            <div className="md:col-span-4">
-                &nbsp;
-            </div>
+        </form>
+        <div className="md:col-span-4">
+            &nbsp;
+        </div>
     </AuthenticatedLayout>
 )
 ;

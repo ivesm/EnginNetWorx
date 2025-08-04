@@ -27,6 +27,7 @@ export default function Hileyformula() {
     const [potentialenergyhammer, setpotentialenergyhammer] =  useState(0);
     const [drivingforce, setdrivingforce] =  useState(0);
     const [stresspilesdrivingforce, setstresspilesdrivingforce] =  useState(0);
+    const [elasticcompresion, setelasticcompresion] =  useState(0);
 
     const [isVisible2, setIsVisible2] = useState(false);
     const [isVisible3, setIsVisible3] = useState(false);
@@ -116,31 +117,10 @@ export default function Hileyformula() {
 
     const handleDownLoad = async (e) => {
 
-        const html2canvas = (await import('html2canvas')).default;
-        const { jsPDF } = await import('jspdf');
 
         const input = document.getElementById('hileyformula_pdf');
         alert(" THIS  WILL  DOWN LOAD THE  VALUES  AS A PDF ");
 
-        setIsVisible5(false);
-
-        html2canvas(input)
-            .then((canvas) => {
-                const imgData = canvas.toDataURL('image/png');
-                const pdf = new jsPDF('p', 'mm', 'a4');
-                const pageWidth = pdf.internal.pageSize.getWidth();
-                const pageHeight = pdf.internal.pageSize.getHeight();
-                const imgProps = pdf.getImageProperties(imgData);
-
-                const ratio = Math.min(pageWidth / imgProps.width, pageHeight / imgProps.height);
-                const imgWidth = imgProps.width * ratio;
-                const imgHeight = imgProps.height * ratio;
-
-                pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
-                pdf.save('hiley-formula.pdf');
-            });
-
-        setIsVisible5(true);
 
     };
 
@@ -568,10 +548,11 @@ return (
                                             </label>
                                         </div>
                                         <div className="md:col-span-4">
-                                            <input type="number" name="test123" id="test123" required
+                                            <input type="number" name="elasticcompresion" id="elasticcompresion" required
                                                 placeholder="Elastic compression of pile head / dolly / packing "
                                                 step="any"
                                                 className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+                                                   onChange={(e) => setelasticcompresion(e.target.value)}
                                             />
                                         </div>
 
