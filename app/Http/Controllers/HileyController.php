@@ -67,7 +67,6 @@ class HileyController extends Controller
     }
 
     public function testpage(Request $request){
-        Log::debug(print_r($request->all(),true));
         dd($request->all());
     }
 }
