@@ -123,6 +123,9 @@ class HileyController extends Controller
             'message' => 'Processing complete!',
         ];
 
+
+        return Inertia::render('Piles/Hileyformula_results');
+
         // ✅ Redirect to results page and pass the result
         return Inertia::render('ResultsPage', [
             'result' => $result
