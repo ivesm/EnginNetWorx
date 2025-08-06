@@ -80,14 +80,53 @@ class HileyController extends Controller
 
         $user = auth()->user();
 
-        echo("User ".$user);
+    /*    echo("User ".$user);
         echo "<br>" ;echo "<br>" ;
-        echo("User ID : ".$user['id']);
-        echo "<br>" ;
-        echo("User Name  : ".$user['name']);
-
-        dd("Another user" );
+        echo("Request : ".$request);echo "<br>" ;echo "<br>" ;
+        echo("pilediameter : ".$request->pilediameter);echo "<br>" ;echo "<br>" ;
+        echo("pilebasearea : ".$request->pilebasearea);echo "<br>" ;echo "<br>" ;
+*/
         $newHiley = new Hiley();
+
+        $newHiley->user_id = $user['id'] ;
+        $newHiley->pilediameter = $request->pilediameter ;
+        $newHiley->pilelength = $request->pilebasearea ;
+        $newHiley->weighthammer = 22 ;
+        $newHiley->weightanvil = 22 ;
+        $newHiley->weighthelmet = 22 ;
+        $newHiley->pileunitweightt = 22 ;
+        $newHiley->pilebasearea = 22 ;
+        $newHiley->piletotalweight = 22 ;
+        $newHiley->weightpileanvilhelmet = 22 ;
+        $newHiley->freefallheight = 22 ;
+        $newHiley->efficiencyfall = 22 ;
+        $newHiley->effectiveheight = 22 ;
+        $newHiley->finalpenetration = 22 ;
+        $newHiley->coefficientrestitution = 22 ;
+        $newHiley->efficiencyblow = 22 ;
+        $newHiley->potentialenergyhammer = 22 ;
+        $newHiley->drivingforce = 22 ;
+        $newHiley->stresspilesdrivingforce = 22 ;
+        $newHiley->elasticcompresion = 22 ;
+        $newHiley->elasticcompresionpile = 22 ;
+        $newHiley->quake = 22 ;
+        $newHiley->totaltempcompression = 22 ;
+        $newHiley->ultimatedrivingresistance = 22 ;
+        $newHiley->strengthreductionfator = 22 ;
+        $newHiley->designpileload = 22 ;
+
+        $newHiley->save();
+
+
+        $result = [
+            'value' => 123,
+            'message' => 'Processing complete!',
+        ];
+
+        // ✅ Redirect to results page and pass the result
+        return Inertia::render('ResultsPage', [
+            'result' => $result
+        ]);
 
         dd();
     }
