@@ -32,8 +32,14 @@ class HileyController extends Controller
     public function store(Request $request)
     {
         //
+        $user = auth()->user();
+
+        print_r("User ");
+        dd("TEsting" );
         dd($request->all());
         $newHiley = new Hiley();
+
+
     }
 
     /**

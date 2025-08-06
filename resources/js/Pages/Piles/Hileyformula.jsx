@@ -610,12 +610,23 @@ return (
                                     </div>
 
                                     <div className={`grid grid-cols-1 md:grid-cols-12 gap-4 ${isVisible5 ? '' : 'hidden'}`}>
-                                        <button
-                                            onClick={handleDownLoad}
-                                            className={`w-64 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ${isVisibleBT5 ? '' : 'hidden'}`}
-                                        >
-                                            DownLoad PDF
-                                        </button>
+                                        <div className="md:col-span-4">
+                                            &nbsp;
+                                            <button
+                                                onClick={handleDownLoad}
+                                                className={`w-64 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ${isVisibleBT5 ? '' : 'hidden'}`}
+                                            >
+                                                DownLoad PDF
+                                            </button>
+                                        </div>
+                                        <div className="md:col-span-4">
+                                            <button
+                                                type="submit"
+                                                className={`w-64 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 }`}
+                                            >
+                                                Save
+                                            </button>
+                                        </div>
                                     </div>
                                 </>
                             )}
