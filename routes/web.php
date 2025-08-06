@@ -49,9 +49,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/hiley', [HileyController::class, 'edit'])->name('hiley.edit');
     Route::patch('/hiley', [HileyController::class, 'update'])->name('hiley.update');
     Route::delete('/hiley', [HileyController::class, 'destroy'])->name('hiley.destroy');
+    Route::post('/process-hiley', [HileyController::class, 'store'])->name('hiley.store');
 });
 
-Route::post('/process-form', [HileyController::class, 'testpage']);
+
 
 
 require __DIR__.'/auth.php';

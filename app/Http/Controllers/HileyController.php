@@ -32,6 +32,8 @@ class HileyController extends Controller
     public function store(Request $request)
     {
         //
+        dd($request->all());
+        $newHiley = new Hiley();
     }
 
     /**

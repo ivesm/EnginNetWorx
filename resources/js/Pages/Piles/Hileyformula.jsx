@@ -1,13 +1,36 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import {Head, Link} from '@inertiajs/react';
+import {Head, Link, useForm} from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 import { QuestionMarkCircleIcon } from '@heroicons/react/24/outline';
+
 export default function Hileyformula() {
 
     const [loaded, setLoaded] = useState(false);
     useEffect(() => {
     setLoaded(true);
     }, []);
+
+    const { data, setData, post, processing, errors } = useForm({
+        pilediameter: '',
+        pilebasearea: '',
+        pileunitweight: '',
+        pilelength: '',
+        weighthammer: '',
+        weightanvil: '',
+        weighthelmet: '',
+        piletotalweight: '',
+        weightpileanvilhelmet: '',
+        freefallheight: '',
+        efficiencyfall: '',
+        effectiveheight: '',
+        finalpenetration: '',
+        coefficientrestitution: '',
+        efficiencyblow: '',
+        potentialenergyhammer: '',
+        drivingforce: '',
+        stresspilesdrivingforce: '',
+        elasticcompresion: '',
+    });
 
     const [pilediameter, setpilediameter] = useState(0);
     const [pilebasearea, setpilebasearea] = useState(0);
@@ -116,12 +139,14 @@ export default function Hileyformula() {
     };
 
     const handleDownLoad = async (e) => {
-
-
         const input = document.getElementById('hileyformula_pdf');
         alert(" THIS  WILL  DOWN LOAD THE  VALUES  AS A PDF ");
+    };
 
+    const handleSubmit  = (e) => {
+        e.preventDefault();
 
+        post(route('hiley.store'));
     };
 
 return (
@@ -140,6 +165,7 @@ return (
         }
     >
         <Head title="Hileyformula"/>
+        <form onSubmit={handleSubmit} className="space-y-4 p-4">
             <div className="container mx-auto py-8" name="pilevalues_1" id="pilevalues_1">
                 <div className="flex flex-wrap gap-2">
                 {/* Box 1: Form */}
@@ -630,6 +656,7 @@ return (
                     </div>
                 </div>
             </div>
+        </form>
             <div className="md:col-span-4">
                 &nbsp;
             </div>
