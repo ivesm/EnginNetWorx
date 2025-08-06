@@ -35,6 +35,7 @@ class HileyController extends Controller
         $user = auth()->user();
 
         print_r("User ");
+        print_r("User ".$user->getAuthIdentifierName());
         dd("TEsting" );
         dd($request->all());
         $newHiley = new Hiley();
@@ -75,6 +76,16 @@ class HileyController extends Controller
     }
 
     public function testpage(Request $request){
-        dd($request->all());
+
+
+        $user = auth()->user();
+
+        echo ($request->user());
+        print_r("User ".$user,true);
+
+        dd("Another user" );
+        $newHiley = new Hiley();
+
+        dd();
     }
 }

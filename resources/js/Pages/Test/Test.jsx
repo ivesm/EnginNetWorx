@@ -50,7 +50,7 @@ export default function Hileyformula() {
     const handleSubmit  = (e) => {
         e.preventDefault();
 
-        post('/process-hiley');
+        post(route('hiley.store'));
     };
 
     const handleDownLoad = async (e) => {
