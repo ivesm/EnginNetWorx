@@ -80,8 +80,11 @@ class HileyController extends Controller
 
         $user = auth()->user();
 
-        echo ($request->user());
-        print_r("User ".$user,true);
+        echo("User ".$user);
+        echo "<br>" ;echo "<br>" ;
+        echo("User ID : ".$user['id']);
+        echo "<br>" ;
+        echo("User Name  : ".$user['name']);
 
         dd("Another user" );
         $newHiley = new Hiley();

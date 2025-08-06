@@ -50,6 +50,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/hiley', [HileyController::class, 'update'])->name('hiley.update');
     Route::delete('/hiley', [HileyController::class, 'destroy'])->name('hiley.destroy');
     Route::post('/process-hiley', [HileyController::class, 'store'])->name('hiley.store');
+    Route::post('/testing', [HileyController::class, 'testpage'])->name('hiley.test');
 });
 
 
