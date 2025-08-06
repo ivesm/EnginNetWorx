@@ -89,48 +89,37 @@ class HileyController extends Controller
         $newHiley = new Hiley();
 
         $newHiley->user_id = $user['id'] ;
-        $newHiley->pilediameter = $request->pilediameter ;
-        $newHiley->pilelength = $request->pilebasearea ;
-        $newHiley->weighthammer = 22 ;
-        $newHiley->weightanvil = 22 ;
-        $newHiley->weighthelmet = 22 ;
-        $newHiley->pileunitweightt = 22 ;
-        $newHiley->pilebasearea = 22 ;
-        $newHiley->piletotalweight = 22 ;
-        $newHiley->weightpileanvilhelmet = 22 ;
-        $newHiley->freefallheight = 22 ;
-        $newHiley->efficiencyfall = 22 ;
-        $newHiley->effectiveheight = 22 ;
-        $newHiley->finalpenetration = 22 ;
-        $newHiley->coefficientrestitution = 22 ;
-        $newHiley->efficiencyblow = 22 ;
-        $newHiley->potentialenergyhammer = 22 ;
-        $newHiley->drivingforce = 22 ;
-        $newHiley->stresspilesdrivingforce = 22 ;
-        $newHiley->elasticcompresion = 22 ;
-        $newHiley->elasticcompresionpile = 22 ;
-        $newHiley->quake = 22 ;
-        $newHiley->totaltempcompression = 22 ;
-        $newHiley->ultimatedrivingresistance = 22 ;
-        $newHiley->strengthreductionfator = 22 ;
-        $newHiley->designpileload = 22 ;
+        $newHiley->pilediameter =  $request->pilediameter ??   0;
+        $newHiley->pilelength =  $request->pilebasearea ??   0;
+        $newHiley->weighthammer  =    $request->weighthammer ??   0;
+        $newHiley->weightanvil  =    $request->weightanvil ??   0;
+        $newHiley->weighthelmet  =    $request->weighthelmet ??   0;
+        $newHiley->pileunitweightt  =    $request->pileunitweightt ??   0;
+        $newHiley->pilebasearea  =    $request->pilebasearea ??   0;
+        $newHiley->piletotalweight  =    $request->piletotalweight ??   0;
+        $newHiley->weightpileanvilhelmet  =    $request->weightpileanvilhelmet ??   0;
+        $newHiley->freefallheight  =    $request->freefallheight ??   0;
+        $newHiley->efficiencyfall  =    $request->efficiencyfall ??   0;
+        $newHiley->effectiveheight  =    $request->effectiveheight ??   0;
+        $newHiley->finalpenetration  =    $request->finalpenetration ??   0;
+        $newHiley->coefficientrestitution  =    $request->coefficientrestitution ??   0;
+        $newHiley->efficiencyblow  =    $request->efficiencyblow ??   0;
+        $newHiley->potentialenergyhammer  =    $request->potentialenergyhammer ??   0;
+        $newHiley->drivingforce  =    $request->drivingforce ??   0;
+        $newHiley->stresspilesdrivingforce  =    $request->stresspilesdrivingforce ??   0;
+        $newHiley->elasticcompresion  =    $request->elasticcompresion ??   0;
+        $newHiley->elasticcompresionpile  =    $request->elasticcompresionpile ??   0;
+        $newHiley->quake  =    $request->quake ??   0;
+        $newHiley->totaltempcompression  =    $request->totaltempcompression ??   0;
+        $newHiley->ultimatedrivingresistance  =    $request->ultimatedrivingresistance ??   0;
+        $newHiley->strengthreductionfator  =    $request->strengthreductionfator ??   0;
+        $newHiley->designpileload  =    $request->designpileload ??   0;
 
         $newHiley->save();
 
-
-        $result = [
-            'value' => 123,
-            'message' => 'Processing complete!',
-        ];
-
-
-        return Inertia::render('Piles/Hileyformula_results');
-
         // ✅ Redirect to results page and pass the result
-        return Inertia::render('ResultsPage', [
-            'result' => $result
+        return Inertia::render('Piles/Hileyformula_results', [
+            'result' => $newHiley->toArray()
         ]);
-
-        dd();
     }
 }

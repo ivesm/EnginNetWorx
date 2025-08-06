@@ -20,16 +20,6 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/piles', function () {
-    return Inertia::render('Piles/Piles');
-})->middleware(['auth', 'verified'])->name('piles');
-
-
-
-Route::get('/hileyformula', function () {
-    return Inertia::render('Piles/Hileyformula');
-})->middleware(['auth', 'verified'])->name('hileyformula');
-
 
 Route::get('/testing', function () {
     return Inertia::render('Test/Test');
@@ -45,6 +35,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// HileyFormula
 Route::middleware('auth')->group(function () {
     Route::get('/hiley', [HileyController::class, 'edit'])->name('hiley.edit');
     Route::patch('/hiley', [HileyController::class, 'update'])->name('hiley.update');
@@ -52,7 +43,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/process-hiley', [HileyController::class, 'store'])->name('hiley.store');
     Route::post('/testing', [HileyController::class, 'testpage'])->name('hiley.test');
 });
-
+Route::get('/hileyformula', function () {
+    return Inertia::render('Piles/Hileyformula');
+})->middleware(['auth', 'verified'])->name('hileyformula');
 
 
 

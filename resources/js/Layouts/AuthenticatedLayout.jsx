@@ -99,35 +99,6 @@ export default function AuthenticatedLayout({ header, children }) {
                                                 </div>
                                             )}
 
-                                            <button
-                                                type="button"
-                                                onClick={(e) => {
-                                                    e.stopPropagation(); // 👈 prevents closing the whole dropdown
-                                                    setOpenSubmenu(openSubmenu === 'test' ? null : 'test');
-                                                }}
-                                                className="flex w-full items-center justify-between px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                            >
-                                                Example
-                                                <svg
-                                                    className={`ml-2 h-4 w-4 transform transition-transform ${
-                                                        openSubmenu === 'test' ? 'rotate-90' : ''
-                                                    }`}
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    fill="none"
-                                                    viewBox="0 0 24 24"
-                                                    stroke="currentColor"
-                                                >
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-                                                </svg>
-                                            </button>
-
-                                            {openSubmenu === 'test' && (
-                                                <div className="absolute left-full top-0 ml-1 w-48 rounded-md border bg-white shadow-lg z-50">
-                                                    <Dropdown.Link href="#">
-                                                        Example Submenu 1
-                                                    </Dropdown.Link>
-                                                </div>
-                                            )}
                                         </div>
                                     </Dropdown.Content>
                                 </Dropdown>
