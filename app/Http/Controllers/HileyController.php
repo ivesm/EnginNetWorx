@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Hiley;
+use App\Models\ProfileHistory ;
+use App\Models\ProjectOptions ;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
@@ -32,15 +34,6 @@ class HileyController extends Controller
     public function store(Request $request)
     {
         //
-        $user = auth()->user();
-
-        print_r("User ");
-        print_r("User ".$user->getAuthIdentifierName());
-        dd("TEsting" );
-        dd($request->all());
-        $newHiley = new Hiley();
-
-
     }
 
     /**
@@ -79,13 +72,11 @@ class HileyController extends Controller
 
 
         $user = auth()->user();
+        $tablenameID = ProjectOptions::select('id')
+        ->where('project_tablename', 'hileys')->first();
 
-    /*    echo("User ".$user);
-        echo "<br>" ;echo "<br>" ;
-        echo("Request : ".$request);echo "<br>" ;echo "<br>" ;
-        echo("pilediameter : ".$request->pilediameter);echo "<br>" ;echo "<br>" ;
-        echo("pilebasearea : ".$request->pilebasearea);echo "<br>" ;echo "<br>" ;
-*/
+
+        dd($request);
         $newHiley = new Hiley();
 
         $newHiley->user_id = $user['id'] ;
@@ -116,6 +107,14 @@ class HileyController extends Controller
         $newHiley->designpileload  =    $request->designpileload ??   0;
 
         $newHiley->save();
+
+        $newprojectHistory = new ProfileHistory();
+
+        $newprojectHistory->user_id = $user['id'] ;
+        $newprojectHistory->project_id =$newHiley->id ;
+        $newprojectHistory->projecttable_id = $tablenameID['id'];
+        $newprojectHistory->project_name = $request->projectname ??  'New Hiley Project' ;
+        $newprojectHistory->save();
 
         // ✅ Redirect to results page and pass the result
         return Inertia::render('Piles/Hileyformula_results', [

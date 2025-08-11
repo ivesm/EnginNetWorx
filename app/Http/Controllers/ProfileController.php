@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ProfileHistory ;
+use App\Models\ProjectOptions ;
+
 use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
@@ -66,10 +69,16 @@ class ProfileController extends Controller
     public function history(Request $request): Response
     {
         $user = $request->user();
+        $profileHistory = ProfileHistory::where('user_id', '=', $user->id)->get();
 
+        foreach ($profileHistory as $history) {
+            dump($history->project_name);
+        }
 
+        dd('TEST');
         return Inertia::render('Profile/ProfileHistory', [
             'status' => session('status'),
+            'profileHistory' => $profileHistory->get(),
         ]);
     }
 

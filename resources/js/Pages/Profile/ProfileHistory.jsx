@@ -17,7 +17,7 @@ export default function ProfileHistory({ result }) {
                     <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900">
                             <h1 className="text-2xl font-bold mb-4">Saved Projects</h1>
-                            <p><strong>Value:</strong> </p>
+                            <p><strong>Value:</strong>{result['project_name']}</p>
                             <p><strong>Message:</strong> TEST SAVED  PROJECTS</p>
                         </div>
                     </div>
