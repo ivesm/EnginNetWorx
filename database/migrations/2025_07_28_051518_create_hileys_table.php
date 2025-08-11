@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('hileys', function (Blueprint $table) {
             $table->increments('id');// Record Id
-            $table->integer('user_id')->comment('this is the user ID');
+            $table->integer('user_id')->index()->comment('this is the user ID');
             $table->float('pilediameter')->comment('this is the Pile Diameter');
             $table->float('pilelength')->comment('this is the Pile Length');
             $table->float('weighthammer')->comment('this is the Weight of hammer');
