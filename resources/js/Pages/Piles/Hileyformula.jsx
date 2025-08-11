@@ -185,6 +185,7 @@ return (
                                 { key: '2', label: 'Info' }
                                 ].map((tab) => (
                                 <button
+                                    type = "button"
                                     key={tab.key}
                                     className={`px-4 py-2 -mb-px text-sm font-medium text-gray-600 border-b-2 transition-colors duration-300 ${
                                     tabIndex === tab.key
@@ -355,6 +356,7 @@ return (
                                         </div>
 
                                         <button
+                                        type = "button"
                                         onClick={() => {
                                         setIsVisible2(!isVisible2);
                                         setIsVisibleBT2(!isVisibleBT2);
@@ -417,6 +419,7 @@ return (
                                             m
                                         </div>
                                         <button
+                                            type = "button"
                                             onClick={() => {
                                             setIsVisible3(!isVisible3)
                                             setIsVisibleBT3(!isVisibleBT3);
@@ -552,6 +555,7 @@ return (
                                         </div>
 
                                         <button
+                                            type = "button"
                                             onClick={() => {
                                             setIsVisible4(!isVisible4)
                                             setIsVisibleBT4(!isVisibleBT4);
@@ -598,6 +602,7 @@ return (
                                         </div>
 
                                         <button
+                                            type = "button"
                                             onClick={() => {
                                             setIsVisible5(!isVisible5)
                                             setIsVisibleBT5(!isVisibleBT5);
@@ -613,6 +618,7 @@ return (
                                         <div className="md:col-span-4">
                                             &nbsp;
                                             <button
+                                                type = "button"
                                                 onClick={handleDownLoad}
                                                 className={`w-64 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ${isVisibleBT5 ? '' : 'hidden'}`}
                                             >
