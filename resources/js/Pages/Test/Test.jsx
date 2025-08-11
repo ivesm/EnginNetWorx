@@ -10,6 +10,7 @@ export default function Hileyformula() {
     }, []);
 
     const { data, setData, post, processing, errors } = useForm({
+        projectname : '' ,
         pilediameter: '',
         pilebasearea: '',
         pileunitweight: '',
@@ -33,6 +34,8 @@ export default function Hileyformula() {
 
     const [pilediameter, setpilediameter] = useState(0);
     const [pilebasearea, setpilebasearea] = useState(0);
+    const [projectname, setprojectname] = useState(0);
+
 
 
 
@@ -49,6 +52,7 @@ export default function Hileyformula() {
 
     const handleSubmit  = (e) => {
         e.preventDefault();
+
 
         post(route('hiley.test'));
     };
@@ -84,7 +88,7 @@ return (
                                         loaded ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'
                                     }`}
                                 >
-                                    Hiley Formula Input
+                                    TEST PAGE
                                 </div>
                             </h2>
                             <div className="flex border-b border-gray-300 mb-6">
@@ -109,6 +113,30 @@ return (
                             {/****Tab 1****/}
                             {tabIndex === '1' && (
                                 <>
+
+                                    <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
+
+                                        <div className="md:col-span-12">
+                                            &nbsp;
+                                        </div>
+
+                                        <div className="md:col-span-3 flex items-center">
+                                            <label htmlFor="pilediameter">Projectname</label>
+                                        </div>
+                                        <div className="md:col-span-4">
+                                            <input type="text" name="projectname" id="projectname" required
+                                                   placeholder="ProjectName"
+                                                   step="any"
+                                                   className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+                                                   value={data.projectname}
+                                                   onChange={(e) => setData('projectname', e.target.value)}
+                                            />
+                                        </div>
+                                        <div className="md:col-span-1">
+                                            &nbsp;
+                                        </div>
+                                    </div>
+
                                     <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
 
                                         <div className="md:col-span-12">
@@ -118,7 +146,7 @@ return (
                                         <div className="md:col-span-3 flex items-center">
                                             <label htmlFor="pilediameter">Pile Diameter: D =</label>
                                         </div>
-                                        <div className="md:col-span-8">
+                                        <div className="md:col-span-3">
                                             <input type="number" name="pilediameter" id="pilediameter" required
                                                 placeholder="Pile Diameter"
                                                 step="any"

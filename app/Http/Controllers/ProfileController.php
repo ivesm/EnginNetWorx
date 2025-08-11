@@ -71,14 +71,9 @@ class ProfileController extends Controller
         $user = $request->user();
         $profileHistory = ProfileHistory::where('user_id', '=', $user->id)->get();
 
-        foreach ($profileHistory as $history) {
-            dump($history->project_name);
-        }
-
-        dd('TEST');
         return Inertia::render('Profile/ProfileHistory', [
             'status' => session('status'),
-            'profileHistory' => $profileHistory->get(),
+            'result' => $profileHistory,
         ]);
     }
 

@@ -75,8 +75,6 @@ class HileyController extends Controller
         $tablenameID = ProjectOptions::select('id')
         ->where('project_tablename', 'hileys')->first();
 
-
-        dd($request);
         $newHiley = new Hiley();
 
         $newHiley->user_id = $user['id'] ;
