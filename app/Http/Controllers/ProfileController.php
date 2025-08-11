@@ -60,4 +60,14 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+
+
+    public function history(Request $request): Response
+    {
+        return Inertia::render('Profile/ProfileHistory', [
+            'status' => session('status'),
+        ]);
+    }
+
 }
