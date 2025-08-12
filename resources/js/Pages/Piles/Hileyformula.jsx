@@ -31,29 +31,14 @@ export default function Hileyformula({ result }) {
         drivingforce: '',
         stresspilesdrivingforce: '',
         elasticcompresion: '',
+        elasticcompresion2: '',
+        quake: '',
+        totaltempcompresion: '',
+        ultimatedrivingresistance:'',
+        strenghtreductionfactor:'',
+        designpileload:'',
     });
 
-    const [selectedProject, setSelectedProject] = useState(null);
-    const [projectname, setprojectname] = useState(0);
-    const [pilediameter, setpilediameter] = useState(0);
-    const [pilebasearea, setpilebasearea] = useState(0);
-    const [pileunitweight, setpileunitweight] = useState(0);
-    const [pilelength, setpilelength] = useState(0);
-    const [weighthammer, setweighthammer] =  useState(0);
-    const [weightanvil, setweightanvil] =  useState(0);
-    const [weighthelmet, setweighthelmet] =  useState(0);
-    const [piletotalweight, setpiletotalweight] =  useState(0);
-    const [weightpileanvilhelmet, setweightpileanvilhelmet] =  useState(0);
-    const [freefallheight, setfreefallheight] =  useState(0);
-    const [efficiencyfall, setefficiencyfall] =  useState(0);
-    const [effectiveheight, seteffectiveheight] =  useState(0);
-    const [finalpenetration, setfinalpenetration] =  useState(0);
-    const [coefficientrestitution, setcoefficientrestitution] =  useState(0);
-    const [efficiencyblow, setefficiencyblow] =  useState(0);
-    const [potentialenergyhammer, setpotentialenergyhammer] =  useState(0);
-    const [drivingforce, setdrivingforce] =  useState(0);
-    const [stresspilesdrivingforce, setstresspilesdrivingforce] =  useState(0);
-    const [elasticcompresion, setelasticcompresion] =  useState(0);
 
     const [isVisible2, setIsVisible2] = useState(false);
     const [isVisible3, setIsVisible3] = useState(false);
@@ -72,30 +57,37 @@ export default function Hileyformula({ result }) {
     const [tabIndex, setTabIndex] = useState("1");
     const handlePileDiameter = (e) => {
         const value = e.target.value;
-        setpilediameter(value);
+        setData('pilediameter', value);
 
         const numericDiameter = parseFloat(value);
         if (!isNaN(numericDiameter) && numericDiameter > 0) {
             const calculatedAreaMM = (Math.PI * Math.pow(numericDiameter, 2)) / 4;
             const calculatedArea = calculatedAreaMM / 1000000 ;
-            setpilebasearea(calculatedArea); // round to 2 decimal places
+            setData('pilebasearea', calculatedArea); // round to 2 decimal places
         } else {
-            setpilebasearea(null); // reset if input is invalid
+            setData('pilebasearea', null); // reset if input is invalid
         }
     };
+    const handlElasticcomprsion = (e) => {
+        const value = e.target.value;
+        setData('pilelength', value);
+
+        const calculatedRename = 0.00013 * parseFloat(value || 0);
+        setData('elasticcompresion2', calculatedRename);
+    }
     const handleEfficiency   = (e) => {
 
         const value = parseFloat( e.target.value );
-        setcoefficientrestitution(value);
+        setData('coefficientrestitution',value);
         const tmpcoefficientrestitution = Math.pow(value, 2);
-        const tmpweighthammer = parseFloat(weighthammer);
-        const tmpweightpileanvilhelmet = parseFloat(weightpileanvilhelmet);
-        const tmpeffectiveheightfall =  parseFloat(effectiveheight) ;
-        const tmpfinalpenetration = parseFloat(finalpenetration) ;
-        const tmppilebasearea = parseFloat(pilebasearea) ;
+        const tmpweighthammer = parseFloat(data.weighthammer);
+        const tmpweightpileanvilhelmet = parseFloat(data.weightpileanvilhelmet);
+        const tmpeffectiveheightfall =  parseFloat(data.effectiveheight) ;
+        const tmpfinalpenetration = parseFloat(data.finalpenetration) ;
+        const tmppilebasearea = parseFloat(data.pilebasearea) ;
 
         const EfficiencyofBlow =
-        (tmpweighthammer + (weightpileanvilhelmet * tmpcoefficientrestitution))
+        (tmpweighthammer + (tmpweightpileanvilhelmet * tmpcoefficientrestitution))
         /(tmpweighthammer + tmpweightpileanvilhelmet) ;
 
         const Potentialenergyhammer = (tmpweighthammer  * tmpeffectiveheightfall) * 1000;
@@ -104,41 +96,40 @@ export default function Hileyformula({ result }) {
 
         const Stresspilesdrivingforce = (Potentialenergyhammer)/(tmpfinalpenetration*tmppilebasearea) ;
 
-        setefficiencyblow(EfficiencyofBlow);
-        setpotentialenergyhammer(Potentialenergyhammer) ;
-        setdrivingforce(Drivingforce) ;
-        setstresspilesdrivingforce(Stresspilesdrivingforce);
+        setData('efficiencyblow', EfficiencyofBlow);
+        setData('potentialenergyhammer', Potentialenergyhammer);
+        setData('drivingforce', Drivingforce);
+        setData('stresspilesdrivingforce', Stresspilesdrivingforce);
     };
 
     const  handlePileTotalWeight  = (e) => {
 
         const value = e.target.value;
-        setpileunitweight(value);
+        setData('pileunitweight', value);
 
         const unitWeight = parseFloat(value) || 0;
-        const length = parseFloat(pilelength) || 0;
-        const baseArea = parseFloat(pilebasearea) || 0;
-        const anvilWeight = parseFloat(weightanvil) || 0;
-        const helmetWeight = parseFloat(weighthelmet) || 0;
+        const length = parseFloat(data.pilelength) || 0;
+        const baseArea = parseFloat(data.pilebasearea) || 0;
+        const anvilWeight = parseFloat(data.weightanvil) || 0;
+        const helmetWeight = parseFloat(data.weighthelmet) || 0;
 
         const totalWeight = unitWeight * length * baseArea;
-        setpiletotalweight(totalWeight);
+        setData('piletotalweight', totalWeight);
 
         const totalCombinedWeight = totalWeight + anvilWeight + helmetWeight;
-        setweightpileanvilhelmet(totalCombinedWeight);
+        setData('weightpileanvilhelmet', totalCombinedWeight);
     };
 
     const  handleEffectiveHeightFall  = (e) => {
 
         const value = e.target.value;
-        setefficiencyfall(value);
-
+        setData('efficiencyfall', value);
         const numericefficiencyfall = parseFloat(value)/100;
-        const numericfreefallheight = parseFloat(freefallheight);
+        const numericfreefallheight = parseFloat(data.freefallheight);
 
         const effectiveheightFall = (numericefficiencyfall * numericfreefallheight)/1000;
 
-        seteffectiveheight(effectiveheightFall) ;
+        setData('effectiveheight', effectiveheightFall);
     };
 
     const handleDownLoad = async (e) => {
@@ -238,87 +229,108 @@ return (
                                         <div className="md:col-span-3 flex items-center">
                                             <label htmlFor="pilediameter">Pile Diameter: D =</label>
                                         </div>
-                                        <div className="md:col-span-8">
+                                        <div className="md:col-span-4">
                                             <input type="number" name="pilediameter" id="pilediameter" required
                                                 placeholder="Pile Diameter"
                                                 step="any"
                                                 className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+                                                value={data.pilediameter}
                                                 onChange={handlePileDiameter}
                                             />
                                         </div>
                                         <div className="md:col-span-1">
                                             mm
                                         </div>
+                                        <div className="md:col-span-4">
+                                            &nbsp;
+                                        </div>
 
                                         <div className="md:col-span-3 flex items-center">
                                             <label htmlFor="pilelength">Pile Length: L :=</label>
                                         </div>
-                                        <div className="md:col-span-8">
+                                        <div className="md:col-span-4">
                                             <input type="number" name="pilelength" id="pilelength"
                                                 required
                                                 placeholder="Pile Length"
                                                 step="any"
                                                 className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
-                                                onChange={(e) => setpilelength(e.target.value)}
+                                                value = {data.pilelength}
+                                                onChange={handlElasticcomprsion}
                                             />
                                         </div>
                                         <div className="md:col-span-1">
                                             m
                                         </div>
+                                        <div className="md:col-span-4">
+                                            &nbsp;
+                                        </div>
 
                                         <div className="md:col-span-3 flex items-center">
                                             <label htmlFor="weighthammer">Weight of hammer: W :=</label>
                                         </div>
-                                        <div className="md:col-span-8">
+                                        <div className="md:col-span-4">
                                             <input type="number" name="weighthammer" id="weighthammer" required
                                                 step="any"
                                                 className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
                                                 placeholder="Weight of hammer"
-                                                onChange={(e) => setweighthammer(e.target.value)}
+                                                value = {data.weighthammer}
+                                                onChange={(e) =>  setData('weighthammer', e.target.value) }
                                             />
                                         </div>
                                         <div className="md:col-span-1">
                                             kN
+                                        </div>
+                                        <div className="md:col-span-4">
+                                            &nbsp;
                                         </div>
 
                                         <div className="md:col-span-3 flex items-center">
                                             <label htmlFor="weightanvil">Weight of Anvil: W<sub>a</sub> :=</label>
                                         </div>
-                                        <div className="md:col-span-8">
+                                        <div className="md:col-span-4">
                                             <input type="number" name="weightanvil" id="weightanvil" required
                                                 step="any"
                                                 className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
                                                 placeholder="Weight of Anvil"
-                                                onChange={(e) => setweightanvil(e.target.value)}
+                                                value = {data.weightanvil}
+                                                onChange={(e) =>  setData('weightanvil', e.target.value) }
                                             />
                                         </div>
                                         <div className="md:col-span-1">
                                             kN
                                         </div>
+                                        <div className="md:col-span-4">
+                                            &nbsp;
+                                        </div>
 
                                         <div className="md:col-span-3 flex items-center">
                                             <label htmlFor="weighthelmet">Weight of Helmet: W<sub>H</sub> :=</label>
                                         </div>
-                                        <div className="md:col-span-8">
+                                        <div className="md:col-span-4">
                                             <input type="number" name="weighthelmet" id="weighthelmet" required
                                                 step="any"
                                                 className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
                                                 placeholder="Weight of Helmet"
-                                                onChange={(e) => setweighthelmet(e.target.value)}
+                                                value = {data.weighthelmet}
+                                                onChange={(e) =>  setData('weighthelmet', e.target.value) }
                                             />
                                         </div>
                                         <div className="md:col-span-1">
                                         kN
                                         </div>
+                                        <div className="md:col-span-4">
+                                            &nbsp;
+                                        </div>
 
                                         <div className="md:col-span-3 flex items-center">
                                             <label htmlFor="pileunitweight">Pile Unit Weight: W<sub>p</sub> :=</label>
                                         </div>
-                                        <div className="md:col-span-8">
+                                        <div className="md:col-span-4">
                                             <input type="number" name="pileunitweight" id="pileunitweight" required
                                                 step="any"
                                                 className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
                                                 placeholder="Pile Unit Weight"
+                                                value={data.pileunitweight}
                                                 onChange={handlePileTotalWeight}
                                             />
                                         </div>
@@ -330,38 +342,47 @@ return (
                                                     Timber pile
                                                 </div>
                                             </div>
-
+                                        </div>
+                                        <div className="md:col-span-4">
+                                            &nbsp;
                                         </div>
 
                                         <div className="md:col-span-3 flex items-center">
                                             <label htmlFor="pilebasearea">Pile Base Area: A:= &pi; . D<sup>2</sup>/4</label>
                                         </div>
-                                        <div className="md:col-span-8">
+                                        <div className="md:col-span-4">
                                             <input type="number" name="pilebasearea" id="pilebasearea" required
                                                 step="any" disabled
                                                 className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
                                                 placeholder="Pile Base Area"
-                                                value={pilebasearea ? parseFloat(pilebasearea).toFixed(3) : ''}
+                                                value={data.pilebasearea ? parseFloat(data.pilebasearea).toFixed(3) : ''}
+
                                             />
                                         </div>
                                         <div className="md:col-span-1">
                                             m<sup>2</sup>
+                                        </div>
+                                        <div className="md:col-span-4">
+                                            &nbsp;
                                         </div>
 
                                         <div className="md:col-span-3 flex items-center">
                                             <label htmlFor="piletotalweight">Pile Total weight: W<sub>T</sub>:= W<sub>P</sub>
                                                 . L . A </label>
                                         </div>
-                                        <div className="md:col-span-8">
+                                        <div className="md:col-span-4">
                                             <input type="number" name="piletotalweight" id="piletotalweight" required
                                                 step="any" disabled
                                                 className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
                                                 placeholder="Pile Total weight"
-                                                value={piletotalweight ? parseFloat(piletotalweight).toFixed(3) : ''}
+                                                value={data.piletotalweight ? parseFloat(data.piletotalweight).toFixed(3) : ''}
                                             />
                                         </div>
                                         <div className="md:col-span-1">
                                         kN
+                                        </div>
+                                        <div className="md:col-span-4">
+                                            &nbsp;
                                         </div>
 
                                         <div className="md:col-span-3 flex items-center">
@@ -369,17 +390,20 @@ return (
                                                 W<sub>T</sub> + W<sub>A</sub> + W<sub>H</sub>
                                             </label>
                                         </div>
-                                        <div className="md:col-span-8">
+                                        <div className="md:col-span-4">
                                             <input type="number" name="weightpileanvilhelmet" id="weightpileanvilhelmet"
                                                 required
                                                 step="any" disabled
                                                 className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
                                                 placeholder="Weight of pile, anvil, & helmet"
-                                                value={weightpileanvilhelmet ? parseFloat(weightpileanvilhelmet).toFixed(3) : ''}
+                                                value={data.weightpileanvilhelmet ? parseFloat(data.weightpileanvilhelmet).toFixed(3) : ''}
                                             />
                                         </div>
                                         <div className="md:col-span-1">
                                             kN
+                                        </div>
+                                        <div className="md:col-span-4">
+                                            &nbsp;
                                         </div>
 
                                         <button
@@ -402,31 +426,39 @@ return (
                                         <div className="md:col-span-3 flex items-center">
                                             <label htmlFor="freefallheight">Free fall height of hammer ff ≔</label>
                                         </div>
-                                        <div className="md:col-span-8">
+                                        <div className="md:col-span-4">
                                             <input type="number" name="freefallheight" id="freefallheight" required
                                                 step="any"
                                                 className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
                                                 placeholder="Free fall height of hammer"
-                                                onChange={(e) => setfreefallheight(e.target.value)}
+                                                value={data.freefallheight}
+                                                onChange={(e) => setData('freefallheight', e.target.value)}
                                             />
                                         </div>
                                         <div className="md:col-span-1">
                                             mm
                                         </div>
+                                        <div className="md:col-span-4">
+                                            &nbsp;
+                                        </div>
 
                                         <div className="md:col-span-3 flex items-center">
-                                            <label htmlFor="efficiencyfall">Efficiency of fall Eff ≔</label>
+                                            <label htmlFor="efficiencyfall">Efficiency of fall E<sub>ff</sub> ≔</label>
                                         </div>
-                                        <div className="md:col-span-8">
+                                        <div className="md:col-span-4">
                                             <input type="number" name="efficiencyfall" id="efficiencyfall" required
                                                 step="any"
                                                 className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
                                                 placeholder="Efficiency of fall Eff"
+                                                value = {data.efficiencyfall}
                                                 onChange={handleEffectiveHeightFall}
                                             />
                                         </div>
                                         <div className="md:col-span-1">
                                             %
+                                        </div>
+                                        <div className="md:col-span-4">
+                                            &nbsp;
                                         </div>
 
                                         <div className="md:col-span-3 flex items-center">
@@ -434,17 +466,21 @@ return (
                                                 Effective height of fall h ≔ ff ⋅ Eff =
                                             </label>
                                         </div>
-                                        <div className="md:col-span-8">
+                                        <div className="md:col-span-4">
                                             <input type="number" name="effectiveheight" id="effectiveheight" required
                                                 step="any" disabled
                                                 className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
                                                 placeholder="Effective height of fall"
-                                                value={effectiveheight ? parseFloat(effectiveheight).toFixed(3) : ''}
+                                                value={data.effectiveheight ? parseFloat(data.effectiveheight).toFixed(3) : ''}
                                             />
                                         </div>
                                         <div className="md:col-span-1">
                                             m
                                         </div>
+                                        <div className="md:col-span-4">
+                                            &nbsp;
+                                        </div>
+
                                         <button
                                             type = "button"
                                             onClick={() => {
@@ -472,7 +508,9 @@ return (
                                                 step="any"
                                                 className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
                                                 placeholder="Final set or penetration per blow (mean of final 10 blows)"
-                                                onChange={(e) => setfinalpenetration(e.target.value)}
+                                                value={data.finalpenetration }
+                                                onChange={(e) => setData('finalpenetration',e.target.value)}
+
                                             />
                                         </div>
                                         <div className="md:col-span-1">
@@ -495,12 +533,13 @@ return (
                                                 Coefficient of restitution e ≔
                                             </label>
                                         </div>
-                                        <div className="md:col-span-8">
+                                        <div className="md:col-span-4">
                                             <input type="number" name="coefficientrestitution" id="coefficientrestitution"
                                                 required
                                                 step="any"
                                                 className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
                                                 placeholder="Coefficient of restitution"
+                                                value = {data.coefficientrestitution}
                                                 onChange={handleEfficiency}
                                             />
                                         </div>
@@ -512,51 +551,60 @@ return (
                                                 </div>
                                             </div>
                                         </div>
+                                        <div className="md:col-span-4">
+                                            &nbsp;
+                                        </div>
 
                                         <div className="md:col-span-3 flex items-center">
                                             <label htmlFor="efficiencyblow">Efficiency of blow</label>
                                         </div>
-                                        <div className="md:col-span-8">
+                                        <div className="md:col-span-4">
                                             <input type="number" name="efficiencyblow" id="efficiencyblow" required
                                                 step="any" disabled
                                                 className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
                                                 placeholder="Efficiency of blow"
-                                                value={efficiencyblow ? parseFloat(efficiencyblow).toFixed(3) : ''}
+                                                value={data.efficiencyblow ? parseFloat(data.efficiencyblow).toFixed(3) : ''}
                                             />
                                         </div>
-                                        <div className="md:col-span-1">
+                                        <div className="md:col-span-5">
                                         &nbsp;
                                         </div>
 
                                         <div className="md:col-span-3 flex items-center">
                                             <label htmlFor="potentialenergyhammer">Potential Energy of hammer in free falL</label>
                                         </div>
-                                        <div className="md:col-span-8">
+                                        <div className="md:col-span-4">
                                             <input type="number" name="potentialenergyhammer" id="potentialenergyhammer"
                                                 required
                                                 step="any" disabled
                                                 className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
                                                 placeholder="Potential Energy of hammer in free falL"
-                                                value={potentialenergyhammer ? parseFloat(potentialenergyhammer).toFixed(3) : ''}
+                                                value={data.potentialenergyhammer ? parseFloat(data.potentialenergyhammer).toFixed(3) : ''}
                                             />
                                         </div>
                                         <div className="md:col-span-1">
                                             J
                                         </div>
+                                        <div className="md:col-span-4">
+                                            &nbsp;
+                                        </div>
 
                                         <div className="md:col-span-3 flex items-center">
                                             <label htmlFor="drivingforce">Driving Force</label>
                                         </div>
-                                        <div className="md:col-span-8">
+                                        <div className="md:col-span-4">
                                             <input type="number" name="drivingforce" id="drivingforce" required
                                                 step="any" disabled
                                                 className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
                                                 placeholder="Driving Force"
-                                                value={drivingforce ? parseFloat(drivingforce).toFixed(3) : ''}
+                                                value={data.drivingforce ? parseFloat(data.drivingforce).toFixed(3) : ''}
                                             />
                                         </div>
                                         <div className="md:col-span-1">
                                          kN
+                                        </div>
+                                        <div className="md:col-span-4">
+                                            &nbsp;
                                         </div>
 
                                         <div className="md:col-span-3 flex items-center">
@@ -564,17 +612,20 @@ return (
                                                 <sub>D</sub>
                                             </label>
                                         </div>
-                                        <div className="md:col-span-8">
+                                        <div className="md:col-span-5">
                                             <input type="number" name="stresspilesdrivingforce" id="stresspilesdrivingforce"
                                                 required
                                                 step="any" disabled
                                                 className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
                                                 placeholder="Stress in Piles due to Driving Force"
-                                                value={stresspilesdrivingforce ? parseFloat(stresspilesdrivingforce).toFixed(3) : ''}
+                                                value={data.stresspilesdrivingforce ? parseFloat(data.stresspilesdrivingforce).toFixed(3) : ''}
                                             />
                                         </div>
                                         <div className="md:col-span-1">
                                             MPa
+                                        </div>
+                                        <div className="md:col-span-4">
+                                            &nbsp;
                                         </div>
 
                                         <div className="md:col-span-12">
@@ -609,7 +660,8 @@ return (
                                                 placeholder="Elastic compression of pile head / dolly / packing "
                                                 step="any"
                                                 className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
-                                                   onChange={(e) => setelasticcompresion(e.target.value)}
+                                                   value={data.elasticcompresion }
+                                                   onChange={(e) => setData('elasticcompresion',e.target.value)}
                                             />
                                         </div>
 
@@ -636,7 +688,7 @@ return (
                                                    placeholder="Elastic compression of pile "
                                                    step="any"
                                                    className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
-                                                   onChange={(e) => setelasticcompresion2(e.target.value)}
+                                                   value={data.elasticcompresion2 ? parseFloat(data.elasticcompresion2).toFixed(6) : ''}
                                             />
                                         </div>
 
@@ -651,6 +703,144 @@ return (
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <div className="md:col-span-4">
+                                            &nbsp;
+                                        </div>
+
+
+                                        <div className="md:col-span-3 flex items-center">
+                                            <label htmlFor="quake">Quake of ground beneath pile
+                                                C<sub>q</sub> =
+                                            </label>
+                                        </div>
+                                        <div className="md:col-span-4">
+                                            <input type="number" name="quake" id="quake"
+                                                   required
+                                                   step="any" disabled
+                                                   className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+                                                   placeholder="Quake of ground beneath pile"
+                                                   value={data.quake ? parseFloat(data.quake).toFixed(3) : ''}
+                                            />
+                                        </div>
+                                        <div className="md:col-span-1">
+                                            <div className="md:col-span-1">
+                                                <div className="relative group inline-block">
+                                                    mm
+                                                    <QuestionMarkCircleIcon className="w-5 h-5 text-gray-500" />
+                                                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 w-32 opacity-0 group-hover:opacity-100 transition-opacity duration-200
+					                                    text-xs bg-black text-white px-2 py-1 rounded shadow-lg z-10 text-center">
+                                                        Medium driving (Table A1)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="md:col-span-4">
+                                            &nbsp;
+                                        </div>
+
+                                        <div className="md:col-span-3 flex items-center">
+                                            <label htmlFor="totaltempcompresion">Total temporary compression C:= C<sub>c</sub> + C<sub>p</sub> + C<sub>q</sub>
+                                            </label>
+                                        </div>
+                                        <div className="md:col-span-4">
+                                            <input type="number" name="totaltempcompresion" id="totaltempcompresion"
+                                                   required
+                                                   step="any" disabled
+                                                   className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+                                                   placeholder="Stress in Piles due to Driving Force"
+                                                   value={data.totaltempcompresion ? parseFloat(data.totaltempcompresion).toFixed(3) : ''}
+                                            />
+                                        </div>
+                                        <div className="md:col-span-1">
+                                            <div className="md:col-span-1">
+                                                <div className="relative group inline-block">
+                                                    mm
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="md:col-span-4">
+                                            &nbsp;
+                                        </div>
+
+                                        <div className="md:col-span-3 flex items-center">
+                                            <label htmlFor="ultimatedrivingresistance">
+                                                Ultimate driving resistance R =
+                                            </label>
+                                        </div>
+                                        <div className="md:col-span-4">
+                                            <input type="number" name="ultimatedrivingresistance" id="ultimatedrivingresistance"
+                                                   required
+                                                   step="any" disabled
+                                                   className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+                                                   placeholder="Ultimate driving resistance"
+                                                   value={data.ultimatedrivingresistance ? parseFloat(data.ultimatedrivingresistance).toFixed(3) : ''}
+                                            />
+                                        </div>
+                                        <div className="md:col-span-1">
+                                            <div className="md:col-span-1">
+                                                <div className="relative group inline-block">
+                                                    kN
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="md:col-span-4">
+                                            &nbsp;
+                                        </div>
+
+
+                                        <div className="md:col-span-3 flex items-center">
+                                            <label htmlFor="strenghtreductionfactor">Strength Reduction Factor  &sigma; =
+                                            </label>
+                                        </div>
+                                        <div className="md:col-span-4">
+                                            <input type="number" name="strenghtreductionfactor" id="strenghtreductionfactor"
+                                                   required
+                                                   step="any" disabled
+                                                   className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+                                                   placeholder="Strength Reduction Factor"
+                                                   value={data.strenghtreductionfactor ? parseFloat(data.strenghtreductionfactor).toFixed(3) : ''}
+                                            />
+                                        </div>
+                                        <div className="md:col-span-1">
+                                            <div className="md:col-span-1">
+                                                <div className="relative group inline-block">
+                                                    kN
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="md:col-span-4">
+                                            &nbsp;
+                                        </div>
+
+
+                                        <div className="md:col-span-3 flex items-center">
+                                            <label htmlFor="designpileload">Design Pile Load  &sigma;N =  &sigma;*R =
+                                            </label>
+                                        </div>
+                                        <div className="md:col-span-4">
+                                            <input type="number" name="designpileload" id="designpileload"
+                                                   required
+                                                   step="any" disabled
+                                                   className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+                                                   placeholder="Design Pile Load"
+                                                   value={data.designpileload ? parseFloat(data.designpileload).toFixed(3) : ''}
+                                            />
+                                        </div>
+                                        <div className="md:col-span-1">
+                                            <div className="md:col-span-1">
+                                                <div className="relative group inline-block">
+                                                    kN
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="md:col-span-4">
+                                            &nbsp;
+                                        </div>
+
                                         <button
                                             type = "button"
                                             onClick={() => {
@@ -665,6 +855,9 @@ return (
                                     </div>
 
                                     <div className={`grid grid-cols-1 md:grid-cols-12 gap-4 ${isVisible5 ? '' : 'hidden'}`}>
+                                        <div className="md:col-span-12">
+                                            &nbsp;
+                                        </div>
                                         <div className="md:col-span-4">
                                             &nbsp;
                                             <button
