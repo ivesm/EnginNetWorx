@@ -3,7 +3,7 @@ import {Head, Link, useForm} from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 import { QuestionMarkCircleIcon } from '@heroicons/react/24/outline';
 
-export default function Hileyformula({ result }) {
+export default function Hileyformula({ result = [] }) {
 
     const [loaded, setLoaded] = useState(false);
     useEffect(() => {
@@ -39,7 +39,7 @@ export default function Hileyformula({ result }) {
         designpileload:'',
     });
 
-
+    const [selectedProject, setSelectedProject] = useState(null);
     const [isVisible2, setIsVisible2] = useState(false);
     const [isVisible3, setIsVisible3] = useState(false);
     const [isVisible4, setIsVisible4] = useState(false);
@@ -969,7 +969,7 @@ return (
                                         <div className="max-w-6xl mx-auto p-6">
                                             <h1 className="text-2xl font-bold mb-6">Hiley Formula History</h1>
 
-                                            {result.length === 0 ? (
+                                            {!Array.isArray(result) || result.length === 0 ? (
                                                 <div className="bg-yellow-100 text-yellow-800 px-4 py-3 rounded">
                                                     No history found.
                                                 </div>
@@ -978,20 +978,29 @@ return (
                                                     <table className="min-w-full border-collapse">
                                                         <thead>
                                                         <tr className="bg-gray-100 text-gray-700">
-                                                            <th className="px-6 py-3 text-left text-sm font-semibold border-b">Project name</th>
-                                                            <th className="px-6 py-3 text-left text-sm font-semibold border-b">Created At</th>
+                                                            <th className="px-6 py-3 text-left text-sm font-semibold border-b">
+                                                                Project name
+                                                            </th>
+                                                            <th className="px-6 py-3 text-left text-sm font-semibold border-b">
+                                                                Created At
+                                                            </th>
                                                         </tr>
                                                         </thead>
                                                         <tbody>
                                                         {result.map((history, index) => (
                                                             <tr
-                                                                key={history.id}
+                                                                key={history.id || index}
                                                                 className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}
                                                             >
-                                                                <td className="px-6 py-4 text-sm border-b"
+                                                                <td
+                                                                    className="px-6 py-4 text-sm border-b cursor-pointer hover:text-blue-500"
                                                                     onClick={() => setSelectedProject(history)}
-                                                                >{history.project_name}</td>
-                                                                <td className="px-6 py-4 text-sm border-b">{history.created_at}</td>
+                                                                >
+                                                                    {history.project_name}
+                                                                </td>
+                                                                <td className="px-6 py-4 text-sm border-b">
+                                                                    {history.created_at}
+                                                                </td>
                                                             </tr>
                                                         ))}
                                                         </tbody>
@@ -1004,11 +1013,24 @@ return (
                                     {selectedProject && (
                                         <div className="py-12 fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-90">
                                             <div className="bg-white rounded-lg shadow-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto p-6">
-                                                <h2 className="text-xl font-bold mb-4">{selectedProject.project_name}</h2>
-                                                <p><span className="font-semibold">ID:</span> {selectedProject.id}</p>
-                                                <p><span className="font-semibold">Project ID:</span> {selectedProject.project_id}</p>
-                                                <p><span className="font-semibold">Created At:</span> {selectedProject.created_at}</p>
-                                                <p><span className="font-semibold">Updated At:</span> {selectedProject.updated_at}</p>
+                                                <h2 className="text-xl font-bold mb-4">
+                                                    {selectedProject.project_name}
+                                                </h2>
+                                                <p>
+                                                    <span className="font-semibold">ID:</span> {selectedProject.id}
+                                                </p>
+                                                <p>
+                                                    <span className="font-semibold">Project ID:</span>{" "}
+                                                    {selectedProject.project_id}
+                                                </p>
+                                                <p>
+                                                    <span className="font-semibold">Created At:</span>{" "}
+                                                    {selectedProject.created_at}
+                                                </p>
+                                                <p>
+                                                    <span className="font-semibold">Updated At:</span>{" "}
+                                                    {selectedProject.updated_at}
+                                                </p>
 
                                                 {/* Close Button */}
                                                 <div className="mt-6 flex justify-end">
