@@ -34,6 +34,7 @@ export default function Hileyformula({ result }) {
     });
 
     const [selectedProject, setSelectedProject] = useState(null);
+    const [projectname, setprojectname] = useState(0);
     const [pilediameter, setpilediameter] = useState(0);
     const [pilebasearea, setpilebasearea] = useState(0);
     const [pileunitweight, setpileunitweight] = useState(0);
@@ -206,6 +207,28 @@ return (
                             {/****Tab 1****/}
                             {tabIndex === '1' && (
                                 <>
+                                    <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
+
+                                        <div className="md:col-span-12">
+                                            &nbsp;
+                                        </div>
+
+                                        <div className="md:col-span-3 flex items-center">
+                                            <label htmlFor="pilediameter">Projectname</label>
+                                        </div>
+                                        <div className="md:col-span-4">
+                                            <input type="text" name="projectname" id="projectname" required
+                                                   placeholder="Project Name"
+                                                   step="any"
+                                                   className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+                                                   value={data.projectname}
+                                                   onChange={(e) => setData('projectname', e.target.value)}
+                                            />
+                                        </div>
+                                        <div className="md:col-span-1">
+                                            &nbsp;
+                                        </div>
+                                    </div>
                                     <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
 
                                         <div className="md:col-span-12">
