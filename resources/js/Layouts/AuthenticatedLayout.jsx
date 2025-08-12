@@ -93,7 +93,7 @@ export default function AuthenticatedLayout({ header, children }) {
 
                                             {openSubmenu === 'piles' && (
                                                 <div className="absolute left-full top-0 ml-1 w-48 rounded-md border bg-white shadow-lg z-50">
-                                                    <Dropdown.Link href={route('hileyformula')}>
+                                                    <Dropdown.Link href={route('hiley.hileyformula')}>
                                                         Hiley Formula
                                                     </Dropdown.Link>
                                                 </div>
