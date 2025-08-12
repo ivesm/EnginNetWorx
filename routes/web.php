@@ -43,10 +43,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/hiley', [HileyController::class, 'destroy'])->name('hiley.destroy');
     Route::post('/process-hiley', [HileyController::class, 'store'])->name('hiley.store');
     Route::post('/testing', [HileyController::class, 'testpage'])->name('hiley.test');
+    Route::get('/hileyformula', [HileyController::class, 'hileyformula'])->name('hiley.hileyformula');
 });
-Route::get('/hileyformula', function () {
-    return Inertia::render('Piles/Hileyformula');
-})->middleware(['auth', 'verified'])->name('hileyformula');
+
 
 
 

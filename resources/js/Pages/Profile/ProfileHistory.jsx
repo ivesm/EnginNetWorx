@@ -53,8 +53,8 @@ export default function ProfileHistory({ result }) {
 
             {/* Modal */}
             {selectedProject && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-blue-500 bg-opacity-90">
-                    <div className="bg-white rounded-lg shadow-lg max-w-lg w-full p-6">
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-90">
+                    <div className="bg-white rounded-lg shadow-lg max-w-4xl w-full p-6">
                         <h2 className="text-xl font-bold mb-4">{selectedProject.project_name}</h2>
                         <p><span className="font-semibold">ID:</span> {selectedProject.id}</p>
                         <p><span className="font-semibold">Project ID:</span> {selectedProject.project_id}</p>

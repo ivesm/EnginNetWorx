@@ -3,12 +3,13 @@ import {Head, Link, useForm} from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 import { QuestionMarkCircleIcon } from '@heroicons/react/24/outline';
 
-export default function Hileyformula() {
+export default function Hileyformula({ result }) {
 
     const [loaded, setLoaded] = useState(false);
     useEffect(() => {
     setLoaded(true);
     }, []);
+
 
     const { data, setData, post, processing, errors } = useForm({
         pilediameter: '',
@@ -32,6 +33,7 @@ export default function Hileyformula() {
         elasticcompresion: '',
     });
 
+    const [selectedProject, setSelectedProject] = useState(null);
     const [pilediameter, setpilediameter] = useState(0);
     const [pilebasearea, setpilebasearea] = useState(0);
     const [pileunitweight, setpileunitweight] = useState(0);
@@ -182,7 +184,9 @@ return (
                             <div className="flex border-b border-gray-300 mb-6">
                                 {[
                                 { key: '1', label: 'Hiley Form' },
-                                { key: '2', label: 'Info' }
+                                { key: '2', label: 'Pile Capacity Table' },
+                                { key: '3', label: 'Temporary Compresions' },
+                                { key: '4', label: 'History' },
                                 ].map((tab) => (
                                 <button
                                     type = "button"
@@ -440,7 +444,7 @@ return (
                                                 (mean of final 10 blows) S ≔
                                             </label>
                                         </div>
-                                        <div className="md:col-span-4">
+                                        <div className="md:col-span-5">
                                             <input type="number" name="finalpenetration" id="finalpenetration" required
                                                 step="any"
                                                 className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
@@ -459,7 +463,7 @@ return (
                                             </div>
                                         </div>
 
-                                        <div className="md:col-span-4">
+                                        <div className="md:col-span-3">
                                         &nbsp;
                                         </div>
 
@@ -493,7 +497,7 @@ return (
                                             <input type="number" name="efficiencyblow" id="efficiencyblow" required
                                                 step="any" disabled
                                                 className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
-                                                placeholder="0"
+                                                placeholder="Efficiency of blow"
                                                 value={efficiencyblow ? parseFloat(efficiencyblow).toFixed(3) : ''}
                                             />
                                         </div>
@@ -509,7 +513,7 @@ return (
                                                 required
                                                 step="any" disabled
                                                 className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
-                                                placeholder="0"
+                                                placeholder="Potential Energy of hammer in free falL"
                                                 value={potentialenergyhammer ? parseFloat(potentialenergyhammer).toFixed(3) : ''}
                                             />
                                         </div>
@@ -524,7 +528,7 @@ return (
                                             <input type="number" name="drivingforce" id="drivingforce" required
                                                 step="any" disabled
                                                 className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
-                                                placeholder="0"
+                                                placeholder="Driving Force"
                                                 value={drivingforce ? parseFloat(drivingforce).toFixed(3) : ''}
                                             />
                                         </div>
@@ -542,7 +546,7 @@ return (
                                                 required
                                                 step="any" disabled
                                                 className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
-                                                placeholder="0"
+                                                placeholder="Stress in Piles due to Driving Force"
                                                 value={stresspilesdrivingforce ? parseFloat(stresspilesdrivingforce).toFixed(3) : ''}
                                             />
                                         </div>
@@ -574,7 +578,7 @@ return (
                                         </div>
                                         <div className="md:col-span-3 flex items-center">
                                             <label htmlFor="pilediameter">Elastic compression of pile
-                                                head / dolly / packing: T =
+                                                head / dolly / packing: C<sub>c</sub>:=
                                             </label>
                                         </div>
                                         <div className="md:col-span-4">
@@ -600,7 +604,30 @@ return (
                                         <div className="md:col-span-4">
                                             &nbsp;
                                         </div>
+                                        <div className="md:col-span-3 flex items-center">
+                                            <label htmlFor="pilediameter">Elastic compression of pile C<sub>p</sub>:=
+                                            </label>
+                                        </div>
+                                        <div className="md:col-span-4">
+                                            <input type="number" name="elasticcompresion2" id="elasticcompresion2" required
+                                                   placeholder="Elastic compression of pile "
+                                                   step="any"
+                                                   className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+                                                   onChange={(e) => setelasticcompresion2(e.target.value)}
+                                            />
+                                        </div>
 
+                                        <div className="md:col-span-1">
+                                            <div className="relative group inline-block">
+                                                mm
+                                                <QuestionMarkCircleIcon className="w-5 h-5 text-gray-500" />
+                                                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1
+                                                    w-32 opacity-0 group-hover:opacity-100 transition-opacity duration-200
+                                                    text-xs bg-black text-white px-2 py-1 rounded shadow-lg z-10 text-center">
+                                                    Timber Pile / Medium driving
+                                                </div>
+                                            </div>
+                                        </div>
                                         <button
                                             type = "button"
                                             onClick={() => {
@@ -637,20 +664,151 @@ return (
                                 </>
                             )}
 
-                            {/* TAB: Info Content */}
+                            {/* TAB: Pile Capacity Table Content */}
                             {tabIndex === '2' && (
                                 <>
-                                    <div className="text-gray-700">
-                                        <h3 className="text-lg font-semibold mb-4">Formula Info</h3>
-                                        <ul className="list-disc list-inside space-y-2">
-                                            <li><strong>e</strong> = coefficient of restitution</li>
-                                            <li><strong>Eff</strong> = hammer efficiency (%)</li>
-                                            <li><strong>S</strong> = set per blow (mm)</li>
-                                            <li><strong>Wp</strong> = pile weight</li>
-                                        </ul>
+                                    <div className="py-6">
+                                        <h3 className="text-lg font-semibold mb-4">Pile Capacity Table</h3>
+                                        <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                                            <div className="bg-white shadow-md rounded-lg overflow-hidden">
+                                                <table className="min-w-full divide-y divide-gray-200">
+                                                    <thead className="bg-gray-50">
+                                                    <tr>
+                                                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                            Set (mm/blow)
+                                                        </th>
+                                                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                            Ultimate Resistance (kN)
+                                                        </th>
+                                                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                            Design Resistance (kN)
+                                                        </th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody className="bg-white divide-y divide-gray-200">
+
+                                                        <tr >
+                                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">ee</td>
+                                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">tt</td>
+                                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">ttt</td>
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
                                     </div>
                                 </>
                             )}
+
+                            {/* TAB: Temporary Compresions Content */}
+                            {tabIndex === '3' && (
+                                <>
+                                    <div className="py-6">
+                                        <h3 className="text-lg font-semibold mb-4">Table 8. Temporary Compresion</h3>
+                                        <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                                            <div className="bg-white shadow-md rounded-lg overflow-hidden">
+                                                <table className="min-w-full divide-y divide-gray-200">
+                                                    <thead className="bg-gray-50">
+                                                    <tr>
+                                                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                            Form of Compresion
+                                                        </th>
+                                                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                            Material
+                                                        </th>
+                                                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                            Easy Driving
+                                                        </th>
+                                                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                            Medium Driving
+                                                        </th>
+                                                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                            hard Driving
+                                                        </th>
+                                                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                            Very hard Driving
+                                                        </th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody className="bg-white divide-y divide-gray-200">
+
+                                                    <tr >
+                                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">ee</td>
+                                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">tt</td>
+                                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">ttt</td>
+                                                    </tr>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </>
+                            )}
+                            {/* TAB: History Content */}
+                            {tabIndex === '4' && (
+                                <>
+                                    <div className="py-12">
+                                        <div className="max-w-6xl mx-auto p-6">
+                                            <h1 className="text-2xl font-bold mb-6">Hiley Formula History</h1>
+
+                                            {result.length === 0 ? (
+                                                <div className="bg-yellow-100 text-yellow-800 px-4 py-3 rounded">
+                                                    No history found.
+                                                </div>
+                                            ) : (
+                                                <div className="overflow-x-auto bg-white rounded-lg shadow-md">
+                                                    <table className="min-w-full border-collapse">
+                                                        <thead>
+                                                        <tr className="bg-gray-100 text-gray-700">
+                                                            <th className="px-6 py-3 text-left text-sm font-semibold border-b">Project name</th>
+                                                            <th className="px-6 py-3 text-left text-sm font-semibold border-b">Created At</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        {result.map((history, index) => (
+                                                            <tr
+                                                                key={history.id}
+                                                                className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}
+                                                            >
+                                                                <td className="px-6 py-4 text-sm border-b"
+                                                                    onClick={() => setSelectedProject(history)}
+                                                                >{history.project_name}</td>
+                                                                <td className="px-6 py-4 text-sm border-b">{history.created_at}</td>
+                                                            </tr>
+                                                        ))}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+
+                                    {selectedProject && (
+                                        <div className="py-12 fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-90">
+                                            <div className="bg-white rounded-lg shadow-lg max-w-lg w-full p-6">
+                                                <h2 className="text-xl font-bold mb-4">{selectedProject.project_name}</h2>
+                                                <p><span className="font-semibold">ID:</span> {selectedProject.id}</p>
+                                                <p><span className="font-semibold">Project ID:</span> {selectedProject.project_id}</p>
+                                                <p><span className="font-semibold">Created At:</span> {selectedProject.created_at}</p>
+                                                <p><span className="font-semibold">Updated At:</span> {selectedProject.updated_at}</p>
+
+                                                {/* Close Button */}
+                                                <div className="mt-6 flex justify-end">
+                                                    <button
+                                                        onClick={() => setSelectedProject(null)}
+                                                        className="w-64 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300"
+                                                    >
+                                                        Close
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
+                                </>
+                            )}
+
 
                             {/* END TAB 1*/}
                         </div>

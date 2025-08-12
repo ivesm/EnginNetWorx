@@ -67,6 +67,16 @@ class HileyController extends Controller
     {
         //
     }
+    public function hileyformula(Request $request): Response
+    {
+        $user = $request->user();
+        $profileHistory = ProfileHistory::where('user_id', '=', $user->id)->get();
+
+        return Inertia::render('Piles/Hileyformula', [
+            'status' => session('status'),
+            'result' => $profileHistory,
+        ]);
+    }
 
     public function testpage(Request $request){
 
