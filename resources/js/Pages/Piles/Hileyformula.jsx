@@ -143,11 +143,10 @@ export default function Hileyformula({ result = [] }) {
         post(route('hiley.store'));
     };
 
-    const getProjectDetails = async (id) => {
+    const getProjectDetails = async (id , projectname ) => {
 
-        console.log("TESTINg ") ;
         try {
-            const response = await fetch(`/hileyformula/{id}`, {
+            const response = await fetch('/hileyformula/'+id, {
                 headers: {
                     'Accept': 'application/json'
                 }
@@ -155,9 +154,11 @@ export default function Hileyformula({ result = [] }) {
             if (!response.ok) throw new Error('Failed to fetch');
             const data = await response.json();
 
-            console.log(data);
-            console.log("TESTING END")
-            setSelectedProject(data);
+            const mergedData = { ...data[0], project_name: projectname };
+
+            console.log(mergedData);
+
+            setSelectedProject({ ...data[0], project_name: projectname });
 
         } catch (error) {
             console.error(error);
@@ -1015,7 +1016,7 @@ return (
                                                             >
                                                                 <td
                                                                     className="px-6 py-4 text-sm border-b cursor-pointer hover:text-blue-500"
-                                                                    onClick={() => getProjectDetails(history.project_id)}
+                                                                    onClick={() => getProjectDetails(history.project_id , history.project_name)}
                                                                 >
                                                                     {history.project_name}
                                                                 </td>
@@ -1037,20 +1038,11 @@ return (
                                                 <h2 className="text-xl font-bold mb-4">
                                                     {selectedProject.project_name}
                                                 </h2>
-                                                <p>
-                                                    <span className="font-semibold">ID:</span> {selectedProject.id}
-                                                </p>
-                                                <p>
-                                                    <span className="font-semibold">Project ID:</span>{" "}
-                                                    {selectedProject.project_id}
-                                                </p>
+
+
                                                 <p>
                                                     <span className="font-semibold">Created At:</span>{" "}
                                                     {selectedProject.created_at}
-                                                </p>
-                                                <p>
-                                                    <span className="font-semibold">Updated At:</span>{" "}
-                                                    {selectedProject.updated_at}
                                                 </p>
 
                                                 {/* Close Button */}

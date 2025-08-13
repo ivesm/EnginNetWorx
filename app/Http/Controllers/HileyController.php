@@ -88,10 +88,8 @@ class HileyController extends Controller
         //
         $hileyprojects =  Hiley::where ('id', '=', $id)->get();
 
-        // If you want JSON (pure AJAX)
-        if (request()->wantsJson()) {
-            return response()->json($hileyprojects);
-        }
+        return response()->json($hileyprojects);
+
 
     }
 
@@ -122,7 +120,6 @@ class HileyController extends Controller
     {
         $user = $request->user();
         $profileHistory = ProfileHistory::where('user_id', '=', $user->id)->get();
-
 
         return Inertia::render('Piles/Hileyformula', [
             'status' => session('status'),
