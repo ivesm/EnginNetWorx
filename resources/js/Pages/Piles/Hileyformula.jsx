@@ -143,6 +143,22 @@ export default function Hileyformula({ result = [] }) {
         post(route('hiley.store'));
     };
 
+    const getProjectDetails = async (history) => {
+        try {
+            const response = await fetch(`/projects/${history.id}`, {
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+            if (!response.ok) throw new Error('Failed to fetch');
+            const data = await response.json();
+            setSelectedProject(data);
+
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
 return (
 
     <AuthenticatedLayout
@@ -994,7 +1010,6 @@ return (
                                                             >
                                                                 <td
                                                                     className="px-6 py-4 text-sm border-b cursor-pointer hover:text-blue-500"
-                                                                    onClick={() => setSelectedProject(history)}
                                                                 >
                                                                     {history.project_name}
                                                                 </td>
