@@ -154,10 +154,6 @@ export default function Hileyformula({ result = [] }) {
             if (!response.ok) throw new Error('Failed to fetch');
             const data = await response.json();
 
-            const mergedData = { ...data[0], project_name: projectname };
-
-            console.log(mergedData);
-
             setSelectedProject({ ...data[0], project_name: projectname });
 
         } catch (error) {
@@ -1038,11 +1034,19 @@ return (
                                                 <h2 className="text-xl font-bold mb-4">
                                                     {selectedProject.project_name}
                                                 </h2>
+                                                <p> <span className="font-semibold">Pile Diameter D := </span>  {selectedProject.pilediameter} mm</p>
+                                                <p>	<span className="font-semibold">Pile Length L :=</span>  {selectedProject.pilelength} m</p>
+                                                <p>	<span className="font-semibold">Weight of hammer W := </span>  {selectedProject.weighthammer} kN</p>
+                                                <p>	<span className="font-semibold">Weight of anvil W<sub>a</sub> := </span> {selectedProject.weightanvil} kN</p>
+                                                <p>	<span className="font-semibold">Weight of helmet W<sub>h</sub> := </span> {selectedProject.weighthelmet} kN</p>
+                                                <p>	<span className="font-semibold">Pile unit weight W<sub>p</sub> := </span> {selectedProject.pileunitweightt}  kN.m<sup>-3</sup></p>
+                                                <p>	<span className="font-semibold">Pile base area A := </span>  {selectedProject.pilebasearea} m<sup>2</sup></p>
+                                                <p>	<span className="font-semibold">Pile total weight</span>  {selectedProject.piletotalweight} kN</p>
 
 
                                                 <p>
                                                     <span className="font-semibold">Created At:</span>{" "}
-                                                    {selectedProject.created_at}
+                                                    {new Date(selectedProject.created_at).toLocaleString()}
                                                 </p>
 
                                                 {/* Close Button */}
