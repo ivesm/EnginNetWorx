@@ -1034,16 +1034,32 @@ return (
                                                 <h2 className="text-xl font-bold mb-4">
                                                     {selectedProject.project_name}
                                                 </h2>
-                                                <p> <span className="font-semibold">Pile Diameter D := </span>  {selectedProject.pilediameter} mm</p>
-                                                <p>	<span className="font-semibold">Pile Length L :=</span>  {selectedProject.pilelength} m</p>
-                                                <p>	<span className="font-semibold">Weight of hammer W := </span>  {selectedProject.weighthammer} kN</p>
-                                                <p>	<span className="font-semibold">Weight of anvil W<sub>a</sub> := </span> {selectedProject.weightanvil} kN</p>
-                                                <p>	<span className="font-semibold">Weight of helmet W<sub>h</sub> := </span> {selectedProject.weighthelmet} kN</p>
-                                                <p>	<span className="font-semibold">Pile unit weight W<sub>p</sub> := </span> {selectedProject.pileunitweightt}  kN.m<sup>-3</sup></p>
-                                                <p>	<span className="font-semibold">Pile base area A := </span>  {selectedProject.pilebasearea} m<sup>2</sup></p>
-                                                <p>	<span className="font-semibold">Pile total weight</span>  {selectedProject.piletotalweight} kN</p>
 
 
+                                                    <table className="w-auto border-collapse border-spacing-0">
+                                                        <thead>
+                                                        <tr className="bg-gray-100 text-gray-700">
+                                                            <th className="px-20 py-3 text-left text-sm font-semibold border-b"></th>
+                                                            <th className="px-10 py-3 text-left text-sm font-semibold border-b"></th>
+                                                            <th className="px-4 py-3 text-left text-sm font-semibold border-b"></th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr className="bg-white">
+                                                            <td className="px-20 py-4 text-sm border-b cursor-pointer">
+                                                                Pile Diameter D :=
+                                                            </td><td className="px-10 py-4 text-sm border-b">
+                                                                {selectedProject.pilediameter}
+                                                            </td><td className="px-4 py-4 text-sm border-b">
+                                                                mm
+                                                            </td>
+                                                        </tr>
+
+
+                                                        </tbody>
+                                                    </table>
+
+                                                <br/>
                                                 <p>
                                                     <span className="font-semibold">Created At:</span>{" "}
                                                     {new Date(selectedProject.created_at).toLocaleString()}
