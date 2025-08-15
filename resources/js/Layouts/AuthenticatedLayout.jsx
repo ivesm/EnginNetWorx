@@ -85,41 +85,7 @@ export default function AuthenticatedLayout({ header, children }) {
                         </div>
                     )}
 
-                    {/* Test */}
-                    <button
-                        type="button"
-                        onClick={() => setOpen((o) => ({ ...o, test: !o.test }))}
-                        className="flex items-center justify-between w-full px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded"
-                    >
-                        <span>Test</span>
-                        <svg
-                            className={`h-4 w-4 transition-transform ${open.test ? 'rotate-180' : ''}`}
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                        >
-                            <path
-                                fillRule="evenodd"
-                                d="M5.23 7.21a.75.75 0 011.06.02L10 11.085l3.71-3.855a.75.75 0 111.08 1.04l-4.24 4.4a.75.75 0 01-1.08 0l-4.24-4.4a.75.75 0 01.02-1.06z"
-                                clipRule="evenodd"
-                            />
-                        </svg>
-                    </button>
-                    {open.test && (
-                        <div className="ml-3 space-y-1">
-                            <Link
-                                href={route('testing_tab')}
-                                className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded"
-                            >
-                                Test Tabs
-                            </Link>
-                            <Link
-                                href={route('testing')}
-                                className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded"
-                            >
-                                Test
-                            </Link>
-                        </div>
-                    )}
+                   
                 </nav>
 
                 {/* User Dropdown */}
