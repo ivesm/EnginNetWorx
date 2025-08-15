@@ -278,7 +278,7 @@ return (
                                                 className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
                                                 value={data.pilediameter}
                                                 onChange={handlePileDiameter}
-                                            /> 
+                                            />
                                         </div>
                                         <div className="md:col-span-1">
                                             mm
