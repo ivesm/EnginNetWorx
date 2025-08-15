@@ -44,6 +44,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/process-hiley', [HileyController::class, 'store'])->name('hiley.store');
     Route::post('/testing', [HileyController::class, 'testpage'])->name('hiley.test');
     Route::get('/hileyformula', [HileyController::class, 'hileyformula'])->name('hiley.hileyformula');
+    Route::get('/hileyformula/{id}', [HileyController::class, 'show'])->name('hiley.show');;
 });
 
 

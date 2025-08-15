@@ -83,9 +83,14 @@ class HileyController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Hiley $hiley)
+    public function show($id)
     {
         //
+        $hileyprojects =  Hiley::where ('id', '=', $id)->get();
+
+        return response()->json($hileyprojects);
+
+
     }
 
     /**
@@ -164,7 +169,7 @@ class HileyController extends Controller
 
         $newprojectHistory->user_id = $user['id'] ;
         $newprojectHistory->project_id =$newHiley->id ;
-        $newprojectHistory->projecttable_id = $tablenameID['id'];
+        $newprojectHistory->project_table = 'hileys';
         $newprojectHistory->project_name = $request->projectname ??  'New Hiley Project' ;
         $newprojectHistory->save();
 

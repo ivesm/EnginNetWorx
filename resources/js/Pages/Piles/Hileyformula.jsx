@@ -72,7 +72,7 @@ export default function Hileyformula({ result = [] }) {
         const value = e.target.value;
         setData('pilelength', value);
 
-        const calculatedRename = 0.00013 * parseFloat(value || 0);
+        const calculatedRename = (0.00013 * parseFloat(value || 0))  * 10000;
         setData('elasticcompresion2', calculatedRename);
     }
     const handleEfficiency   = (e) => {
@@ -94,7 +94,7 @@ export default function Hileyformula({ result = [] }) {
 
         const Drivingforce = ( tmpweighthammer *(tmpeffectiveheightfall/tmpfinalpenetration )) * 1000  ;
 
-        const Stresspilesdrivingforce = (Potentialenergyhammer)/(tmpfinalpenetration*tmppilebasearea) ;
+        const Stresspilesdrivingforce = (tmpweighthammer  * tmpeffectiveheightfall)/(tmpfinalpenetration*tmppilebasearea) ;
 
         setData('efficiencyblow', EfficiencyofBlow);
         setData('potentialenergyhammer', Potentialenergyhammer);
@@ -120,7 +120,7 @@ export default function Hileyformula({ result = [] }) {
         setData('weightpileanvilhelmet', totalCombinedWeight);
     };
 
-    const  handleEffectiveHeightFall  = (e) => {
+    const  handleEffectiveHeightFall   = (e) => {
 
         const value = e.target.value;
         setData('efficiencyfall', value);
@@ -132,6 +132,30 @@ export default function Hileyformula({ result = [] }) {
         setData('effectiveheight', effectiveheightFall);
     };
 
+    const handleTotalTmpCompresion  = (e) => {
+        const value = e.target.value;
+        setData('quake',value) ;
+
+        const tmpTotalcompression = parseFloat(data.elasticcompresion) + parseFloat(data.elasticcompresion2) + parseFloat(value) ;
+
+        //Ultimate driving resistance
+        const tmpweightofhammer = parseFloat(data.weighthammer) ;
+        const tmpeffectiveheight = parseFloat(data.efficiencyfall) ;
+        const tmpefficiency = parseFloat(data.efficiencyblow) ;
+        const tmpfinalset = parseFloat(data.finalpenetration) ;
+
+
+        const tmpultimatedriving =  (tmpweightofhammer *  tmpeffectiveheight * tmpefficiency) /(tmpfinalset /(tmpTotalcompression /2) );
+        setData('ultimatedrivingresistance',tmpultimatedriving ) ;
+
+    };
+    const handleDesignpileload  = (e) => {
+      const value  = e.target.value ;
+      setData('strenghtreductionfactor',value ) ;
+
+      const tmpDesignpileload = parseFloat(value) * parseFloat(data.ultimatedrivingresistance) ;
+    };
+
     const handleDownLoad = async (e) => {
         const input = document.getElementById('hileyformula_pdf');
         alert(" THIS  WILL  DOWN LOAD THE  VALUES  AS A PDF ");
@@ -141,6 +165,24 @@ export default function Hileyformula({ result = [] }) {
         e.preventDefault();
 
         post(route('hiley.store'));
+    };
+
+    const getProjectDetails = async (id , projectname ) => {
+
+        try {
+            const response = await fetch('/hileyformula/'+id, {
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+            if (!response.ok) throw new Error('Failed to fetch');
+            const data = await response.json();
+
+            setSelectedProject({ ...data[0], project_name: projectname });
+
+        } catch (error) {
+            console.error(error);
+        }
     };
 
 return (
@@ -717,10 +759,12 @@ return (
                                         <div className="md:col-span-4">
                                             <input type="number" name="quake" id="quake"
                                                    required
-                                                   step="any" disabled
+                                                   step="any"
                                                    className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
                                                    placeholder="Quake of ground beneath pile"
-                                                   value={data.quake ? parseFloat(data.quake).toFixed(3) : ''}
+                                                   value={data.quake }
+                                                   onChange={handleTotalTmpCompresion}
+
                                             />
                                         </div>
                                         <div className="md:col-span-1">
@@ -994,7 +1038,7 @@ return (
                                                             >
                                                                 <td
                                                                     className="px-6 py-4 text-sm border-b cursor-pointer hover:text-blue-500"
-                                                                    onClick={() => setSelectedProject(history)}
+                                                                    onClick={() => getProjectDetails(history.project_id , history.project_name)}
                                                                 >
                                                                     {history.project_name}
                                                                 </td>
@@ -1016,20 +1060,61 @@ return (
                                                 <h2 className="text-xl font-bold mb-4">
                                                     {selectedProject.project_name}
                                                 </h2>
-                                                <p>
-                                                    <span className="font-semibold">ID:</span> {selectedProject.id}
-                                                </p>
-                                                <p>
-                                                    <span className="font-semibold">Project ID:</span>{" "}
-                                                    {selectedProject.project_id}
-                                                </p>
+
+
+                                                    <table className="w-auto border-collapse border-spacing-0">
+                                                        <thead>
+                                                        <tr className="bg-gray-100 text-gray-700">
+                                                            <th className="px-20 py-3 text-left text-sm font-semibold border-b"></th>
+                                                            <th className="px-10 py-3 text-left text-sm font-semibold border-b"></th>
+                                                            <th className="px-4 py-3 text-left text-sm font-semibold border-b"></th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr className="bg-white">
+                                                            <td className="px-20 py-4 text-sm border-b cursor-pointer">
+                                                                Pile Diameter D :=
+                                                            </td><td className="px-10 py-4 text-sm border-b">
+                                                                {selectedProject.pilediameter}
+                                                            </td><td className="px-4 py-4 text-sm border-b">
+                                                                mm
+                                                            </td>
+                                                        </tr>
+
+
+                                                        <tr className="bg-white">	<td className="px-20 py-4 text-sm border-b cursor-pointer">Pile Length L :=</td><td className="px-10 py-4 text-sm border-b">  {selectedProject.pilelength} </td><td className="px-4 py-4 text-sm border-b">m</td></tr>
+                                                        <tr className="bg-white">	<td className="px-20 py-4 text-sm border-b cursor-pointer">Weight of hammer W := </td><td className="px-10 py-4 text-sm border-b">  {selectedProject.weighthammer} </td><td className="px-4 py-4 text-sm border-b">kN</td></tr>
+                                                        <tr className="bg-white">	<td className="px-20 py-4 text-sm border-b cursor-pointer">Weight of anvil W<sub>a</sub> := </td><td className="px-10 py-4 text-sm border-b"> {selectedProject.weightanvil} </td><td className="px-4 py-4 text-sm border-b">kN</td></tr>
+                                                        <tr className="bg-white">	<td className="px-20 py-4 text-sm border-b cursor-pointer">Weight of helmet W<sub>h</sub> := </td><td className="px-10 py-4 text-sm border-b"> {selectedProject.weighthelmet}</td><td className="px-4 py-4 text-sm border-b">kN</td></tr>
+                                                        <tr className="bg-white">	<td className="px-20 py-4 text-sm border-b cursor-pointer">Pile unit weight W<sub>p</sub> := </td><td className="px-10 py-4 text-sm border-b"> {selectedProject.pileunitweightt}  </td><td className="px-4 py-4 text-sm border-b">kN.m<sup>-3</sup></td></tr>
+                                                        <tr className="bg-white">	<td className="px-20 py-4 text-sm border-b cursor-pointer">Pile base area A := </td><td className="px-10 py-4 text-sm border-b">  {selectedProject.pilebasearea}</td><td className="px-4 py-4 text-sm border-b"> m<sup>2</sup></td></tr>
+                                                        <tr className="bg-white">	<td className="px-20 py-4 text-sm border-b cursor-pointer">Pile total weight</td><td className="px-10 py-4 text-sm border-b">  {selectedProject.piletotalweight} </td><td className="px-4 py-4 text-sm border-b">kN</td></tr>
+                                                        <tr className="bg-white">	<td className="px-20 py-4 text-sm border-b cursor-pointer">Weight of pile, anvil, & helmet P:= </td><td className="px-10 py-4 text-sm border-b"> {selectedProject.weightpileanvilhelmet} </td><td className="px-4 py-4 text-sm border-b">kN</td></tr>
+                                                        <tr className="bg-white">	<td className="px-20 py-4 text-sm border-b cursor-pointer">Free fall height of hammer ff := </td><td className="px-10 py-4 text-sm border-b"> {selectedProject.freefallheight} </td><td className="px-4 py-4 text-sm border-b">mm</td></tr>
+                                                        <tr className="bg-white">	<td className="px-20 py-4 text-sm border-b cursor-pointer">Efficiency of fall E <sub>ff</sub> </td><td className="px-10 py-4 text-sm border-b"> {selectedProject.efficiencyfall}</td><td className="px-4 py-4 text-sm border-b">&nbsp;</td></tr>
+                                                        <tr className="bg-white">	<td className="px-20 py-4 text-sm border-b cursor-pointer">Effective height of fall h :=  </td><td className="px-10 py-4 text-sm border-b"> {selectedProject.effectiveheight}</td><td className="px-4 py-4 text-sm border-b"> m</td></tr>
+                                                        <tr className="bg-white">	<td className="px-20 py-4 text-sm border-b cursor-pointer">Final set or penetration per blow (mean of final 10 blows) S:= </td><td className="px-10 py-4 text-sm border-b"> {selectedProject.finalpenetration} </td><td className="px-4 py-4 text-sm border-b">mm  Vary set to achieve design load </td></tr>
+                                                        <tr className="bg-white">	<td className="px-20 py-4 text-sm border-b cursor-pointer">Coefficient of restitution e:= </td><td className="px-10 py-4 text-sm border-b"> {selectedProject.coefficientrestitution} </td><td className="px-4 py-4 text-sm border-b"> Single Acting Hammer Timber piles</td></tr>
+                                                        <tr className="bg-white">	<td className="px-20 py-4 text-sm border-b cursor-pointer">Efficiency of blow n:= </td><td className="px-10 py-4 text-sm border-b"> {selectedProject.efficiencyblow}</td><td className="px-4 py-4 text-sm border-b">&nbsp;</td></tr>
+                                                        <tr className="bg-white">	<td className="px-20 py-4 text-sm border-b cursor-pointer">Potential Energy of hammer in free fall PE:= </td><td className="px-10 py-4 text-sm border-b"> {selectedProject.potentialenergyhammer}</td></tr>
+                                                        <tr className="bg-white">	<td className="px-20 py-4 text-sm border-b cursor-pointer">Driving Force DF:= </td><td className="px-10 py-4 text-sm border-b"> {selectedProject.drivingforce}</td><td className="px-4 py-4 text-sm border-b"> kN</td></tr>
+                                                        <tr className="bg-white">	<td className="px-20 py-4 text-sm border-b cursor-pointer">Stress in Piles due to Driving Force &sigma;<sub>D</sub> := </td><td className="px-10 py-4 text-sm border-b"> {selectedProject.stresspilesdrivingforce} </td><td className="px-4 py-4 text-sm border-b">MPa</td></tr>
+                                                        <tr className="bg-white">	<td className="px-20 py-4 text-sm border-b cursor-pointer"> if (&sigma;<sub>D</sub> {'>'} 9.9 MPa , "Check Driving Type" , "Medium") = "Medium"</td><td className="px-10 py-4 text-sm border-b">&nbsp; </td></tr>
+                                                        <tr className="bg-white">	<td className="px-20 py-4 text-sm border-b cursor-pointer">Elastic compression of pile head / dolly / packing C<sub>c := </sub></td><td className="px-10 py-4 text-sm border-b"> {selectedProject.elasticcompresion}</td><td className="px-4 py-4 text-sm border-b"> mm Medium driving</td></tr>
+                                                        <tr className="bg-white">	<td className="px-20 py-4 text-sm border-b cursor-pointer">Elastic compression of pile C<sub>p</sub> := </td><td className="px-10 py-4 text-sm border-b"> {selectedProject.elasticcompresionpile}</td><td className="px-4 py-4 text-sm border-b">mm Timber Pile / Medium driving</td></tr>
+                                                        <tr className="bg-white">	<td className="px-20 py-4 text-sm border-b cursor-pointer">Quake of ground beneath pile C<sub>q</sub> := </td><td className="px-10 py-4 text-sm border-b"> {selectedProject.quake}</td><td className="px-4 py-4 text-sm border-b"> mm</td></tr>
+                                                        <tr className="bg-white">	<td className="px-20 py-4 text-sm border-b cursor-pointer">Total temporary compression C:= </td><td className="px-10 py-4 text-sm border-b"> {selectedProject.totaltempcompression} </td><td className="px-4 py-4 text-sm border-b">mm</td></tr>
+                                                        <tr className="bg-white">	<td className="px-20 py-4 text-sm border-b cursor-pointer">Ultimate driving resistance</td><td className="px-10 py-4 text-sm border-b"> {selectedProject.ultimatedrivingresistance}</td><td className="px-4 py-4 text-sm border-b">kN</td></tr>
+                                                        <tr className="bg-white">	<td className="px-20 py-4 text-sm border-b cursor-pointer">Strength Reduction Factor &phi; : = </td><td className="px-10 py-4 text-sm border-b"> {selectedProject.strengthreductionfator}</td><td className="px-4 py-4 text-sm border-b"></td></tr>
+                                                        <tr className="bg-white">	<td className="px-20 py-4 text-sm border-b cursor-pointer">Design Pile Load &phi;N := </td><td className="px-10 py-4 text-sm border-b"> {selectedProject.designpileload} </td><td className="px-4 py-4 text-sm border-b">kN</td></tr>
+
+                                                        </tbody>
+                                                    </table>
+
+                                                <br/>
                                                 <p>
                                                     <span className="font-semibold">Created At:</span>{" "}
-                                                    {selectedProject.created_at}
-                                                </p>
-                                                <p>
-                                                    <span className="font-semibold">Updated At:</span>{" "}
-                                                    {selectedProject.updated_at}
+                                                    {new Date(selectedProject.created_at).toLocaleString()}
                                                 </p>
 
                                                 {/* Close Button */}
