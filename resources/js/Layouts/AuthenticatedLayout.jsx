@@ -1,29 +1,19 @@
-import ApplicationLogo from '@/Components/ApplicationLogo';
-import Dropdown from '@/Components/Dropdown';
-import NavLink from '@/Components/NavLink';
-import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Link, usePage } from '@inertiajs/react';
-import { useState } from 'react';
-import { useEffect, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
+import Dropdown from '@/Components/Dropdown';
 
 export default function AuthenticatedLayout({ header, children }) {
-    const user = usePage().props.auth.user;
+    const user = usePage().props?.auth?.user || {};
+    const [open, setOpen] = useState({ foundations: false, piles: false, test: false });
+    const sidebarRef = useRef(null);
 
-    const [showingNavigationDropdown, setShowingNavigationDropdown] =
-        useState(false);
-    const submenuRef = useRef(null);
-    const [submenuOpen, setSubmenuOpen] = useState(false);
-    const [submenuOpen1, setSubmenuOpen1] = useState(false);
-
-    const [openSubmenu, setOpenSubmenu] = useState(null);
-
+    // Close menus when clicking outside sidebar
     useEffect(() => {
-        function handleClickOutside(event) {
-            if (submenuRef.current && !submenuRef.current.contains(event.target)) {
-                setOpenSubmenu(null);
+        const handleClickOutside = (event) => {
+            if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+                setOpen({ foundations: false, piles: false, test: false });
             }
-        }
-
+        };
         document.addEventListener('mousedown', handleClickOutside);
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
@@ -31,259 +21,145 @@ export default function AuthenticatedLayout({ header, children }) {
     }, []);
 
     return (
-        <div className="min-h-screen bg-gray-100">
-            <nav className="border-b border-gray-100 bg-white">
-                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                    <div className="flex h-16 justify-between">
-                        <div className="flex">
-                            <div className="flex shrink-0 items-center">
-                                <Link href="/dashboard">
-                                    <img className="w-16 h-16 object-cover border rounded" alt="Thumbnail" src="images/EngeneerWorx_1.png"/>
-                                </Link>
-                            </div>
+        <div className="grid min-h-screen grid-cols-[12rem_1fr] bg-gray-100">
+            {/* Sidebar */}
+            <aside ref={sidebarRef} className="flex flex-col bg-white border-r">
+                <div className="p-4 flex items-center justify-center border-b">
+                    <Link href="/dashboard">
+                        <img
+                            className="w-16 h-16 object-cover border rounded"
+                            alt="Thumbnail"
+                            src="images/EngeneerWorx_1.png"
+                        />
+                    </Link>
+                </div>
 
-                            {/***************************************************/}
-                            <div className="hidden sm:-my-px sm:ms-10 sm:flex items-center">
-                                <Dropdown>
-                                    <Dropdown.Trigger>
-                                        <span className="inline-flex items-center">
-                                            <button
-                                            type="button"
-                                            className="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none"
-                                            >
-                                                Foundations
-                                                <svg
-                                                className="-me-0.5 ms-2 h-4 w-4"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 20 20"
-                                                fill="currentColor"
-                                                >
-                                                    <path
-                                                    fillRule="evenodd"
-                                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                    clipRule="evenodd"
-                                                    />
-                                                </svg>
-                                            </button>
-                                        </span>
-                                    </Dropdown.Trigger>
-                                    <Dropdown.Content className="z-50">
-                                        <div ref={submenuRef} className="relative group">
-                                            <button
-                                                type="button"
-                                                onClick={(e) => {
-                                                    e.stopPropagation();
-                                                    setOpenSubmenu(openSubmenu === 'piles' ? null : 'piles');
-                                                }}
-                                                className="flex w-full items-center justify-between px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                            >
-                                                Piles
-                                                <svg
-                                                    className={`ml-2 h-4 w-4 transform transition-transform ${
-                                                        openSubmenu === 'piles' ? 'rotate-90' : ''
-                                                    }`}
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    fill="none"
-                                                    viewBox="0 0 24 24"
-                                                    stroke="currentColor"
-                                                >
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-                                                </svg>
-                                            </button>
-
-                                            {openSubmenu === 'piles' && (
-                                                <div className="absolute left-full top-0 ml-1 w-48 rounded-md border bg-white shadow-lg z-50">
-                                                    <Dropdown.Link href={route('hiley.hileyformula')}>
-                                                        Hiley Formula
-                                                    </Dropdown.Link>
-                                                </div>
-                                            )}
-
-                                        </div>
-                                    </Dropdown.Content>
-                                </Dropdown>
-                            </div>
-
-
-                            <div className="hidden sm:-my-px sm:ms-10 sm:flex items-center">
-                                <Dropdown>
-                                    <Dropdown.Trigger>
-                                        <span className="inline-flex items-center">
-                                            <button
-                                                type="button"
-                                                className="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none"
-                                            >
-                                                Test
-                                                <svg
-                                                    className="-me-0.5 ms-2 h-4 w-4"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 20 20"
-                                                    fill="currentColor"
-                                                >
-                                                    <path
-                                                        fillRule="evenodd"
-                                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                        clipRule="evenodd"
-                                                    />
-                                                </svg>
-                                            </button>
-                                        </span>
-                                    </Dropdown.Trigger>
-                                    <Dropdown.Content className="z-50">
-                                        <Dropdown.Link href={route('testing_tab')}>
-                                            Test Tabs
-                                        </Dropdown.Link>
-                                        <Dropdown.Link href={route('testing')}>
-                                            Test
-                                        </Dropdown.Link>
-                                    </Dropdown.Content>
-
-                                </Dropdown>
-                            </div>
-                        </div>
-
-                        <div className="hidden sm:ms-6 sm:flex sm:items-center">
-                            <div className="relative ms-3">
-                                <Dropdown>
-                                    <Dropdown.Trigger>
-                                        <span className="inline-flex rounded-md">
-                                            <button
-                                                type="button"
-                                                className="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none"
-                                            >
-                                                {user.name}
-                                                <svg
-                                                    className="-me-0.5 ms-2 h-4 w-4"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 20 20"
-                                                    fill="currentColor"
-                                                >
-                                                    <path
-                                                        fillRule="evenodd"
-                                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                        clipRule="evenodd"
-                                                    />
-                                                </svg>
-                                            </button>
-                                        </span>
-                                    </Dropdown.Trigger>
-
-                                    <Dropdown.Content>
-                                        <Dropdown.Link
-                                            href={route('profile.edit')}
-                                        >
-                                            Profile
-                                        </Dropdown.Link>
-                                        <Dropdown.Link
-                                            href={route('profile.history')}
-                                        >
-                                            Saved projects
-                                        </Dropdown.Link>
-                                        <Dropdown.Link
-                                            href={route('logout')}
-                                            method="post"
-                                            as="button"
-                                        >
-                                            Log Out
-                                        </Dropdown.Link>
-                                    </Dropdown.Content>
-                                </Dropdown>
-                            </div>
-                        </div>
-
-                        <div className="-me-2 flex items-center sm:hidden">
+                <nav className="p-2 space-y-1">
+                    {/* Foundations */}
+                    <button
+                        type="button"
+                        onClick={() => setOpen((o) => ({ ...o, foundations: !o.foundations }))}
+                        className="flex items-center justify-between w-full px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded"
+                    >
+                        <span>Foundations</span>
+                        <svg
+                            className={`h-4 w-4 transition-transform ${open.foundations ? 'rotate-180' : ''}`}
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                        >
+                            <path
+                                fillRule="evenodd"
+                                d="M5.23 7.21a.75.75 0 011.06.02L10 11.085l3.71-3.855a.75.75 0 111.08 1.04l-4.24 4.4a.75.75 0 01-1.08 0l-4.24-4.4a.75.75 0 01.02-1.06z"
+                                clipRule="evenodd"
+                            />
+                        </svg>
+                    </button>
+                    {open.foundations && (
+                        <div className="ml-3 space-y-1">
+                            {/* Piles submenu */}
                             <button
-                                onClick={() =>
-                                    setShowingNavigationDropdown(
-                                        (previousState) => !previousState,
-                                    )
-                                }
-                                className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 transition duration-150 ease-in-out hover:bg-gray-100 hover:text-gray-500 focus:bg-gray-100 focus:text-gray-500 focus:outline-none"
+                                type="button"
+                                onClick={() => setOpen((o) => ({ ...o, piles: !o.piles }))}
+                                className="flex items-center justify-between w-full px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded"
                             >
+                                <span>Piles</span>
                                 <svg
-                                    className="h-6 w-6"
-                                    stroke="currentColor"
-                                    fill="none"
+                                    className={`h-4 w-4 transition-transform ${open.piles ? 'rotate-90' : ''}`}
                                     viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
                                 >
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                                </svg>
+                            </button>
+                            {open.piles && (
+                                <div className="ml-4 space-y-1">
+                                    <Link
+                                        href={route('hiley.hileyformula')}
+                                        className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded"
+                                    >
+                                        Hiley Formula
+                                    </Link>
+                                </div>
+                            )}
+                        </div>
+                    )}
+
+                    {/* Test */}
+                    <button
+                        type="button"
+                        onClick={() => setOpen((o) => ({ ...o, test: !o.test }))}
+                        className="flex items-center justify-between w-full px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded"
+                    >
+                        <span>Test</span>
+                        <svg
+                            className={`h-4 w-4 transition-transform ${open.test ? 'rotate-180' : ''}`}
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                        >
+                            <path
+                                fillRule="evenodd"
+                                d="M5.23 7.21a.75.75 0 011.06.02L10 11.085l3.71-3.855a.75.75 0 111.08 1.04l-4.24 4.4a.75.75 0 01-1.08 0l-4.24-4.4a.75.75 0 01.02-1.06z"
+                                clipRule="evenodd"
+                            />
+                        </svg>
+                    </button>
+                    {open.test && (
+                        <div className="ml-3 space-y-1">
+                            <Link
+                                href={route('testing_tab')}
+                                className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded"
+                            >
+                                Test Tabs
+                            </Link>
+                            <Link
+                                href={route('testing')}
+                                className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded"
+                            >
+                                Test
+                            </Link>
+                        </div>
+                    )}
+                </nav>
+
+                {/* User Dropdown */}
+                <div className="border-t p-4 mt-4">
+                    <Dropdown>
+                        <Dropdown.Trigger>
+                            <button
+                                type="button"
+                                className="flex items-center justify-between w-full px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded"
+                            >
+                                {user.name || 'User'}
+                                <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
                                     <path
-                                        className={
-                                            !showingNavigationDropdown
-                                                ? 'inline-flex'
-                                                : 'hidden'
-                                        }
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth="2"
-                                        d="M4 6h16M4 12h16M4 18h16"
-                                    />
-                                    <path
-                                        className={
-                                            showingNavigationDropdown
-                                                ? 'inline-flex'
-                                                : 'hidden'
-                                        }
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth="2"
-                                        d="M6 18L18 6M6 6l12 12"
+                                        fillRule="evenodd"
+                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                        clipRule="evenodd"
                                     />
                                 </svg>
                             </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div
-                    className={
-                        (showingNavigationDropdown ? 'block' : 'hidden') +
-                        ' sm:hidden'
-                    }
-                >
-                    <div className="space-y-1 pb-3 pt-2">
-                        <ResponsiveNavLink
-                            href={route('dashboard')}
-                            active={route().current('dashboard')}
-                        >
-                            Dashboard
-                        </ResponsiveNavLink>
-                    </div>
-
-                    <div className="border-t border-gray-200 pb-1 pt-4">
-                        <div className="px-4">
-                            <div className="text-base font-medium text-gray-800">
-                                {user.name}
-                            </div>
-                            <div className="text-sm font-medium text-gray-500">
-                                {user.email}
-                            </div>
-                        </div>
-
-                        <div className="mt-3 space-y-1">
-                            <ResponsiveNavLink href={route('profile.edit')}>
-                                Profile
-                            </ResponsiveNavLink>
-                            <ResponsiveNavLink
-                                method="post"
-                                href={route('logout')}
-                                as="button"
-                            >
+                        </Dropdown.Trigger>
+                        <Dropdown.Content className="ml-4">
+                            <Dropdown.Link href={route('profile.edit')}>Profile</Dropdown.Link>
+                            <Dropdown.Link href={route('profile.history')}>Saved projects</Dropdown.Link>
+                            <Dropdown.Link href={route('logout')} method="post" as="button">
                                 Log Out
-                            </ResponsiveNavLink>
-                        </div>
-                    </div>
+                            </Dropdown.Link>
+                        </Dropdown.Content>
+                    </Dropdown>
                 </div>
-            </nav>
+            </aside>
 
-            {header && (
-                <header className="bg-white shadow">
-                    <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-                        {header}
-                    </div>
-                </header>
-            )}
-
-            <main>{children}</main>
+            {/* Content */}
+            <section className="flex flex-col min-w-0">
+                {header && (
+                    <header className="bg-white shadow">
+                        <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">{header}</div>
+                    </header>
+                )}
+                <main className="p-6">{children}</main>
+            </section>
         </div>
     );
 }
