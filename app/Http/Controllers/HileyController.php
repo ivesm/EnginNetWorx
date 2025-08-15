@@ -63,7 +63,7 @@ class HileyController extends Controller
         $newHiley->quake  =    $request->quake ??   0;
         $newHiley->totaltempcompression  =    $request->totaltempcompression ??   0;
         $newHiley->ultimatedrivingresistance  =    $request->ultimatedrivingresistance ??   0;
-        $newHiley->strengthreductionfator  =    $request->strengthreductionfator ??   0;
+        $newHiley->strengthreductionfactor  =    $request->strengthreductionfactor ??   0;
         $newHiley->designpileload  =    $request->designpileload ??   0;
 
         $newHiley->save();
@@ -77,7 +77,7 @@ class HileyController extends Controller
         $newprojectHistory->save();
 
         // ✅ Redirect to results page and pass the result
-        return  redirect()->route('hileyformula.hileyformula') ;
+        return  redirect()->route('hiley.hileyformula') ;
     }
 
     /**
@@ -160,7 +160,7 @@ class HileyController extends Controller
         $newHiley->quake  =    $request->quake ??   0;
         $newHiley->totaltempcompression  =    $request->totaltempcompression ??   0;
         $newHiley->ultimatedrivingresistance  =    $request->ultimatedrivingresistance ??   0;
-        $newHiley->strengthreductionfator  =    $request->strengthreductionfator ??   0;
+        $newHiley->strengthreductionfactor  =    $request->strengthreductionfactor ??   0;
         $newHiley->designpileload  =    $request->designpileload ??   0;
 
         $newHiley->save();

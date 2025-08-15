@@ -47,7 +47,7 @@ class Hiley extends Model
         'quake',
         'totaltempcompression',
         'ultimatedrivingresistance',
-        'strengthreductionfator',
+        'strengthreductionfactor',
         'designpileload',
     ];
 

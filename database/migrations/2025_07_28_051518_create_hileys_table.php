@@ -38,7 +38,7 @@ return new class extends Migration
             $table->float('quake')->comment('this is the Quake of the ground beneath pile');
             $table->float('totaltempcompression')->comment('this is the Total Temporary Compression');
             $table->float('ultimatedrivingresistance')->comment('this is the Ultmate Driving resistance');
-            $table->float('strengthreductionfator')->comment('this is the Strength Reduction Factor');
+            $table->float('strengthreductionfactor')->comment('this is the Strength Reduction Factor');
             $table->float('designpileload')->comment('this is the Desin Pile Load');
             $table->timestamps();
         });

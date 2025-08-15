@@ -31,11 +31,11 @@ export default function Hileyformula({ result = [] }) {
         drivingforce: '',
         stresspilesdrivingforce: '',
         elasticcompresion: '',
-        elasticcompresion2: '',
+        elasticcompresionpile: '',
         quake: '',
-        totaltempcompresion: '',
+        totaltempcompression: '',
         ultimatedrivingresistance:'',
-        strenghtreductionfactor:'',
+        strengthtreductionfactor:'',
         designpileload:'',
     });
 
@@ -73,7 +73,7 @@ export default function Hileyformula({ result = [] }) {
         setData('pilelength', value);
 
         const calculatedRename = (0.00013 * parseFloat(value || 0))  * 10000;
-        setData('elasticcompresion2', calculatedRename);
+        setData('elasticcompresionpile', calculatedRename);
     }
     const handleEfficiency   = (e) => {
 
@@ -96,7 +96,7 @@ export default function Hileyformula({ result = [] }) {
 
         const Stresspilesdrivingforce = (tmpweighthammer  * tmpeffectiveheightfall)/(tmpfinalpenetration*tmppilebasearea) ;
 
-        setData('efficiencyblow', EfficiencyofBlow);
+        setData('efficiencyblow', Number(EfficiencyofBlow.toFixed(3)) );
         setData('potentialenergyhammer', Potentialenergyhammer);
         setData('drivingforce', Drivingforce);
         setData('stresspilesdrivingforce', Stresspilesdrivingforce);
@@ -136,24 +136,30 @@ export default function Hileyformula({ result = [] }) {
         const value = e.target.value;
         setData('quake',value) ;
 
-        const tmpTotalcompression = parseFloat(data.elasticcompresion) + parseFloat(data.elasticcompresion2) + parseFloat(value) ;
-
+        const tmpTotalcompression = parseFloat(data.elasticcompresion) + parseFloat(data.elasticcompresionpile) + parseFloat(value) ;
+        setData('totaltempcompression',tmpTotalcompression) ;
         //Ultimate driving resistance
         const tmpweightofhammer = parseFloat(data.weighthammer) ;
-        const tmpeffectiveheight = parseFloat(data.efficiencyfall) ;
+        const tmpeffectiveheight = parseFloat(data.effectiveheight) ;
         const tmpefficiency = parseFloat(data.efficiencyblow) ;
-        const tmpfinalset = parseFloat(data.finalpenetration) ;
+        const tmpfinalpenetration = parseFloat(data.finalpenetration) ;
 
+            console.log("W  :"+tmpweightofhammer);
+            console.log("H :"+tmpeffectiveheight);
+            console.log("n :"+tmpefficiency);
+            console.log("S :"+tmpfinalpenetration);
+            console.log("C :"+tmpTotalcompression);
 
-        const tmpultimatedriving =  (tmpweightofhammer *  tmpeffectiveheight * tmpefficiency) /(tmpfinalset /(tmpTotalcompression /2) );
+        const tmpultimatedriving =  ((tmpweightofhammer *  tmpeffectiveheight * tmpefficiency) /(tmpfinalpenetration /(tmpTotalcompression /2) ) ) * 1000;
         setData('ultimatedrivingresistance',tmpultimatedriving ) ;
 
     };
     const handleDesignpileload  = (e) => {
       const value  = e.target.value ;
-      setData('strenghtreductionfactor',value ) ;
+      setData('strengthtreductionfactor',value ) ;
 
       const tmpDesignpileload = parseFloat(value) * parseFloat(data.ultimatedrivingresistance) ;
+      setData('designpileload',tmpDesignpileload) ;
     };
 
     const handleDownLoad = async (e) => {
@@ -269,7 +275,7 @@ return (
                                         </div>
 
                                         <div className="md:col-span-3 flex items-center">
-                                            <label htmlFor="pilediameter">Pile Diameter: D =</label>
+                                            <label htmlFor="pilediameter">Pile Diameter <br/> D :=</label>
                                         </div>
                                         <div className="md:col-span-4">
                                             <input type="number" name="pilediameter" id="pilediameter" required
@@ -288,7 +294,7 @@ return (
                                         </div>
 
                                         <div className="md:col-span-3 flex items-center">
-                                            <label htmlFor="pilelength">Pile Length: L :=</label>
+                                            <label htmlFor="pilelength">Pile Length <br/> L :=</label>
                                         </div>
                                         <div className="md:col-span-4">
                                             <input type="number" name="pilelength" id="pilelength"
@@ -327,7 +333,7 @@ return (
                                         </div>
 
                                         <div className="md:col-span-3 flex items-center">
-                                            <label htmlFor="weightanvil">Weight of Anvil: W<sub>a</sub> :=</label>
+                                            <label htmlFor="weightanvil">Weight of Anvil <br/>  W<sub>a</sub> :=</label>
                                         </div>
                                         <div className="md:col-span-4">
                                             <input type="number" name="weightanvil" id="weightanvil" required
@@ -365,7 +371,7 @@ return (
                                         </div>
 
                                         <div className="md:col-span-3 flex items-center">
-                                            <label htmlFor="pileunitweight">Pile Unit Weight: W<sub>p</sub> :=</label>
+                                            <label htmlFor="pileunitweight">Pile Unit Weight <br/> W<sub>p</sub> :=</label>
                                         </div>
                                         <div className="md:col-span-4">
                                             <input type="number" name="pileunitweight" id="pileunitweight" required
@@ -390,7 +396,7 @@ return (
                                         </div>
 
                                         <div className="md:col-span-3 flex items-center">
-                                            <label htmlFor="pilebasearea">Pile Base Area: A:= &pi; . D<sup>2</sup>/4</label>
+                                            <label htmlFor="pilebasearea">Pile Base Area <br/> A:= &pi; . D<sup>2</sup>/4</label>
                                         </div>
                                         <div className="md:col-span-4">
                                             <input type="number" name="pilebasearea" id="pilebasearea" required
@@ -409,7 +415,7 @@ return (
                                         </div>
 
                                         <div className="md:col-span-3 flex items-center">
-                                            <label htmlFor="piletotalweight">Pile Total weight: W<sub>T</sub>:= W<sub>P</sub>
+                                            <label htmlFor="piletotalweight">Pile Total weight <br/> W<sub>T</sub>:= W<sub>P</sub>
                                                 . L . A </label>
                                         </div>
                                         <div className="md:col-span-4">
@@ -428,7 +434,7 @@ return (
                                         </div>
 
                                         <div className="md:col-span-3 flex items-center">
-                                            <label htmlFor="weightpileanvilhelmet">Weight of pile, anvil, & helmet: P :=
+                                            <label htmlFor="weightpileanvilhelmet">Weight of pile, anvil, & helmet <br/> P :=
                                                 W<sub>T</sub> + W<sub>A</sub> + W<sub>H</sub>
                                             </label>
                                         </div>
@@ -466,7 +472,7 @@ return (
                                         &nbsp;
                                         </div>
                                         <div className="md:col-span-3 flex items-center">
-                                            <label htmlFor="freefallheight">Free fall height of hammer ff ≔</label>
+                                            <label htmlFor="freefallheight">Free fall height of hammer <br/> ff ≔</label>
                                         </div>
                                         <div className="md:col-span-4">
                                             <input type="number" name="freefallheight" id="freefallheight" required
@@ -485,7 +491,7 @@ return (
                                         </div>
 
                                         <div className="md:col-span-3 flex items-center">
-                                            <label htmlFor="efficiencyfall">Efficiency of fall E<sub>ff</sub> ≔</label>
+                                            <label htmlFor="efficiencyfall">Efficiency of fall <br/> E<sub>ff</sub> ≔</label>
                                         </div>
                                         <div className="md:col-span-4">
                                             <input type="number" name="efficiencyfall" id="efficiencyfall" required
@@ -505,7 +511,7 @@ return (
 
                                         <div className="md:col-span-3 flex items-center">
                                             <label htmlFor="effectiveheight">
-                                                Effective height of fall h ≔ ff ⋅ Eff =
+                                                Effective height of fall <br/> h ≔ ff ⋅ Eff =
                                             </label>
                                         </div>
                                         <div className="md:col-span-4">
@@ -541,8 +547,8 @@ return (
                                         &nbsp;
                                         </div>
                                         <div className="md:col-span-3 flex items-center">
-                                            <label htmlFor="effectiveheight">Final set or penetration per blow
-                                                (mean of final 10 blows) S ≔
+                                            <label htmlFor="effectiveheight">
+                                                Final set or penetration per blow (mean of final 10 blows) <br/> S ≔
                                             </label>
                                         </div>
                                         <div className="md:col-span-5">
@@ -572,7 +578,7 @@ return (
 
                                         <div className="md:col-span-3 flex items-center">
                                             <label htmlFor="effectiveheight">
-                                                Coefficient of restitution e ≔
+                                                Coefficient of restitution <br/>e ≔
                                             </label>
                                         </div>
                                         <div className="md:col-span-4">
@@ -598,7 +604,9 @@ return (
                                         </div>
 
                                         <div className="md:col-span-3 flex items-center">
-                                            <label htmlFor="efficiencyblow">Efficiency of blow</label>
+                                            <label htmlFor="efficiencyblow">
+                                                Efficiency of blow <br/> n:= W + P * e<sup>2</sup>
+                                            </label>
                                         </div>
                                         <div className="md:col-span-4">
                                             <input type="number" name="efficiencyblow" id="efficiencyblow" required
@@ -613,7 +621,9 @@ return (
                                         </div>
 
                                         <div className="md:col-span-3 flex items-center">
-                                            <label htmlFor="potentialenergyhammer">Potential Energy of hammer in free falL</label>
+                                            <label htmlFor="potentialenergyhammer">
+                                                Potential Energy of hammer in free falL <br/> PE:= W * h =
+                                            </label>
                                         </div>
                                         <div className="md:col-span-4">
                                             <input type="number" name="potentialenergyhammer" id="potentialenergyhammer"
@@ -632,7 +642,9 @@ return (
                                         </div>
 
                                         <div className="md:col-span-3 flex items-center">
-                                            <label htmlFor="drivingforce">Driving Force</label>
+                                            <label htmlFor="drivingforce">
+                                                Driving Force <br/> DF := W * (h/S)
+                                            </label>
                                         </div>
                                         <div className="md:col-span-4">
                                             <input type="number" name="drivingforce" id="drivingforce" required
@@ -650,8 +662,8 @@ return (
                                         </div>
 
                                         <div className="md:col-span-3 flex items-center">
-                                            <label htmlFor="stresspilesdrivingforce">Stress in Piles due to Driving Force  &sigma;
-                                                <sub>D</sub>
+                                            <label htmlFor="stresspilesdrivingforce">
+                                                Stress in Piles due to Driving Force <br/> &sigma;<sub>D</sub> := W * h / S * A
                                             </label>
                                         </div>
                                         <div className="md:col-span-5">
@@ -694,7 +706,7 @@ return (
                                         </div>
                                         <div className="md:col-span-3 flex items-center">
                                             <label htmlFor="pilediameter">Elastic compression of pile
-                                                head / dolly / packing: C<sub>c</sub>:=
+                                                head / dolly / packing <br/> C<sub>c</sub>:=
                                             </label>
                                         </div>
                                         <div className="md:col-span-4">
@@ -722,15 +734,15 @@ return (
                                             &nbsp;
                                         </div>
                                         <div className="md:col-span-3 flex items-center">
-                                            <label htmlFor="pilediameter">Elastic compression of pile C<sub>p</sub>:=
+                                            <label htmlFor="pilediameter">Elastic compression of pile <br/> C<sub>p</sub>:= 0.0013 * L
                                             </label>
                                         </div>
                                         <div className="md:col-span-4">
-                                            <input type="number" name="elasticcompresion2" id="elasticcompresion2" required
+                                            <input type="number" name="elasticcompresionpile" id="elasticcompresionpile" required
                                                    placeholder="Elastic compression of pile "
                                                    step="any"
                                                    className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
-                                                   value={data.elasticcompresion2 ? parseFloat(data.elasticcompresion2).toFixed(6) : ''}
+                                                   value={data.elasticcompresionpile ? parseFloat(data.elasticcompresionpile).toFixed(6) : ''}
                                             />
                                         </div>
 
@@ -750,10 +762,9 @@ return (
                                             &nbsp;
                                         </div>
 
-
                                         <div className="md:col-span-3 flex items-center">
-                                            <label htmlFor="quake">Quake of ground beneath pile
-                                                C<sub>q</sub> =
+                                            <label htmlFor="quake">
+                                                Quake of ground beneath pile <br/> C<sub>q</sub> =
                                             </label>
                                         </div>
                                         <div className="md:col-span-4">
@@ -784,16 +795,17 @@ return (
                                         </div>
 
                                         <div className="md:col-span-3 flex items-center">
-                                            <label htmlFor="totaltempcompresion">Total temporary compression C:= C<sub>c</sub> + C<sub>p</sub> + C<sub>q</sub>
+                                            <label htmlFor="totaltempcompression">
+                                                Total temporary compression <br/> C:= C<sub>c</sub> + C<sub>p</sub> + C<sub>q</sub>
                                             </label>
                                         </div>
                                         <div className="md:col-span-4">
-                                            <input type="number" name="totaltempcompresion" id="totaltempcompresion"
+                                            <input type="number" name="totaltempcompression" id="totaltempcompression"
                                                    required
                                                    step="any" disabled
                                                    className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
                                                    placeholder="Stress in Piles due to Driving Force"
-                                                   value={data.totaltempcompresion ? parseFloat(data.totaltempcompresion).toFixed(3) : ''}
+                                                   value={data.totaltempcompression ? parseFloat(data.totaltempcompression).toFixed(3) : ''}
                                             />
                                         </div>
                                         <div className="md:col-span-1">
@@ -810,7 +822,7 @@ return (
 
                                         <div className="md:col-span-3 flex items-center">
                                             <label htmlFor="ultimatedrivingresistance">
-                                                Ultimate driving resistance R =
+                                                Ultimate driving resistance <br/> R:=  W * h * n /  2 + C/2 =
                                             </label>
                                         </div>
                                         <div className="md:col-span-4">
@@ -836,16 +848,18 @@ return (
 
 
                                         <div className="md:col-span-3 flex items-center">
-                                            <label htmlFor="strenghtreductionfactor">Strength Reduction Factor  &sigma; =
+                                            <label htmlFor="strengthtreductionfactor">Strength Reduction Factor  &phi; =
                                             </label>
                                         </div>
                                         <div className="md:col-span-4">
-                                            <input type="number" name="strenghtreductionfactor" id="strenghtreductionfactor"
+                                            <input type="number" name="strengthtreductionfactor" id="strengthtreductionfactor"
                                                    required
-                                                   step="any" disabled
+                                                   step="any"
                                                    className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
                                                    placeholder="Strength Reduction Factor"
-                                                   value={data.strenghtreductionfactor ? parseFloat(data.strenghtreductionfactor).toFixed(3) : ''}
+                                                   value={data.strengthtreductionfactor }
+                                                   onChange={handleDesignpileload}
+
                                             />
                                         </div>
                                         <div className="md:col-span-1">
@@ -861,7 +875,7 @@ return (
 
 
                                         <div className="md:col-span-3 flex items-center">
-                                            <label htmlFor="designpileload">Design Pile Load  &sigma;N =  &sigma;*R =
+                                            <label htmlFor="designpileload">Design Pile Load  &phi;N =  &phi;* R =
                                             </label>
                                         </div>
                                         <div className="md:col-span-4">
@@ -898,21 +912,15 @@ return (
                                         </button>
                                     </div>
 
-                                    <div className={`grid grid-cols-1 md:grid-cols-12 gap-4 ${isVisible5 ? '' : 'hidden'}`}>
-                                        <div className="md:col-span-12">
+                                    <div className={`grid grid-cols-1 md:grid-cols-8 gap-4 ${isVisible5 ? '' : 'hidden'}`}>
+                                        <div className="md:col-span-8">
                                             &nbsp;
                                         </div>
-                                        <div className="md:col-span-3">
+
+                                        <div className="md:col-span-5">
                                             &nbsp;
-                                            <button
-                                                type = "button"
-                                                onClick={handleDownLoad}
-                                                className={`w-48 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ${isVisibleBT5 ? '' : 'hidden'}`}
-                                            >
-                                                DownLoad PDF
-                                            </button>
                                         </div>
-                                        <div className="md:col-span-3">
+                                        <div className="md:col-span-2">
                                             <button
                                                 type="submit"
                                                 className={`w-48 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 }`}
@@ -1101,12 +1109,12 @@ return (
                                                         <tr className="bg-white">	<td className="px-20 py-4 text-sm border-b cursor-pointer">Stress in Piles due to Driving Force &sigma;<sub>D</sub> := </td><td className="px-10 py-4 text-sm border-b"> {selectedProject.stresspilesdrivingforce} </td><td className="px-4 py-4 text-sm border-b">MPa</td></tr>
                                                         <tr className="bg-white">	<td className="px-20 py-4 text-sm border-b cursor-pointer"> if (&sigma;<sub>D</sub> {'>'} 9.9 MPa , "Check Driving Type" , "Medium") = "Medium"</td><td className="px-10 py-4 text-sm border-b">&nbsp; </td></tr>
                                                         <tr className="bg-white">	<td className="px-20 py-4 text-sm border-b cursor-pointer">Elastic compression of pile head / dolly / packing C<sub>c := </sub></td><td className="px-10 py-4 text-sm border-b"> {selectedProject.elasticcompresion}</td><td className="px-4 py-4 text-sm border-b"> mm Medium driving</td></tr>
-                                                        <tr className="bg-white">	<td className="px-20 py-4 text-sm border-b cursor-pointer">Elastic compression of pile C<sub>p</sub> := </td><td className="px-10 py-4 text-sm border-b"> {selectedProject.elasticcompresionpile}</td><td className="px-4 py-4 text-sm border-b">mm Timber Pile / Medium driving</td></tr>
+                                                        <tr className="bg-white">	<td className="px-20 py-4 text-sm border-b cursor-pointer">Elastic compression of pile C<sub>p</sub> :=  := 0.0013 * L = </td><td className="px-10 py-4 text-sm border-b"> {selectedProject.elasticcompresionpile}</td><td className="px-4 py-4 text-sm border-b">mm Timber Pile / Medium driving</td></tr>
                                                         <tr className="bg-white">	<td className="px-20 py-4 text-sm border-b cursor-pointer">Quake of ground beneath pile C<sub>q</sub> := </td><td className="px-10 py-4 text-sm border-b"> {selectedProject.quake}</td><td className="px-4 py-4 text-sm border-b"> mm</td></tr>
-                                                        <tr className="bg-white">	<td className="px-20 py-4 text-sm border-b cursor-pointer">Total temporary compression C:= </td><td className="px-10 py-4 text-sm border-b"> {selectedProject.totaltempcompression} </td><td className="px-4 py-4 text-sm border-b">mm</td></tr>
-                                                        <tr className="bg-white">	<td className="px-20 py-4 text-sm border-b cursor-pointer">Ultimate driving resistance</td><td className="px-10 py-4 text-sm border-b"> {selectedProject.ultimatedrivingresistance}</td><td className="px-4 py-4 text-sm border-b">kN</td></tr>
-                                                        <tr className="bg-white">	<td className="px-20 py-4 text-sm border-b cursor-pointer">Strength Reduction Factor &phi; : = </td><td className="px-10 py-4 text-sm border-b"> {selectedProject.strengthreductionfator}</td><td className="px-4 py-4 text-sm border-b"></td></tr>
-                                                        <tr className="bg-white">	<td className="px-20 py-4 text-sm border-b cursor-pointer">Design Pile Load &phi;N := </td><td className="px-10 py-4 text-sm border-b"> {selectedProject.designpileload} </td><td className="px-4 py-4 text-sm border-b">kN</td></tr>
+                                                        <tr className="bg-white">	<td className="px-20 py-4 text-sm border-b cursor-pointer">Total temporary compression C:= C<sub>c</sub> + C<sub>p</sub> + C<sub>q</sub> = </td><td className="px-10 py-4 text-sm border-b"> {selectedProject.totaltempcompression} </td><td className="px-4 py-4 text-sm border-b">mm</td></tr>
+                                                        <tr className="bg-white">	<td className="px-20 py-4 text-sm border-b cursor-pointer">Ultimate driving resistance R :=  W*h*n /  2 + C/2 = </td><td className="px-10 py-4 text-sm border-b"> {selectedProject.ultimatedrivingresistance}</td><td className="px-4 py-4 text-sm border-b">kN</td></tr>
+                                                        <tr className="bg-white">	<td className="px-20 py-4 text-sm border-b cursor-pointer">Strength Reduction Factor &phi; : = </td><td className="px-10 py-4 text-sm border-b"> {selectedProject.strengthreductionfactor}</td><td className="px-4 py-4 text-sm border-b"></td></tr>
+                                                        <tr className="bg-white">	<td className="px-20 py-4 text-sm border-b cursor-pointer">Design Pile Load &phi;N =  &phi;*R = </td><td className="px-10 py-4 text-sm border-b"> {selectedProject.designpileload} </td><td className="px-4 py-4 text-sm border-b">kN</td></tr>
 
                                                         </tbody>
                                                     </table>
@@ -1118,13 +1126,16 @@ return (
                                                 </p>
 
                                                 {/* Close Button */}
-                                                <div className="mt-6 flex justify-end">
+                                                <div className="mt-6 flex ">
                                                     <button
                                                         onClick={() => setSelectedProject(null)}
-                                                        className="w-64 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300"
+                                                        className="w-48 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300"
                                                     >
                                                         Close
                                                     </button>
+
+
+
                                                 </div>
                                             </div>
                                         </div>
