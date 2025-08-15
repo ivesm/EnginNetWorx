@@ -455,7 +455,7 @@ return (
                                         setIsVisibleBT2(!isVisibleBT2);
                                         setIsVisibleBT1(!isVisibleBT1);
                                         }}
-                                        className={`w-64 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ${isVisibleBT1 ? '' : 'hidden'}`}
+                                        className={`w-56 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ${isVisibleBT1 ? '' : 'hidden'}`}
                                         >
                                         Continue
                                         </button>
@@ -530,7 +530,7 @@ return (
                                             setIsVisibleBT3(!isVisibleBT3);
                                             setIsVisibleBT2(!isVisibleBT2);
                                             }}
-                                            className={`w-64 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ${isVisibleBT2 ? '' : 'hidden'}`}
+                                            className={`w-56 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ${isVisibleBT2 ? '' : 'hidden'}`}
                                         >
                                             Continue
                                         </button>
@@ -682,7 +682,7 @@ return (
                                             setIsVisibleBT3(!isVisibleBT3);
                                             }}
 
-                                            className={`w-64 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ${isVisibleBT3 ? '' : 'hidden'}`}
+                                            className={`w-56 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ${isVisibleBT3 ? '' : 'hidden'}`}
                                         >
                                             Continue
                                         </button>
@@ -892,7 +892,7 @@ return (
                                             setIsVisibleBT5(!isVisibleBT5);
                                             setIsVisibleBT4(!isVisibleBT4);
                                             }}
-                                            className={`w-64 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ${isVisibleBT4 ? '' : 'hidden'}`}
+                                            className={`w-56 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ${isVisibleBT4 ? '' : 'hidden'}`}
                                         >
                                             Continue
                                         </button>
@@ -902,20 +902,20 @@ return (
                                         <div className="md:col-span-12">
                                             &nbsp;
                                         </div>
-                                        <div className="md:col-span-4">
+                                        <div className="md:col-span-3">
                                             &nbsp;
                                             <button
                                                 type = "button"
                                                 onClick={handleDownLoad}
-                                                className={`w-64 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ${isVisibleBT5 ? '' : 'hidden'}`}
+                                                className={`w-48 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ${isVisibleBT5 ? '' : 'hidden'}`}
                                             >
                                                 DownLoad PDF
                                             </button>
                                         </div>
-                                        <div className="md:col-span-4">
+                                        <div className="md:col-span-3">
                                             <button
                                                 type="submit"
-                                                className={`w-64 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 }`}
+                                                className={`w-48 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 }`}
                                             >
                                                 Save
                                             </button>
