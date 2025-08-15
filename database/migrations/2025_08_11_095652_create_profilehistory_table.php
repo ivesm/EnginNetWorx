@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id')->index()->comment('this is the user ID');
             $table->integer('project_id')->index()->comment('this is the Project ID');
-            $table->integer('projecttable_id')->index()->comment('this is the Project ID');
             $table->string('project_name');
+            $table->string('project_table');
             $table->timestamps();
         });
     }
