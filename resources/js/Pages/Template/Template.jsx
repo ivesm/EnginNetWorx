@@ -201,7 +201,7 @@ return (
             loaded ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'
             }`}
             >
-                <p className="text-gray-800">Hiley Formula</p>
+                <p className="text-gray-800">Template</p>
             </div>
         </h2>
         }

@@ -21,6 +21,12 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
+
+Route::get('/template', function () {
+    return Inertia::render('Template/Template');
+})->middleware(['auth', 'verified'])->name('template');
+
+
 Route::get('/testing', function () {
     return Inertia::render('Test/Test');
 })->middleware(['auth', 'verified'])->name('testing');

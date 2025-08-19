@@ -21,7 +21,7 @@ export default function AuthenticatedLayout({ header, children }) {
     }, []);
 
     return (
-        <div className="grid min-h-screen grid-cols-[12rem_1fr] bg-gray-100">
+        <div className="grid min-h-screen grid-cols-[12rem_1fr] bg-zinc-200">
             {/* Sidebar */}
             <aside ref={sidebarRef} className="flex flex-col bg-white border-r">
                 <div className="p-4 flex items-center justify-center border-b">
