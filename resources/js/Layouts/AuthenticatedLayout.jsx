@@ -4,7 +4,7 @@ import Dropdown from '@/Components/Dropdown';
 
 export default function AuthenticatedLayout({ header, children }) {
     const user = usePage().props?.auth?.user || {};
-    const [open, setOpen] = useState({ foundations: false, piles: false, test: false });
+    const [open, setOpen] = useState({ foundations: false, piles: false });
     const sidebarRef = useRef(null);
 
     // Close menus when clicking outside sidebar
@@ -106,7 +106,7 @@ export default function AuthenticatedLayout({ header, children }) {
                                 </svg>
                             </button>
                         </Dropdown.Trigger>
-                        <Dropdown.Content className="ml-4">
+                        <Dropdown.Content align="left" className="left-8">
                             <Dropdown.Link href={route('profile.edit')}>Profile</Dropdown.Link>
                             <Dropdown.Link href={route('logout')} method="post" as="button">
                                 Log Out
