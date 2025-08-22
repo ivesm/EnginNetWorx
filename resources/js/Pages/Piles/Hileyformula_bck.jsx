@@ -231,8 +231,7 @@ return (
                                 <button
                                     type = "button"
                                     key={tab.key}
-                                    className={`px-4 py-2 -mb-px text-sm font-medium text-gray-600
-                                      border-b-2 transition-colors duration-300 ${
+                                    className={`px-4 py-2 -mb-px text-sm font-medium text-gray-600 border-b-2 transition-colors duration-300 ${
                                     tabIndex === tab.key
                                     ? 'border-blue-500 text-blue-600'
                                     : 'border-transparent hover:text-blue-500'

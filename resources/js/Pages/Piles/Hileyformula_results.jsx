@@ -5,7 +5,7 @@ export default function Hileyformula_results({ result }) {
     return (
         <AuthenticatedLayout
             header={
-                <h2 className="text-xl font-semibold leading-tight text-gray-800">
+                <h2 className="text-5xl font-['Roboto_Condensed'] text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-pink-500 to-cyan-400 drop-shadow-lg">
                     Hiley Formula Results
                 </h2>
             }
