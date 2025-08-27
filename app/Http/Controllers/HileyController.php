@@ -121,61 +121,11 @@ class HileyController extends Controller
         $user = $request->user();
         $profileHistory = ProfileHistory::where('user_id', '=', $user->id)->get();
 
-        return Inertia::render('Piles/Hileyformula', [
+        return Inertia::render('Foundations/Piles/Hileyformula', [
             'status' => session('status'),
             'result' => $profileHistory,
         ]);
     }
 
-    public function testpage(Request $request){
-
-
-        $user = auth()->user();
-        $tablenameID = ProjectOptions::select('id')
-        ->where('project_tablename', 'hileys')->first();
-
-        $newHiley = new Hiley();
-
-        $newHiley->user_id = $user['id'] ;
-        $newHiley->pilediameter =  $request->pilediameter ??   0;
-        $newHiley->pilelength =  $request->pilebasearea ??   0;
-        $newHiley->weighthammer  =    $request->weighthammer ??   0;
-        $newHiley->weightanvil  =    $request->weightanvil ??   0;
-        $newHiley->weighthelmet  =    $request->weighthelmet ??   0;
-        $newHiley->pileunitweightt  =    $request->pileunitweightt ??   0;
-        $newHiley->pilebasearea  =    $request->pilebasearea ??   0;
-        $newHiley->piletotalweight  =    $request->piletotalweight ??   0;
-        $newHiley->weightpileanvilhelmet  =    $request->weightpileanvilhelmet ??   0;
-        $newHiley->freefallheight  =    $request->freefallheight ??   0;
-        $newHiley->efficiencyfall  =    $request->efficiencyfall ??   0;
-        $newHiley->effectiveheight  =    $request->effectiveheight ??   0;
-        $newHiley->finalpenetration  =    $request->finalpenetration ??   0;
-        $newHiley->coefficientrestitution  =    $request->coefficientrestitution ??   0;
-        $newHiley->efficiencyblow  =    $request->efficiencyblow ??   0;
-        $newHiley->potentialenergyhammer  =    $request->potentialenergyhammer ??   0;
-        $newHiley->drivingforce  =    $request->drivingforce ??   0;
-        $newHiley->stresspilesdrivingforce  =    $request->stresspilesdrivingforce ??   0;
-        $newHiley->elasticcompresion  =    $request->elasticcompresion ??   0;
-        $newHiley->elasticcompresionpile  =    $request->elasticcompresionpile ??   0;
-        $newHiley->quake  =    $request->quake ??   0;
-        $newHiley->totaltempcompression  =    $request->totaltempcompression ??   0;
-        $newHiley->ultimatedrivingresistance  =    $request->ultimatedrivingresistance ??   0;
-        $newHiley->strengthreductionfactor  =    $request->strengthreductionfactor ??   0;
-        $newHiley->designpileload  =    $request->designpileload ??   0;
-
-        $newHiley->save();
-
-        $newprojectHistory = new ProfileHistory();
-
-        $newprojectHistory->user_id = $user['id'] ;
-        $newprojectHistory->project_id =$newHiley->id ;
-        $newprojectHistory->project_table = 'hileys';
-        $newprojectHistory->project_name = $request->projectname ??  'New Hiley Project' ;
-        $newprojectHistory->save();
-
-        // ✅ Redirect to results page and pass the result
-        return Inertia::render('Piles/Hileyformula_results', [
-            'result' => $newHiley->toArray()
-        ]);
-    }
+    
 }

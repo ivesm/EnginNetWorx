@@ -1,4 +1,4 @@
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import {Head, Link, useForm} from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 import { QuestionMarkCircleIcon } from '@heroicons/react/24/outline';
@@ -55,6 +55,7 @@ export default function Hileyformula({ result = [] }) {
     const [isVisibleBT6, setIsVisibleBT6] = useState(false);
 
     const [tabIndex, setTabIndex] = useState("1");
+
     const handlePileDiameter = (e) => {
         const value = e.target.value;
         setData('pilediameter', value);
@@ -68,13 +69,15 @@ export default function Hileyformula({ result = [] }) {
             setData('pilebasearea', null); // reset if input is invalid
         }
     };
+
     const handlElasticcomprsion = (e) => {
         const value = e.target.value;
         setData('pilelength', value);
 
         const calculatedRename = (0.00013 * parseFloat(value || 0))  * 10000;
         setData('elasticcompresionpile', calculatedRename);
-    }
+    };
+
     const handleEfficiency   = (e) => {
 
         const value = parseFloat( e.target.value );
@@ -143,7 +146,6 @@ export default function Hileyformula({ result = [] }) {
         const tmpeffectiveheight = parseFloat(data.effectiveheight) ;
         const tmpefficiency = parseFloat(data.efficiencyblow) ;
         const tmpfinalpenetration = parseFloat(data.finalpenetration) ;
-
         const tmpultimatedriving =  ((tmpweightofhammer *  tmpeffectiveheight * tmpefficiency) /(tmpfinalpenetration /(tmpTotalcompression /2) ) ) * 1000;
         setData('ultimatedrivingresistance',tmpultimatedriving ) ;
 
@@ -164,9 +166,7 @@ export default function Hileyformula({ result = [] }) {
     const handleSubmit  = (e) => {
         e.preventDefault();
 
-        post(route('hiley.store'), {
-            onSuccess: () => reset(),   // 🔹 clears all fields after successful post
-        });
+        post(route('hiley.store'));
     };
 
     const getProjectDetails = async (id , projectname ) => {
@@ -230,8 +230,8 @@ return (
                                     className={`px-4 py-2 -mb-px text-sm font-medium text-gray-600
                                       border-b-2 transition-colors duration-300 ${
                                     tabIndex === tab.key
-                                    ? 'border-blue-500 text-blue-600'
-                                    : 'border-transparent hover:text-blue-500'
+                                    ? 'border-blue-500 text-blue-600 '
+                                    : 'border-transparent hover:text-red-500'
                                     }`}
                                     onClick={() => setTabIndex(tab.key)}
                                 >
@@ -1125,6 +1125,8 @@ return (
                                                     >
                                                         Close
                                                     </button>
+
+
 
                                                 </div>
                                             </div>
