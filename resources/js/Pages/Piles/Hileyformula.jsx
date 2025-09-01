@@ -144,12 +144,6 @@ export default function Hileyformula({ result = [] }) {
         const tmpefficiency = parseFloat(data.efficiencyblow) ;
         const tmpfinalpenetration = parseFloat(data.finalpenetration) ;
 
-            console.log("W  :"+tmpweightofhammer);
-            console.log("H :"+tmpeffectiveheight);
-            console.log("n :"+tmpefficiency);
-            console.log("S :"+tmpfinalpenetration);
-            console.log("C :"+tmpTotalcompression);
-
         const tmpultimatedriving =  ((tmpweightofhammer *  tmpeffectiveheight * tmpefficiency) /(tmpfinalpenetration /(tmpTotalcompression /2) ) ) * 1000;
         setData('ultimatedrivingresistance',tmpultimatedriving ) ;
 
