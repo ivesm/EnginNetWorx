@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react';
 
 
-function Players({intialName ,symbol}) {
+function Players({intialName ,symbol,isActive}) {
   const [isEditing, setisEditing] = useState(false);
   const [playerName, setplayerName] = useState(intialName);
 
   function handleIsEditing() {
-
-    setisEditing( (isEditing) => !isEditing);
+    setisEditing( isEditing => !isEditing);
   };
 
   function handleChange (event) {
@@ -17,10 +16,10 @@ function Players({intialName ,symbol}) {
   let editablePlayer = <span className='player-name'>{playerName}</span>
   if(isEditing){
       editablePlayer = <input type="text" required value={playerName} onChange={handleChange}/>;
-
   }
+
   return (
-        <li>
+        <li className={isActive ? 'active':undefined}>
           <span className="player">
             {editablePlayer}
             <span className='player-symbol'>{symbol}</span>

@@ -55,8 +55,8 @@ export default function Hileyformula({ result = [] }) {
     const [isVisibleBT6, setIsVisibleBT6] = useState(false);
 
     const [tabIndex, setTabIndex] = useState("1");
-    const handlePileDiameter = (e) => {
-        const value = e.target.value;
+    function handlePileDiameter (event){
+        const value = event.target.value;
         setData('pilediameter', value);
 
         const numericDiameter = parseFloat(value);
@@ -68,16 +68,16 @@ export default function Hileyformula({ result = [] }) {
             setData('pilebasearea', null); // reset if input is invalid
         }
     };
-    const handlElasticcomprsion = (e) => {
-        const value = e.target.value;
+    function handlElasticcomprsion(event) {
+        const value = event.target.value;
         setData('pilelength', value);
 
         const calculatedRename = (0.00013 * parseFloat(value || 0))  * 10000;
         setData('elasticcompresionpile', calculatedRename);
     }
-    const handleEfficiency   = (e) => {
+    function handleEfficiency(event){
 
-        const value = parseFloat( e.target.value );
+        const value = parseFloat( event.target.value );
         setData('coefficientrestitution',value);
         const tmpcoefficientrestitution = Math.pow(value, 2);
         const tmpweighthammer = parseFloat(data.weighthammer);
@@ -102,9 +102,9 @@ export default function Hileyformula({ result = [] }) {
         setData('stresspilesdrivingforce', Stresspilesdrivingforce);
     };
 
-    const  handlePileTotalWeight  = (e) => {
+    function  handlePileTotalWeight(event) {
 
-        const value = e.target.value;
+        const value = event.target.value;
         setData('pileunitweight', value);
 
         const unitWeight = parseFloat(value) || 0;
@@ -120,9 +120,9 @@ export default function Hileyformula({ result = [] }) {
         setData('weightpileanvilhelmet', totalCombinedWeight);
     };
 
-    const  handleEffectiveHeightFall   = (e) => {
+    function  handleEffectiveHeightFall(event) {
 
-        const value = e.target.value;
+        const value = event.target.value;
         setData('efficiencyfall', value);
         const numericefficiencyfall = parseFloat(value)/100;
         const numericfreefallheight = parseFloat(data.freefallheight);
@@ -132,8 +132,8 @@ export default function Hileyformula({ result = [] }) {
         setData('effectiveheight', effectiveheightFall);
     };
 
-    const handleTotalTmpCompresion  = (e) => {
-        const value = e.target.value;
+    function handleTotalTmpCompresion(event) {
+        const value = event.target.value;
         setData('quake',value) ;
 
         const tmpTotalcompression = parseFloat(data.elasticcompresion) + parseFloat(data.elasticcompresionpile) + parseFloat(value) ;
@@ -148,21 +148,21 @@ export default function Hileyformula({ result = [] }) {
         setData('ultimatedrivingresistance',tmpultimatedriving ) ;
 
     };
-    const handleDesignpileload  = (e) => {
-      const value  = e.target.value ;
+    function handleDesignpileload(event){
+      const value  = event.target.value ;
       setData('strengthtreductionfactor',value ) ;
 
       const tmpDesignpileload = parseFloat(value) * parseFloat(data.ultimatedrivingresistance) ;
       setData('designpileload',tmpDesignpileload) ;
     };
 
-    const handleDownLoad = async (e) => {
+    function handleDownLoad(){
         const input = document.getElementById('hileyformula_pdf');
         alert(" THIS  WILL  DOWN LOAD THE  VALUES  AS A PDF ");
     };
 
-    const handleSubmit  = (e) => {
-        e.preventDefault();
+    function handleSubmit(event) {
+        event.preventDefault();
 
         post(route('hiley.store'));
     };
